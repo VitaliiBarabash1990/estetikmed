@@ -1,0 +1,42 @@
+.menuLanguageList {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: row;
+	gap: 12px;
+	width: auto;
+	height: 40px;
+	/* border: 1px solid green; */
+}
+.menuLanguageItem {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: calc(100% / 4);
+	height: 100%;
+	font-family: var(--font-family);
+	font-weight: 300;
+	font-size: 18px;
+	line-height: 222%;
+	text-align: center;
+	color: #eaeaea;
+
+	text-transform: uppercase;
+	/* border-right: 2px solid var(--black); */
+	cursor: pointer;
+}
+.activeLang {
+	font-weight: 500;
+	text-decoration: underline;
+}
+.separator {
+	font-family: var(--font-family);
+	font-weight: 300;
+	font-size: 18px;
+	line-height: 81%;
+	text-align: right;
+	color: var(--black);
+}
+.separator:last-child {
+	display: none;
+}

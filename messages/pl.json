@@ -1,0 +1,41 @@
+{
+	"Hero": {
+		"button_1": "Psycholog",
+		"button_2": "Fryzjer"
+	},
+
+	"LocaleLayout": {
+		"title": "estetikmed",
+		"description": "Життєвий блог психолога про духовний розвиток"
+	},
+	"LocaleSwitcher": {
+		"label": "Sprache ändern",
+		"locale": "{locale, select, en {en} ua {ua} other {Unbekannt}}"
+	},
+	"Manifest": {
+		"description": "estetikmed",
+		"name": "estetikmed"
+	},
+	"PageLayout": {
+		"links": {
+			"docs": {
+				"description": "Learn more about next-intl in the official docs.",
+				"href": "https://next-intl-docs.vercel.app/",
+				"title": "Docs"
+			},
+			"source": {
+				"description": "Browse the source code of this example on GitHub.",
+				"href": "https://github.com/amannn/next-intl/tree/main/examples/example-app-router",
+				"title": "Source code"
+			}
+		}
+	},
+	"NotFoundPage": {
+		"description": "Sprawdź pasek adresu przeglądarki lub skorzystaj z nawigacji, aby przejść do znanej strony.",
+		"title": "Nie znaleziono strony"
+	},
+	"Error": {
+		"description": "Przepraszamy, wystąpił problem. Możesz spróbować ponownie załadować tę stronę.",
+		"title": "Coś poszło nie tak!"
+	}
+}

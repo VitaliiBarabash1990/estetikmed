@@ -1,0 +1,14 @@
+<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+
+<symbol id="icon-burger-menu" viewBox="0 0 32 32">
+<path stroke-width="1.2" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M31.2 9.6h-22.8M31.2 16h-30.4M31.2 22.4h-15.2"></path>
+</symbol>
+
+<symbol id="icon-burger-menu-close" viewBox="0 0 32 32">
+<path d="M8.533 24.41l-0.944-0.944 7.467-7.467-7.467-7.467 0.944-0.944 7.467 7.467 7.467-7.467 0.944 0.944-7.467 7.467 7.467 7.467-0.944 0.944-7.467-7.467-7.467 7.467z"></path>
+</symbol>
+
+
+</defs>
+</svg>
