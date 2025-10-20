@@ -2,12 +2,9 @@
 import React, { useEffect, useState } from "react";
 import s from "./Hero.module.css";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
 
 const Hero = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
-
-	const t = useTranslations("Hero");
 
 	useEffect(() => {
 		setTimeout(() => {
