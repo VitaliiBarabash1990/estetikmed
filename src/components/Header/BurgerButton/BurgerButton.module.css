@@ -1,6 +1,6 @@
 .burgerMenu {
-	width: 40px;
-	height: 40px;
+	width: calc((24 / 330) * 100vw);
+	height: calc((24 / 330) * 100vw);
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
@@ -15,4 +15,16 @@
 }
 .iconClose {
 	fill: var(--background);
+}
+@media screen and (min-width: 768px) {
+	.burgerMenu {
+		width: calc((40 / 768) * 100vw);
+		height: calc((40 / 768) * 100vw);
+	}
+}
+@media screen and (min-width: 1280px) {
+	.burgerMenu {
+		width: calc((40 / 1280) * 100vw);
+		height: calc((40 / 1280) * 100vw);
+	}
 }

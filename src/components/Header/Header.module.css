@@ -2,11 +2,16 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 40px 44px;
+	padding: 20px 20px;
 	width: 100%;
 	max-width: 1920px;
 	margin: 0 auto;
 	position: fixed;
 	left: 50%;
 	transform: translateX(-50%);
+}
+@media screen and (min-width: 768px) {
+	.headerWrapper {
+		padding: 40px 44px;
+	}
 }
