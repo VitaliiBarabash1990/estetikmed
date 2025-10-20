@@ -22,9 +22,8 @@ const LanguageSwitcher = () => {
 	return (
 		<ul className={s.menuLanguageList}>
 			{routing.locales.map((item) => (
-				<>
+				<React.Fragment key={item}>
 					<li
-						key={item}
 						className={`${s.menuLanguageItem} ${
 							item === locale ? s.activeLang : ""
 						}`}
@@ -33,7 +32,7 @@ const LanguageSwitcher = () => {
 						{item === "pl" ? "PLK" : "DEU".toUpperCase()}
 					</li>
 					<div className={s.separator}>|</div>
-				</>
+				</React.Fragment>
 			))}
 		</ul>
 	);
