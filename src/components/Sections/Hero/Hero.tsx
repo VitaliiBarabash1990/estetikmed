@@ -2,9 +2,11 @@
 import React, { useEffect, useState } from "react";
 import s from "./Hero.module.css";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const Hero = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
+	const t = useTranslations("Hero");
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -27,20 +29,17 @@ const Hero = () => {
 							/>
 						</div>
 
-						<h1 className={s.heroTitle}>Estetik Med</h1>
+						<h1 className={s.heroTitle}>{t("title")}</h1>
 					</div>
 
-					<h2 className={s.heroSubTitle}>
-						MEDYCYNA ESTETYCZNA I REGENERACYJNA
-						<br /> BEAUTY INJECTION
-					</h2>
+					<h2 className={s.heroSubTitle}>{t("sub_title")}</h2>
 				</div>
 				<div className={s.heroBtnBlock}>
 					<button type="button" className={`${s.btn} ${s.reservationBtn}`}>
-						Zapisać się
+						{t("button_1")}
 					</button>
 					<button type="button" className={`${s.btn} ${s.consultationBtn}`}>
-						Konsultacja
+						{t("button_2")}
 					</button>
 				</div>
 			</div>

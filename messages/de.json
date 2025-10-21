@@ -1,7 +1,17 @@
 {
 	"Hero": {
-		"button_1": "Psychologe",
-		"button_2": "Friseur"
+		"title": "Estetik Med",
+		"sub_title": "ÄSTHETISCHE UND REGENERATIVE MEDIZIN-SCHÖNHEITSINJEKTION",
+		"button_1": "Anmelden",
+		"button_2": "Beratung",
+		"menu": [
+			"Über das Studio",
+			"Dienstleistungen",
+			"Blog",
+			"FAQ",
+			"KONTAKT",
+			"Facebook"
+		]
 	},
 
 	"LocaleLayout": {

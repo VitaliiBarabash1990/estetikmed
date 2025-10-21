@@ -1,7 +1,10 @@
 {
 	"Hero": {
-		"button_1": "Psycholog",
-		"button_2": "Fryzjer"
+		"title": "Estetik Med",
+		"sub_title": "MEDYCYNA ESTETYCZNA I REGENERACYJNA BEAUTY INJECTION",
+		"button_1": "Zapisać się",
+		"button_2": "Konsultacja",
+		"menu": ["O studiu", "usługi", "blogu", "FAQ", "ŁĄCZNOŚĆ", "facebook"]
 	},
 
 	"LocaleLayout": {

@@ -67,7 +67,7 @@
 	width: 100%;
 	height: calc((36 / 330) * 100vw);
 	font-size: clamp(13px, calc((13 / 330) * 100vw), 40px);
-	white-space: nowrap;
+	/* white-space: nowrap; */
 	line-height: 120%;
 	text-align: center;
 	color: var(--white);
@@ -179,6 +179,7 @@
 		width: calc((120 / 1280) * 100vw);
 	}
 	.heroTitleBlock {
+		max-width: 1390px;
 		gap: calc((40 / 1280) * 100vw);
 	}
 	.heroName {

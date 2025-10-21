@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import s from "./Header.module.css";
 import BurgerButton from "./BurgerButton/BurgerButton";
 import LanguageSwitcher from "./LanguageSwitcher/LanguageSwitcher";
+import { NavigationMenu } from "./NavigationMenu/NavigationMenu";
 
 const Header = () => {
 	const [openMenu, setOpenMenu] = useState(false);
@@ -20,11 +21,16 @@ const Header = () => {
 		};
 	}, [openMenu]);
 	return (
-		<div className={s.headerWrapper}>
-			<LanguageSwitcher />
+		<>
+			<div className={s.headerWrapper}>
+				<LanguageSwitcher />
 
-			<BurgerButton openMenu={openMenu} setOpenMenu={setOpenMenu} />
-		</div>
+				<BurgerButton openMenu={openMenu} setOpenMenu={setOpenMenu} />
+			</div>
+			<div className={`${s.menuHead} ${openMenu ? s.open : ""}`}>
+				<NavigationMenu setOpenMenu={setOpenMenu} openMenu={openMenu} />
+			</div>
+		</>
 	);
 };
 
