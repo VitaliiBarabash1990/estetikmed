@@ -1,5 +1,6 @@
 import About from "@/components/Sections/About/About";
 import Hero from "@/components/Sections/Hero/Hero";
+import Services from "@/components/Sections/Services/Services";
 import { Locale } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
 
@@ -17,6 +18,7 @@ export default async function IndexPage({ params }: Props) {
 		<>
 			<Hero />
 			<About />
+			<Services />
 		</>
 	);
 }
