@@ -4,7 +4,30 @@
 		"sub_title": "MEDYCYNA ESTETYCZNA I REGENERACYJNA BEAUTY INJECTION",
 		"button_1": "Zapisać się",
 		"button_2": "Konsultacja",
-		"menu": ["O studiu", "usługi", "blogu", "FAQ", "ŁĄCZNOŚĆ", "facebook"]
+		"menu": [
+			"Panel administracyjny",
+			"O studiu",
+			"usługi",
+			"blogu",
+			"FAQ",
+			"ŁĄCZNOŚĆ",
+			"facebook"
+		],
+		"register_form": "Zaloguj się do panelu administracyjnego",
+		"btn_enter": "Wejście"
+	},
+	"About": {
+		"title": "O studiu",
+		"description": "Nasze studio to miejsce, w którym piękno spotyka się z profesjonalizmem. Oferujemy szeroki zakres usług kosmetologicznych i pielęgnacyjnych – od zabiegów na twarz i ciało, przez terapie aparaturowe, aż po indywidualnie dobrane programy odmładzające i regeneracyjne. Zespół doświadczonych specjalistów dba nie tylko o efekty estetyczne, lecz także o komfort i bezpieczeństwo każdej osoby, która nas odwiedza. Łączymy nowoczesne technologie z troską o naturalne piękno i dobre samopoczucie. Wnętrza naszego studia zostały zaprojektowane tak, aby sprzyjały relaksowi i pozwalały na chwilę wytchnienia od codzienności. Tutaj możesz poczuć się wyjątkowo i zaufać profesjonalistom, którzy podkreślą Twoje naturalne piękno.",
+		"year": "Lata doświadczenia",
+		"clients": "Zadowoleni klienci",
+		"procedure": "Rodzajów procedur",
+		"procents": "Poziom satysfakcji"
+	},
+
+	"Footer": {
+		"enter": "LOGOWANIE ADMINISTRATORA",
+		"exit": "ВЫХОД АДМИНИСТРАТОРА"
 	},
 
 	"LocaleLayout": {

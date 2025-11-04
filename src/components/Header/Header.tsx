@@ -4,6 +4,8 @@ import s from "./Header.module.css";
 import BurgerButton from "./BurgerButton/BurgerButton";
 import LanguageSwitcher from "./LanguageSwitcher/LanguageSwitcher";
 import { NavigationMenu } from "./NavigationMenu/NavigationMenu";
+import { useSelector } from "react-redux";
+import { selectIsEnterAuth } from "@/redux/auth/selectors";
 
 const Header = () => {
 	const [openMenu, setOpenMenu] = useState(false);
@@ -20,6 +22,16 @@ const Header = () => {
 			document.documentElement.classList.remove("no-scroll");
 		};
 	}, [openMenu]);
+
+	const isEnterAuth = useSelector(selectIsEnterAuth);
+	console.log("Enter", isEnterAuth);
+
+	useEffect(() => {
+		if (isEnterAuth) {
+			setOpenMenu(true);
+		}
+	}, [isEnterAuth]);
+
 	return (
 		<>
 			<div className={s.headerWrapper}>

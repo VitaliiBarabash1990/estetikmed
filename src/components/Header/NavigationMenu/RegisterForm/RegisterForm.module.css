@@ -1,0 +1,135 @@
+.registerWrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 24px;
+}
+
+.registerTitle {
+	height: 120px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	color: rgba(234, 234, 234, 1);
+
+	font-family: var(--second-family);
+	font-size: clamp(20px, calc((20 / 330) * 100vw), 28px);
+	font-weight: 500;
+	line-height: 34px;
+	letter-spacing: 0%;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.form {
+	width: 100%;
+	max-width: 480px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+}
+.field {
+	width: 100%;
+	height: 56px;
+	display: flex;
+	flex-direction: column;
+}
+.label {
+	width: 100%;
+	height: 100%;
+}
+.input {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 10px;
+	padding: 17px 24px;
+
+	color: rgba(234, 234, 234, 1);
+
+	font-family: var(--font-family);
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 20px;
+	letter-spacing: 0%;
+	text-align: left;
+
+	box-sizing: border-box;
+	border: 1px solid rgba(163, 163, 163, 1);
+	border-radius: 30px;
+	box-shadow: inset 0px 4px 13.899999618530273px 0px rgba(0, 0, 0, 0.25);
+	background: rgba(234, 234, 234, 0.01);
+}
+.pass {
+	position: relative;
+}
+.iconWrap {
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 50%;
+	right: 24px;
+	transform: translateY(-50%);
+	cursor: pointer;
+}
+.iconOir {
+	width: 100px;
+	height: 100%;
+	stroke: var(--white);
+	fill: none;
+}
+.btn {
+	width: 100%;
+	max-width: 480px;
+	height: 56px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 10;
+	padding: 12px 12px;
+	border-radius: 30px;
+	background: rgba(242, 94, 218, 1);
+
+	color: rgba(244, 244, 247, 1);
+
+	font-family: var(--second-family);
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 22px;
+	letter-spacing: 0%;
+	text-align: left;
+}
+.error {
+	color: red;
+}
+@media screen and (min-width: 768px) {
+	.registerWrapper {
+		width: 100%;
+		max-width: 480px;
+	}
+	.form {
+		gap: 24px;
+	}
+	.registerTitle {
+		height: 56px;
+		font-size: clamp(20px, calc((24 / 768) * 100vw), 28px);
+		white-space: nowrap;
+	}
+}
+@media screen and (min-width: 1280px) {
+	.registerTitle {
+		font-size: clamp(20px, calc((28 / 1280) * 100vw), 28px);
+	}
+}

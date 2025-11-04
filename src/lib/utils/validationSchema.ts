@@ -1,6 +1,19 @@
 // /lib/utils/validationSchema.ts
 import * as Yup from "yup";
 
+const passwordRules = /^[a-zA-Z0-9]+$/;
+export const validationSchemaRegister = () => {
+	return Yup.object({
+		email: Yup.string()
+			.email("Не коректний Email!")
+			.required("Введіть коректну email-адресу!"),
+		password: Yup.string()
+			.matches(passwordRules, "Лише латинські літери та цифри!")
+			.min(5, "Мінімум 5 символів")
+			.required("Обов'язково"),
+	});
+};
+
 export const ValidationSchema = Yup.object().shape({
 	subTitleOneUa: Yup.string().required(
 		"Введіть перший підзаголовок на Українській. Це обовязково!"

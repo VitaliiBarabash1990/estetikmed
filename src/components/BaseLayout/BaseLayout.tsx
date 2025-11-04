@@ -3,6 +3,7 @@ import { getMessages } from "next-intl/server";
 import { ReactNode } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import ReduxProvider from "@/ReduxProvider/ReduxProvider";
 
 type Props = {
 	children: ReactNode;
@@ -17,11 +18,13 @@ export default async function BaseLayout({ children, locale }: Props) {
 	return (
 		<html lang={locale}>
 			<body>
-				<NextIntlClientProvider locale={locale} messages={messages}>
-					<Header />
-					<main>{children}</main>
-					<Footer />
-				</NextIntlClientProvider>
+				<ReduxProvider>
+					<NextIntlClientProvider locale={locale} messages={messages}>
+						<Header />
+						<main>{children}</main>
+						<Footer />
+					</NextIntlClientProvider>
+				</ReduxProvider>
 			</body>
 		</html>
 	);

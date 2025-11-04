@@ -5,14 +5,27 @@
 		"button_1": "Anmelden",
 		"button_2": "Beratung",
 		"menu": [
+			"Admin-Panel",
 			"Über das Studio",
 			"Dienstleistungen",
 			"Blog",
 			"FAQ",
 			"KONTAKT",
 			"Facebook"
-		]
+		],
+		"register_form": "Melden Sie sich beim Admin-Panel an",
+		"btn_enter": "Eingang"
 	},
+	"About": {
+		"title": "Über das Studio",
+		"description": "In unserem Studio treffen Schönheit und Professionalität aufeinander. Wir bieten ein breites Spektrum an Kosmetik- und Schönheitsbehandlungen – von Gesichts- und Körperbehandlungen über Gerätetherapien bis hin zu individuell zugeschnittenen Verjüngungs- und Regenerationsprogrammen. Ein Team erfahrener Spezialisten sorgt nicht nur für ästhetische Ergebnisse, sondern auch für den Komfort und die Sicherheit jedes Besuchers. Wir verbinden moderne Technologie mit der Pflege natürlicher Schönheit und des Wohlbefindens. Die Einrichtung unseres Studios ist so gestaltet, dass sie Entspannung fördert und Ihnen einen Moment der Auszeit vom Alltag ermöglicht. Hier können Sie sich außergewöhnlich fühlen und unseren Experten vertrauen, die Ihre natürliche Schönheit unterstreichen.",
+		"year": "Jahrelange Erfahrung",
+		"clients": "Zufriedene Kunden",
+		"procedure": "Arten von Verfahren",
+		"procents": "Zufriedenheitsgrad"
+	},
+
+	"Footer": { "enter": "ADMINISTRATOR-LOGIN", "exit": "ВЫХОД АДМИНИСТРАТОРА" },
 
 	"LocaleLayout": {
 		"title": "estetikmed",
