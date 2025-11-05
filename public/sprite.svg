@@ -18,6 +18,10 @@
 <path stroke-width="2" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M4 17.333c4.8-10.667 19.2-10.667 24 0"></path>
 </symbol>
 
+<symbol id="icon-arrow-outlined" viewBox="0 0 16 32">
+<path d="M12.756 8.767l-1.415-1.413-7.705 7.703c-0.124 0.123-0.223 0.27-0.29 0.432s-0.102 0.335-0.102 0.51c0 0.175 0.035 0.348 0.102 0.51s0.166 0.308 0.29 0.432l7.705 7.707 1.413-1.413-7.232-7.233 7.233-7.233z"></path>
+</symbol>
+
 
 </defs>
 </svg>

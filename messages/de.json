@@ -24,6 +24,55 @@
 		"procedure": "Arten von Verfahren",
 		"procents": "Zufriedenheitsgrad"
 	},
+	"Services": {
+		"title": "Usługi",
+		"btn_reservation": "Zapisać się",
+		"btn_consultation": "Konsultacja",
+		"med_est_i_reg": [
+			{ "name": "Lippenvergrößerung 1 ml", "price": "900", "currency": "PLN" },
+			{
+				"name": "Juviderm für Lippen 1 ml",
+				"price": "1200",
+				"currency": "PLN"
+			},
+			{
+				"name": "Botox für das Gesicht ist eine Zone",
+				"price": "500",
+				"currency": "PLN"
+			},
+			{
+				"name": "Botox für das Gesicht in zwei Zonen",
+				"price": "800",
+				"currency": "PLN"
+			},
+			{
+				"name": "Botox für das Gesicht in drei Zonen",
+				"price": "1000",
+				"currency": "PLN"
+			},
+			{
+				"name": "Botox für das ganze Gesicht",
+				"price": "1800",
+				"currency": "PLN"
+			}
+		],
+		"dep_las_dla_kob": [
+			{ "name": "Schnurrbart", "price": "90", "currency": "PLN" },
+			{ "name": "Bart", "price": "90", "currency": "PLN" },
+			{ "name": "Bart + Schnurrbart", "price": "170", "currency": "PLN" },
+			{ "name": "Wangen", "price": "90", "currency": "PLN" },
+			{ "name": "Nacken", "price": "100", "currency": "PLN" },
+			{ "name": "Das ganze Gesicht", "price": "170", "currency": "PLN" }
+		],
+		"dep_las_dla_mez": [
+			{ "name": "Wangen", "price": "100", "currency": "PLN" },
+			{ "name": "Achseln", "price": "160", "currency": "PLN" },
+			{ "name": "Bart", "price": "160", "currency": "PLN" },
+			{ "name": "Schnurrbart", "price": "100", "currency": "PLN" },
+			{ "name": "Bauch", "price": "170", "currency": "PLN" },
+			{ "name": "Brust", "price": "180", "currency": "PLN" }
+		]
+	},
 
 	"Footer": { "enter": "ADMINISTRATOR-LOGIN", "exit": "ВЫХОД АДМИНИСТРАТОРА" },
 

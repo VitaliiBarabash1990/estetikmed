@@ -1,0 +1,33 @@
+.paginationBlock {
+	width: clamp(72px, calc((88 / 768) * 100vw), 96px);
+	height: clamp(44px, calc((56px / 768) * 100vw), 56px);
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	gap: clamp(8px, calc((16 / 768) * 100vw), 16px);
+}
+.btnPagination {
+	/* Left */
+	width: clamp(32px, calc((40 / 375) * 100vw), 40px);
+	height: clamp(44px, calc((56 / 375) * 100vw), 56px);
+	/* Auto layout */
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 8;
+	padding: 4px;
+
+	border-radius: 20px;
+	background: rgba(234, 234, 234, 1);
+}
+
+.paginationIcon {
+	width: 12px;
+	height: 24px;
+	fill: var(--pink);
+}
+.iconRight {
+	transform: rotate(-180deg);
+}
