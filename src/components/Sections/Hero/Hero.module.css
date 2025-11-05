@@ -178,19 +178,22 @@
 	}
 	.heroIcon {
 		width: calc((120 / 1280) * 100vw);
+		max-width: 120px;
 	}
 	.heroTitleBlock {
 		max-width: 1390px;
 		gap: calc((40 / 1280) * 100vw);
+		margin: 0 auto;
 	}
 	.heroName {
-		gap: calc((55 / 1280) * 100vw);
+		gap: 55px;
 		aspect-ratio: 974 / 120;
 	}
 	.heroTitle {
 		font-size: clamp(16px, calc((112 / 1280) * 100vw), 112px);
 	}
 	.heroSubTitle {
+		max-width: 985px;
 		height: calc((96 / 1280) * 100vw);
 		font-size: clamp(16px, calc((40 / 1280) * 100vw), 40px);
 	}
