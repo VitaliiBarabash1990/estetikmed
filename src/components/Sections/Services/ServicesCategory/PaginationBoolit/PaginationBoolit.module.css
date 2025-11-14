@@ -1,0 +1,19 @@
+.boolitList {
+	width: 100%;
+	height: 8px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+}
+.boolitItem {
+	width: 8px;
+	height: 8px;
+	flex-shrink: 0;
+	border-radius: 50px;
+	background: rgba(217, 217, 217, 1);
+}
+.boolitItem:first-child {
+	background: var(--pink);
+}

@@ -28,6 +28,11 @@
 		"title": "Usługi",
 		"btn_reservation": "Zapisać się",
 		"btn_consultation": "Konsultacja",
+		"services": [
+			"Ästhetische und regenerative Medizin",
+			"Laser-Haarentfernung für Frauen",
+			"Laser-Haarentfernung für Männer"
+		],
 		"med_est_i_reg": [
 			{ "name": "Lippenvergrößerung 1 ml", "price": "900", "currency": "PLN" },
 			{

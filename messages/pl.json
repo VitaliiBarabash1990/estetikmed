@@ -28,6 +28,11 @@
 		"title": "Usługi",
 		"btn_reservation": "Zapisać się",
 		"btn_consultation": "Konsultacja",
+		"services": [
+			"Medycyna estetyczna i regeneracyjna",
+			"Depilacja laserowa dla kobiet",
+			"Depilacja laserowa dla mężczyzn"
+		],
 		"med_est_i_reg": [
 			{ "name": "Powiększanie ust 1 ml", "price": "900", "currency": "PLN" },
 			{ "name": "Juviderm do ust 1 ml", "price": "1200", "currency": "PLN" },
