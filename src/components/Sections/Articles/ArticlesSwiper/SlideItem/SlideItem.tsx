@@ -2,7 +2,6 @@ import React from "react";
 import s from "./SlideItem.module.css";
 import { ItemProps } from "../ArticlesSwiper";
 import Image from "next/image";
-import { Link } from "@/i18n/routing";
 import { BlogLink } from "./BlogLink/BlogLink";
 
 type SlideItemProps = {
