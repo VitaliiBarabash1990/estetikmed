@@ -1,0 +1,113 @@
+.aboutInfoWrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 40px;
+	padding: 20px;
+
+	border-radius: 15px;
+	background: rgba(244, 244, 247, 1);
+}
+@media screen and (min-width: 768px) {
+	.aboutInfoWrapper {
+		padding: 40px;
+	}
+}
+@media screen and (min-width: 1280px) {
+	.aboutInfoWrapper {
+		width: calc(100% + 80px);
+	}
+}
+.aboutInfoDescription {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 40px;
+}
+.aboutBlockHead {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.aboutInfoTitle {
+	color: rgba(242, 94, 218, 1);
+
+	font-family: var(--font-family);
+	font-size: clamp(14px, calc((20 / 768) * 100vw), 28px);
+	font-weight: 500;
+	line-height: clamp(24px, calc((40 / 768) * 100vw), 40px);
+	letter-spacing: 0%;
+	text-align: left;
+	text-transform: capitalize;
+}
+.aboutClose {
+	width: clamp(32px, calc((40 / 768) * 100vw), 40px);
+	height: clamp(44px, calc((56 / 768) * 100vw), 56px);
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	padding: 4px;
+
+	border-radius: 20px;
+	background: rgba(234, 234, 234, 1);
+	cursor: pointer;
+
+	transform: scale(1);
+	transition: transform 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.aboutClose:hover {
+	transform: scale(1.04);
+	transition: transform 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.aboutIcon {
+	width: 16px;
+	height: 16px;
+	fill: var(--pink);
+}
+.aboutInfoText {
+	color: rgba(51, 55, 53, 1);
+
+	font-family: var(--font-family);
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 40px;
+	letter-spacing: 0%;
+	text-align: left;
+}
+.btnConsultation {
+	width: 280px;
+	height: clamp(48px, calc((56 / 768) * 100vw), 56px);
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+	padding: 12px 40px;
+
+	border-radius: 40px;
+	background: rgba(242, 94, 218, 1);
+	color: rgba(234, 234, 234, 1);
+
+	font-family: var(--second-family);
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 180%;
+	letter-spacing: 0%;
+	text-align: left;
+	text-transform: capitalize;
+}
+.btnConsultation:hover {
+	color: var(--pink);
+	border: 1px solid rgba(234, 234, 234, 0.4);
+	border-radius: 40px;
+	box-shadow: inset 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+	background: rgba(16, 16, 16, 0.1);
+}
+.image {
+	border-radius: 15px;
+}

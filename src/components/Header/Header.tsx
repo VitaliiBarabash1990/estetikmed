@@ -6,9 +6,14 @@ import LanguageSwitcher from "./LanguageSwitcher/LanguageSwitcher";
 import { NavigationMenu } from "./NavigationMenu/NavigationMenu";
 import { useSelector } from "react-redux";
 import { selectIsEnterAuth } from "@/redux/auth/selectors";
+import { usePathname } from "@/i18n/routing";
+import LogoAdmin from "./LogoAdmin/LogoAdmin";
 
 const Header = () => {
 	const [openMenu, setOpenMenu] = useState(false);
+
+	const path = usePathname().split("/")[1];
+
 	useEffect(() => {
 		if (openMenu) {
 			document.body.classList.add("no-scroll");
@@ -34,8 +39,14 @@ const Header = () => {
 
 	return (
 		<>
-			<div className={s.headerWrapper}>
+			<div
+				className={`${s.headerWrapper} ${
+					path === "admin" ? s.relative : s.fixed
+				}`}
+			>
 				<LanguageSwitcher />
+
+				<LogoAdmin />
 
 				<BurgerButton openMenu={openMenu} setOpenMenu={setOpenMenu} />
 			</div>

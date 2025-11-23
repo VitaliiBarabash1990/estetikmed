@@ -1,0 +1,20 @@
+.menuLogo {
+	width: calc((40 / 330) * 100vw);
+	aspect-ratio: 40 / 40;
+	max-width: 40px;
+	/* margin: 20px auto; */
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+}
+@media screen and (min-width: 768px) {
+	.menuLogo {
+		width: calc((40 / 768) * 100vw);
+	}
+}
+@media screen and (min-width: 1280px) {
+	.menuLogo {
+		width: calc((40 / 1280) * 100vw);
+	}
+}

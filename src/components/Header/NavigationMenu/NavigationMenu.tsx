@@ -3,13 +3,13 @@
 import s from "./NavigationMenu.module.css";
 import { LocalizedScrollLink } from "../LocalizedScrollLink/LocalizedScrollLink";
 import { SetStateAction } from "react";
-import Image from "next/image";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 import BurgerButton from "../BurgerButton/BurgerButton";
 import { useTranslations } from "next-intl";
 import { useSelector } from "react-redux";
 import { selectIsEnterAuth, selectIsLoggedIn } from "@/redux/auth/selectors";
 import RegisterForm from "./RegisterForm/RegisterForm";
+import Logo from "./Logo/Logo";
 
 type MyComponentProps = {
 	setOpenMenu: React.Dispatch<SetStateAction<boolean>>;
@@ -46,15 +46,7 @@ export const NavigationMenu = ({ setOpenMenu, openMenu }: MyComponentProps) => {
 		<div className={s.navMenuWrapper}>
 			<div className={s.menu}>
 				<LanguageSwitcher />
-				<div className={s.menuLogo}>
-					<Image
-						src="/img/Hero/logo.svg"
-						alt={`logo`}
-						fill // замість width/height
-						style={{ objectFit: "cover", objectPosition: "center" }} // замощення
-						sizes="100vw" // опційно для адаптивності
-					/>
-				</div>
+				<Logo />
 				<BurgerButton setOpenMenu={handlerSubmit} openMenu={openMenu} />
 			</div>
 

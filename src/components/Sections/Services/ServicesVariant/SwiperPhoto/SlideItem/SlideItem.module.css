@@ -1,0 +1,13 @@
+.slideWrapper {
+	width: 100%;
+	aspect-ratio: 266 / 266;
+	border-radius: 15px;
+	overflow: hidden;
+
+	/* border: 1px solid blue; */
+}
+.image {
+	object-fit: cover;
+	width: 100%;
+	display: flex;
+}

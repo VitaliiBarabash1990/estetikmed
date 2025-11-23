@@ -3,6 +3,9 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
+	width: 100%;
+	max-width: 1440px;
+	margin: 0 auto;
 	height: 100dvh;
 	gap: 40px;
 	padding: 0px 12px 24px 12px;
@@ -15,15 +18,6 @@
 	align-items: center;
 	justify-content: space-between;
 	position: relative;
-}
-
-.menuLogo {
-	width: calc((40 / 330) * 100vw);
-	aspect-ratio: 40 / 40;
-	/* margin: 20px auto; */
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
 }
 
 .navMenuList {
@@ -138,9 +132,6 @@
 	.menu {
 		padding: 40px 0;
 	}
-	.menuLogo {
-		width: calc((40 / 768) * 100vw);
-	}
 	.navMenuList {
 		gap: calc((24 / 768) * 100vw);
 	}
@@ -178,9 +169,6 @@
 }
 
 @media screen and (min-width: 1280px) {
-	.menuLogo {
-		width: calc((40 / 1280) * 100vw);
-	}
 	.navMenuList {
 		gap: calc((18 / 1280) * 100vw);
 	}

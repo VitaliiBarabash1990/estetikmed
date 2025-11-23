@@ -1,0 +1,79 @@
+.mainContentItem {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	gap: 8px;
+}
+.label {
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-start;
+	gap: 8px;
+	align-self: stretch;
+	position: relative;
+}
+.labelName {
+	position: absolute;
+	left: 7px;
+	top: -11px;
+
+	display: flex;
+	padding: 0 4px;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+
+	color: rgba(119, 119, 119, 1);
+	background: var(--background);
+
+	font-family: var(--font-family);
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 136%;
+	letter-spacing: 0%;
+	text-align: left;
+}
+
+.input {
+	display: flex;
+	padding: 16px;
+	justify-content: space-between;
+	align-items: center;
+	flex: 1 0 0;
+
+	border: 1px solid rgba(163, 163, 163, 1);
+	border-radius: 30px;
+	background: var(--background);
+
+	color: var(--Dark);
+	font-family: var(--second-family);
+	font-size: 13px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: 134%;
+}
+
+.input:focus {
+	outline: none;
+	box-shadow: 0 0 0 2px var(--Stroke);
+}
+
+.error {
+	color: red;
+}
+@media screen and (min-width: 768px) {
+	.input {
+		padding: 20px 24px;
+		font-size: 14px;
+	}
+}
+@media screen and (min-width: 1280px) {
+	.input {
+		padding: 16px 40px;
+		border-radius: 30px;
+		font-size: 18px;
+	}
+	.label {
+		gap: 24px;
+	}
+}

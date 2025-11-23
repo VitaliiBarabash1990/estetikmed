@@ -1,0 +1,19 @@
+.logoAdminWrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.displayNone {
+	display: none;
+}
+.logoTitle {
+	color: var(--color-icon);
+
+	font-family: var(--third-family);
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 40px;
+	letter-spacing: 0%;
+	text-align: center;
+}

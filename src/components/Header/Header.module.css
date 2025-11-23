@@ -4,11 +4,18 @@
 	justify-content: space-between;
 	padding: 20px 20px;
 	width: 100%;
-	max-width: 1920px;
-	margin: 0 auto;
-	position: fixed;
+	/* max-width: 1920px; */
+	max-width: 1440px;
+	/* margin: 0 auto; */
 	left: 50%;
 	transform: translateX(-50%);
+	/* border: 1px solid red; */
+}
+.fixed {
+	position: fixed;
+}
+.relative {
+	position: relative;
 }
 
 .menuHead {
@@ -39,5 +46,10 @@
 @media screen and (min-width: 768px) {
 	.headerWrapper {
 		padding: 40px 44px;
+	}
+	.relative {
+		position: relative;
+		padding: 40px 64px;
+		border-bottom: 1px solid rgba(51, 55, 53, 0.2);
 	}
 }

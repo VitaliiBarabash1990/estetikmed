@@ -14,31 +14,74 @@ export const validationSchemaRegister = () => {
 	});
 };
 
-export const ValidationSchema = Yup.object().shape({
-	subTitleOneUa: Yup.string().required(
-		"Введіть перший підзаголовок на Українській. Це обовязково!"
+export const ValidationSchemaServices = Yup.object().shape({
+	namePl: Yup.string().required(
+		"Введите название на Польськом. Это обязательно!"
 	),
-	subTitleTwoUa: Yup.string().required(
-		"Введіть другий підзаголовок на Українській. Це обовязково!"
+	nameDe: Yup.string().required(
+		"Введите название на Немецком. Это обязательно!"
 	),
-
-	img: Yup.array()
-		.of(Yup.mixed().nullable())
+	descriptionPl: Yup.string().required(
+		"Введите описание на Польськом. Это обязательно!"
+	),
+	descriptionDe: Yup.string().required(
+		"Введите описание на Немецком. Это обязательно!"
+	),
+	price: Yup.number()
+		.typeError("Цена должна быть числом!")
+		.required("Введите цену. Это обязательно!")
+		.min(1, "Цена должна быть не меньше 1"),
+	imgs: Yup.array()
+		.of(
+			Yup.mixed().test(
+				"is-file",
+				"Файл должен быть изображением",
+				(value) => value instanceof File
+			)
+		)
+		.min(1, "Добавьте хотя бы 1 фото")
+		.max(10, "Не можна добавлять больше 10 фото")
 		.test(
-			"four-images-required",
-			"Необхідно завантажити всі чотири фото",
-			function (value) {
-				const existingImg = this.parent?.existingImg || [];
-
-				// Перевірка наявності 4 фото (або нові файли, або існуючі урли)
-				const total = [
-					...(Array.isArray(existingImg) ? existingImg : []),
-					...(Array.isArray(value)
-						? value.filter((v) => v instanceof File || v instanceof Blob)
-						: []),
-				];
-
-				return total.length >= 4;
+			"file-type-check",
+			"Файл должен быть изображением (jpg, png, jpeg, webp)",
+			(value) => {
+				if (!Array.isArray(value)) return true;
+				return value.every((file) => {
+					if (!file) return true;
+					if (!(file instanceof File)) return true;
+					return ["image/jpeg", "image/png", "image/webp"].includes(file.type);
+				});
 			}
 		),
+	// imgs: Yup.array()
+	// 	.of(Yup.mixed().nullable())
+	// 	.test(
+	// 		"four-images-required",
+	// 		"Необходимо загрузить до 5 фотографий",
+	// 		function (value) {
+	// 			const existingImgs = this.parent?.existingImgs || [];
+
+	// 			// Підрахунок усіх фото (нові файли + існуючі)
+	// 			const total = [
+	// 				...(Array.isArray(existingImgs) ? existingImgs.filter((v) => v) : []),
+	// 				...(Array.isArray(value)
+	// 					? value.filter((v) => v instanceof File || v instanceof Blob)
+	// 					: []),
+	// 			];
+
+	// 			return total.length >= 5;
+	// 		}
+	// 	)
+	// 	.test(
+	// 		"file-type-check",
+	// 		"Файл должен быть изображением (jpg, png, jpeg, webp)",
+	// 		(value) => {
+	// 			if (!Array.isArray(value)) return true;
+	// 			return value.every((file) => {
+	// 				if (!file) return true;
+	// 				if (!(file instanceof File)) return true;
+	// 				return ["image/jpeg", "image/png", "image/webp"].includes(file.type);
+	// 			});
+	// 		}
+	// 	),
 });

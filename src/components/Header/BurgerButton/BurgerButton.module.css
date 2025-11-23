@@ -16,6 +16,12 @@
 .iconClose {
 	fill: var(--background);
 }
+.iconClose.darkColor {
+	fill: var(--color-icon);
+}
+.iconOpen.darkColor {
+	stroke: var(--color-icon);
+}
 @media screen and (min-width: 768px) {
 	.burgerMenu {
 		width: calc((40 / 768) * 100vw);

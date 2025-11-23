@@ -1,36 +1,15 @@
 "use client";
-import React from "react";
+import React, { SetStateAction } from "react";
 import s from "./ServicesCategory.module.css";
-import PaginationBlock from "./PaginationBlock/PaginationBlock";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { services } from "@/lib/ data/services";
-import PaginationBoolit from "./PaginationBoolit/PaginationBoolit";
+import ServicesSection, { ItemProps } from "./ServicesSection/ServicesSection";
 
-type CategoryProps = {
+export type CategoryProps = {
 	id: number;
+	setOpenSCInfo: React.Dispatch<SetStateAction<ItemProps | null>>;
 };
 
-const ServicesCategory: React.FC<CategoryProps> = ({ id }) => {
-	const t = useTranslations("Services");
-	const countItem = 8;
-
-	const localizedServices = Object.fromEntries(
-		Object.entries(services).map(([groupName, serviceArray]) => [
-			groupName,
-			serviceArray.map((item) => ({
-				...item,
-				name: t(item.nameKey),
-				price: t(item.priceKey),
-				currency: t(item.currencyKey),
-			})),
-		])
-	);
-
-	const list = localizedServices[`services_${id}`] || [];
-
-	const hundlerClickInfo = () => {};
-
+const ServicesCategory: React.FC<CategoryProps> = ({ id, setOpenSCInfo }) => {
 	return (
 		<div className={s.wrapperComponent}>
 			<div
@@ -47,26 +26,7 @@ const ServicesCategory: React.FC<CategoryProps> = ({ id }) => {
 						className={s.image}
 					/>
 				</div>
-				<div className={s.servicesSection}>
-					<div className={s.servicesHead}>
-						<h4 className={s.servicesTitle}>{t(`services.${id}`)}</h4>
-						<PaginationBlock />
-					</div>
-					<ul className={s.servicesList}>
-						{list.map((item) => (
-							<li key={item.id} className={s.servicesItem}>
-								{item.name}
-								<div className={s.infoBlock}>
-									{item.price} {item.currency}
-									<svg className={s.iconInfo} onClick={hundlerClickInfo}>
-										<use href="/sprite.svg#icon-solar-info"></use>
-									</svg>
-								</div>
-							</li>
-						))}
-					</ul>
-					<PaginationBoolit countItem={countItem} />
-				</div>
+				<ServicesSection id={id} setOpenSCInfo={setOpenSCInfo} />
 			</div>
 		</div>
 	);

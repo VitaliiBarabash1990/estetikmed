@@ -5,7 +5,10 @@ import s from "./LanguageSwitcher.module.css";
 
 const LanguageSwitcher = () => {
 	const router = useRouter();
+	// const path = usePathname().split("/")[1];
 	const pathname = usePathname();
+	const path = pathname.split("/")[1];
+	console.log("Path", path);
 	const [isPending, startTransition] = useTransition();
 
 	const locale = useLocale();
@@ -25,13 +28,19 @@ const LanguageSwitcher = () => {
 				<React.Fragment key={item}>
 					<li
 						className={`${s.menuLanguageItem} ${
-							item === locale ? s.activeLang : ""
-						}`}
+							pathname.split("/")[1] === "admin" ? s.darkColor : ""
+						} ${item === locale ? s.activeLang : ""}`}
 						onClick={() => handleLocaleChange(item)}
 					>
 						{item === "pl" ? "PLK" : "DEU".toUpperCase()}
 					</li>
-					<div className={s.separator}>|</div>
+					<div
+						className={`${s.separator} ${
+							pathname.split("/")[1] === "admin" ? s.darkColor : ""
+						}`}
+					>
+						|
+					</div>
 				</React.Fragment>
 			))}
 		</ul>

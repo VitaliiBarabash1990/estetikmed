@@ -32,3 +32,15 @@ export type RegisterProps = {
 	email: string;
 	password: string;
 };
+
+//forServices
+export interface ServicesFormProps {
+	namePl: string;
+	nameDe: string;
+	descriptionPl: string;
+	descriptionDe: string;
+	price: number;
+	type?: string;
+	imgs: (File | null)[];
+	existingImg?: string[];
+}

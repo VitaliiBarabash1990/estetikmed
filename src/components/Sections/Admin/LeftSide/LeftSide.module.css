@@ -1,0 +1,54 @@
+.menuAdmin {
+	width: 100%;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	padding: 20px 12px 0;
+	gap: 8px;
+
+	overflow-x: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+
+	/* приховування скролбара */
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+.menuItem {
+	min-width: 144px;
+}
+.menuBtn {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+	padding: 8px 32px;
+
+	border-radius: 60px;
+	background: rgba(244, 244, 247, 1);
+
+	color: rgba(51, 55, 53, 1);
+
+	font-family: var(--font-family);
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 24px;
+	letter-spacing: 0%;
+	text-align: center;
+}
+.active {
+	background: rgba(242, 94, 218, 1);
+	color: rgba(244, 244, 247, 1);
+}
+@media screen and (min-width: 768px) {
+	.menuAdmin {
+		width: 100%;
+		max-width: 144px;
+		flex-direction: column;
+		padding: 0;
+	}
+}

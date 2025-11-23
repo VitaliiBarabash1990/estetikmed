@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./BtnBlock.module.css";
 import { useTranslations } from "next-intl";
+import { LocalizedScrollLink } from "@/lib/utils/LocalizedScrollLink/LocalizedScrollLink";
 
 const BtnBlock = () => {
 	const t = useTranslations("Services");
@@ -9,9 +10,12 @@ const BtnBlock = () => {
 			<button type="button" className={s.btn}>
 				{t("btn_reservation")}
 			</button>
-			<button type="button" className={s.btn}>
+			<LocalizedScrollLink href="/" scrollId="Consultation" className={s.btn}>
 				{t("btn_consultation")}
-			</button>
+			</LocalizedScrollLink>
+			{/* <button type="button" className={s.btn}>
+				{t("btn_consultation")}
+			</button> */}
 		</div>
 	);
 };
