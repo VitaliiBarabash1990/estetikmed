@@ -8,7 +8,6 @@ const LanguageSwitcher = () => {
 	// const path = usePathname().split("/")[1];
 	const pathname = usePathname();
 	const path = pathname.split("/")[1];
-	// console.log("Path", path);
 	const [isPending, startTransition] = useTransition();
 
 	const locale = useLocale();
