@@ -2,6 +2,8 @@ import React from "react";
 import s from "./SlideItem.module.css";
 import { ItemProps } from "../ArticlesSwiper";
 import Image from "next/image";
+import { Link } from "@/i18n/routing";
+import { BlogLink } from "./BlogLink/BlogLink";
 
 type SlideItemProps = {
 	item: ItemProps;
@@ -19,11 +21,11 @@ const SlideItem: React.FC<SlideItemProps> = ({ item }) => {
 					alt={`article_` + `${item.id}`}
 					className={s.image}
 				/>
-				<div className={s.btnArticle}>
+				<BlogLink id={String(item.id)} className={s.btnArticle}>
 					<svg className={s.iconBtn}>
 						<use href="/sprite.svg#icon-arrow-bottom-left"></use>
 					</svg>
-				</div>
+				</BlogLink>
 				<div className={s.sliderContentDescr}>
 					<h3 className={s.title}>{item.title}</h3>
 					<p className={s.description}>{item.text.slice(0, 50)}</p>

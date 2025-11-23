@@ -19,7 +19,7 @@ const BurgerButton = ({ setOpenMenu, openMenu }: BurgerProps) => {
 			<svg
 				className={clsx(
 					s.burgerIcon,
-					path === "admin" ? s.darkColor : "",
+					path === "admin" || path === "blog" ? s.darkColor : "",
 					openMenu ? s.iconClose : s.iconOpen
 				)}
 			>

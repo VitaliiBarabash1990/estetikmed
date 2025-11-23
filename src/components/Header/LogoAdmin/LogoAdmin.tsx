@@ -12,7 +12,13 @@ const LogoAdmin = () => {
 			{isMobile ? (
 				<Logo />
 			) : (
-				<div className={path === "admin" ? s.logoAdminWrapper : s.displayNone}>
+				<div
+					className={
+						path === "admin" || path === "blog"
+							? s.logoAdminWrapper
+							: s.displayNone
+					}
+				>
 					<h4 className={s.logoTitle}>EstetikMed</h4>
 				</div>
 			)}

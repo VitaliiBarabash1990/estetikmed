@@ -8,6 +8,7 @@ export const routing = defineRouting({
 		"/": "/",
 		"/admin": "/admin",
 		"/admin_authorization": "/admin_authorization",
+		"/blog": "/blog",
 	},
 });
 

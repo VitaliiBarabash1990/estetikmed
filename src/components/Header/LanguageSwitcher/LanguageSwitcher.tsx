@@ -8,7 +8,7 @@ const LanguageSwitcher = () => {
 	// const path = usePathname().split("/")[1];
 	const pathname = usePathname();
 	const path = pathname.split("/")[1];
-	console.log("Path", path);
+	// console.log("Path", path);
 	const [isPending, startTransition] = useTransition();
 
 	const locale = useLocale();
@@ -28,7 +28,7 @@ const LanguageSwitcher = () => {
 				<React.Fragment key={item}>
 					<li
 						className={`${s.menuLanguageItem} ${
-							pathname.split("/")[1] === "admin" ? s.darkColor : ""
+							path === "admin" || path === "blog" ? s.darkColor : ""
 						} ${item === locale ? s.activeLang : ""}`}
 						onClick={() => handleLocaleChange(item)}
 					>
@@ -36,7 +36,7 @@ const LanguageSwitcher = () => {
 					</li>
 					<div
 						className={`${s.separator} ${
-							pathname.split("/")[1] === "admin" ? s.darkColor : ""
+							path === "admin" || path === "blog" ? s.darkColor : ""
 						}`}
 					>
 						|
