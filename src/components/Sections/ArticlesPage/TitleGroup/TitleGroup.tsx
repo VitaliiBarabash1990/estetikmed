@@ -18,7 +18,13 @@ const TitleGroup: React.FC<TitleGroupProps> = ({ title, type = "blog" }) => {
 	};
 	return (
 		<div className={s.titleGroup}>
-			<h3 className={s.titleArticle}>{title}</h3>
+			<h3
+				className={`${s.titleArticle} ${
+					type !== "blog" ? "" : s.titleArticleBlog
+				}`}
+			>
+				{title}
+			</h3>
 			<button
 				type="button"
 				className={`${s.btnArticle} ${type !== "blog" ? s.btnArticleDark : ""}`}

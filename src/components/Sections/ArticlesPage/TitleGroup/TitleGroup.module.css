@@ -5,16 +5,21 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	gap: 20px;
 }
 .titleArticle {
 	color: var(--pink);
 
 	font-family: var(--font-family);
-	font-size: clamp(20px, calc((24 / 768) * 100vw), 32px);
+	font-size: clamp(14px, calc((20 / 768) * 100vw), 28px);
 	font-weight: 500;
-	line-height: 40px;
+	line-height: 24px;
 	letter-spacing: 0%;
 	text-align: left;
+}
+.titleArticleBlog {
+	font-size: clamp(20px, calc((24 / 768) * 100vw), 32px);
+	line-height: 40px;
 }
 .btnArticle {
 	width: clamp(32px, calc((40 / 768) * 100vw), 40px);
@@ -23,6 +28,7 @@
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+	flex-shrink: 0;
 	gap: 8px;
 	padding: 4px;
 
