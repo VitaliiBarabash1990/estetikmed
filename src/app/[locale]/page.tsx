@@ -6,6 +6,7 @@ import { Locale } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
 import Specialist from "@/components/Sections/Specialist/Specialist";
 import Articles from "@/components/Sections/Articles/Articles";
+import FAQ from "@/components/Sections/FAQ/FAQ";
 
 type Props = {
 	params: Promise<{ locale: Locale }>;
@@ -19,12 +20,13 @@ export default async function IndexPage({ params }: Props) {
 
 	return (
 		<>
-			<Hero />
+			{/* <Hero />
 			<About />
 			<Services />
-			<Features />
+			<Features /> */}
 			<Specialist />
 			<Articles />
+			<FAQ />
 		</>
 	);
 }

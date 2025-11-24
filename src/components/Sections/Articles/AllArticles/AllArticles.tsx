@@ -1,11 +1,12 @@
 import React from "react";
 import s from "./AllArticles.module.css";
+import { Link } from "@/i18n/routing";
 
 const AllArticles = ({ text }: { text: string }) => {
 	return (
-		<button type="button" className={s.btnAllArticles}>
+		<Link href="/blog" className={s.btnAllArticles}>
 			{text}
-		</button>
+		</Link>
 	);
 };
 

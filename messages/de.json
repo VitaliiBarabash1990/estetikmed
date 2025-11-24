@@ -207,6 +207,26 @@
 		}
 	},
 
+	"Faq": {
+		"title": "faq",
+		"acordion_title": [
+			"Sind die Behandlungen schmerzhaft?",
+			"Wie lange dauert eine einzelne Behandlung?",
+			"Kann ich nach dem Eingriff zu meinen täglichen Aktivitäten zurückkehren?",
+			"Welche Kontraindikationen gibt es für Behandlungen?",
+			"Wie oft sollten Behandlungen wiederholt werden?",
+			"Bieten Sie Beratungsgespräche vor der ersten Behandlung an?"
+		],
+		"acordion_description": [
+			"Die meisten Behandlungen sind minimalinvasiv und werden so durchgeführt, dass sie für den Patienten möglichst angenehm sind. Bei Bedarf wenden wir eine örtliche Betäubung in Form einer Creme an, so dass die Beschwerden minimal sind.",
+			"Die Dauer der Behandlung hängt vom gewählten Eingriff ab – im Durchschnitt dauert sie 30 bis 60 Minuten. Der genaue Zeitpunkt wird individuell im Beratungsgespräch festgelegt.",
+			"Ja, in den meisten Fällen können Sie sofort zu Ihren täglichen Aktivitäten zurückkehren. Nach einigen Behandlungen können leichte Rötungen oder Schwellungen auftreten, die innerhalb weniger Stunden oder Tage verschwinden.",
+			"Zu den häufigsten Kontraindikationen zählen: Schwangerschaft, Stillzeit, aktive Hautinfektionen, Entzündungen, Autoimmun- oder Krebserkrankungen sowie Allergien gegen die Inhaltsstoffe der Präparate. Wir besprechen jeden Fall individuell, bevor wir mit der Therapie beginnen.",
+			"Die Häufigkeit der Behandlungen richtet sich nach der Art der Therapie und den individuellen Hautbedürfnissen. Wir empfehlen in der Regel eine Reihe mehrerer Behandlungen im Abstand von 2–4 Wochen, gefolgt von Erhaltungsbehandlungen alle paar Monate.",
+			"Natürlich. Jeder Behandlung geht ein ausführliches Beratungsgespräch voraus, in dem wir Ihre Bedürfnisse, Erwartungen und Ihren Hautzustand besprechen. Auf dieser Basis wählen wir die sicherste und effektivste Lösung aus."
+		]
+	},
+
 	"Footer": { "enter": "ADMINISTRATOR-LOGIN", "exit": "ВЫХОД АДМИНИСТРАТОРА" },
 
 	"LocaleLayout": {

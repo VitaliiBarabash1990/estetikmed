@@ -1,3 +1,5 @@
+import { useLocale } from "next-intl";
+
 export function BlogLink({
 	id,
 	className,
@@ -7,9 +9,11 @@ export function BlogLink({
 	className?: string;
 	children?: React.ReactNode;
 }) {
+	const locale = useLocale();
+
 	return (
 		<a
-			href={`/blog/${id}`} // ✅ передаємо повний шлях як string
+			href={`/${locale}/blog/${id}`} // ✅ передаємо повний шлях як string
 			className={className}
 		>
 			{children}

@@ -29,7 +29,7 @@ const Header = () => {
 	}, [openMenu]);
 
 	const isEnterAuth = useSelector(selectIsEnterAuth);
-	console.log("Enter", isEnterAuth);
+	console.log("isEnterAuth", isEnterAuth);
 
 	useEffect(() => {
 		if (isEnterAuth) {

@@ -1,0 +1,10 @@
+.articlePageWrapper {
+	width: 100%;
+	max-width: 1392px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 24px;
+	margin: 0 auto;
+}

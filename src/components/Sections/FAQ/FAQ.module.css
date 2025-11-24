@@ -1,0 +1,11 @@
+.faqWrapper {
+	display: flex;
+	width: 100%;
+	max-width: 1392px;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 40px;
+	padding: 20px 24px;
+	margin: 0 auto;
+}

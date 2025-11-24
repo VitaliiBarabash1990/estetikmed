@@ -207,6 +207,26 @@
 		}
 	},
 
+	"Faq": {
+		"title": "faq",
+		"acordion_title": [
+			"Czy zabiegi są bolesne?",
+			"Ile czasu trwa pojedynczy zabieg?",
+			"Czy po zabiegu mogę wrócić do codziennych zajęć?",
+			"Jakie są przeciwwskazania do zabiegów?",
+			"Jak często należy powtarzać zabiegi?",
+			"Czy oferujecie konsultacje przed pierwszym zabiegiem?"
+		],
+		"acordion_description": [
+			"Większość zabiegów jest mało inwazyjna i wykonywana w sposób możliwie komfortowy dla pacjenta. W razie potrzeby stosujemy znieczulenie miejscowe w postaci kremu, dzięki czemu dyskomfort jest minimalny.",
+			"Czas trwania zabiegu zależy od wybranej procedury – średnio trwa od 30 do 60 minut. Dokładny czas określamy indywidualnie podczas konsultacji.",
+			"Tak, w większości przypadków można od razu wrócić do codziennych czynności. Po niektórych zabiegach może pojawić się lekkie zaczerwienienie lub obrzęk, które ustępują w ciągu kilku godzin lub dni.",
+			"Do najczęstszych przeciwwskazań należą: ciąża, karmienie piersią, aktywne infekcje skóry, stany zapalne, choroby autoimmunologiczne lub nowotworowe, a także uczulenie na składniki preparatów. Każdy przypadek omawiamy indywidualnie przed rozpoczęciem terapii.",
+			"Częstotliwość zabiegów zależy od rodzaju terapii oraz indywidualnych potrzeb skóry. Zazwyczaj zalecamy serię kilku zabiegów w odstępach 2–4 tygodni, a następnie zabiegi podtrzymujące co kilka miesięcy.",
+			"Oczywiście. Każdy zabieg poprzedza szczegółowa konsultacja, podczas której omawiamy potrzeby, oczekiwania i stan skóry. Na tej podstawie dobieramy najbezpieczniejsze i najbardziej skuteczne rozwiązanie."
+		]
+	},
+
 	"Footer": {
 		"enter": "LOGOWANIE ADMINISTRATORA",
 		"exit": "ВЫХОД АДМИНИСТРАТОРА"
