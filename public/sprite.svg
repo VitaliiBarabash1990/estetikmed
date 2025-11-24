@@ -69,5 +69,10 @@
 <path stroke-width="1.8856" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M23.555 24.445l-15.555-0.444-0.444-15.555M24 8l-16 16"></path>
 </symbol>
 
+<symbol id="icon-accordion-plus" viewBox="0 0 32 32">
+<path stroke-width="4" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M2 16h28M16 16v-14M16 16v14"></path>
+</symbol>
+
+
 </defs>
 </svg>

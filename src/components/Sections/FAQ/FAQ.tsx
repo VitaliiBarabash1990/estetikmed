@@ -4,9 +4,11 @@ import WrapperForComponentsAllSides from "@/lib/utils/WrapperForComponentsAllSid
 import React from "react";
 import s from "./FAQ.module.css";
 import AccordionList from "./AccordionList/AccordionList";
+import { useTranslations } from "next-intl";
 
 function FAQ() {
 	const isMobile = useIsMobile();
+	const t = useTranslations("Faq");
 	return (
 		<WrapperForComponentsAllSides
 			paddingTop={isMobile ? 12 : 20}
@@ -16,7 +18,7 @@ function FAQ() {
 		>
 			<div className={s.faqWrapper}>
 				<div className={s.titleGroup}>
-					<h3></h3>
+					<h3 className={s.title}>{t("title")}</h3>
 				</div>
 				<AccordionList />
 			</div>

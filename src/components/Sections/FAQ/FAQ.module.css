@@ -6,6 +6,26 @@
 	justify-content: flex-start;
 	align-items: flex-start;
 	gap: 40px;
-	padding: 20px 24px;
 	margin: 0 auto;
+}
+.titleGroup {
+	width: 100%;
+	height: 40px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 10;
+	padding: 0px clamp(8px, calc((8 / 768) * 100vw), 40px);
+}
+.title {
+	color: rgba(51, 55, 53, 1);
+
+	font-family: var(--font-family);
+	font-size: clamp(20px, calc((24 / 768) * 100vw), 32px);
+	font-weight: 500;
+	line-height: 40px;
+	letter-spacing: 0%;
+	text-transform: uppercase;
+	text-align: left;
 }
