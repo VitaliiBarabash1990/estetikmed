@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import s from "./AccordionList.module.css";
 import { useTranslations } from "next-intl";
-import { accordion } from "@/lib/ data/accordion";
+import { accordion } from "@/lib/data/accordion";
 
 const AccordionList = () => {
 	const [activeItem, setActiveItem] = useState<number | null>(null);

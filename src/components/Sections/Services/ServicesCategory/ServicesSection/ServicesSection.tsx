@@ -5,7 +5,7 @@ import PaginationBlock from "../PaginationBlock/PaginationBlock";
 import PaginationBoolit from "../PaginationBoolit/PaginationBoolit";
 import { useTranslations } from "next-intl";
 import { CategoryProps } from "../ServicesCategory";
-import { services } from "@/lib/ data/services";
+import { services } from "@/lib/data/services";
 import { usePathname } from "@/i18n/routing";
 
 export type ItemProps = {

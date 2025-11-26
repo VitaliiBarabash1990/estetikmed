@@ -1,4 +1,5 @@
-import { articles } from "@/lib/ data/articles";
+"use client";
+import { articles } from "@/lib/data/articles";
 import { useTranslations } from "next-intl";
 import React from "react";
 import TitleGroup from "../ArticlesPage/TitleGroup/TitleGroup";

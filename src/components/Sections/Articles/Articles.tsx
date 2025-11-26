@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import s from "./Articles.module.css";
-import { articles } from "@/lib/ data/articles";
+import { articles } from "@/lib/data/articles";
 import { useTranslations } from "next-intl";
 import ArticlesSwiper from "./ArticlesSwiper/ArticlesSwiper";
 import AllArticles from "./AllArticles/AllArticles";

@@ -1,9 +1,10 @@
+"use client";
 import React from "react";
 import s from "./ArticlesPage.module.css";
 import TitleGroup from "./TitleGroup/TitleGroup";
 import { useTranslations } from "next-intl";
 import ArticleList from "./ArticleList/ArticleList";
-import { articles } from "@/lib/ data/articles";
+import { articles } from "@/lib/data/articles";
 
 const ArticlesPage = () => {
 	const t = useTranslations("Articles");

@@ -227,6 +227,14 @@
 		]
 	},
 
+	"Reviews": {
+		"title": "Unsere Kunden – über uns",
+		"name": "Anna K.",
+		"services": "Botox für das ganze Gesicht",
+		"reviews": "Ich wollte dir danken! Seit dem Eingriff sind 2 Wochen vergangen und die Wirkung ist erstaunlich 🤩 Das Botox hat sich wunderbar eingelebt, ich habe das Gefühl, als wäre ich 10 Jahre in Ihrer Praxis gewesen 🙈💖 Vielen Dank für Ihre Professionalität und die herzliche Atmosphäre 🥰 Ich werde auf jeden Fall wiederkommen!",
+		"answers": "Vielen Dank! 💖 Es macht uns große Freude zu wissen, dass es Ihnen nach dem Eingriff so gut geht. Bis bald! 🥰"
+	},
+
 	"Footer": { "enter": "ADMINISTRATOR-LOGIN", "exit": "ВЫХОД АДМИНИСТРАТОРА" },
 
 	"LocaleLayout": {

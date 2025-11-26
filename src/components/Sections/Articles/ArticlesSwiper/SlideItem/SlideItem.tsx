@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import s from "./SlideItem.module.css";
 import { ItemProps } from "../ArticlesSwiper";
