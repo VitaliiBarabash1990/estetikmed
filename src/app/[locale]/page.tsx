@@ -8,6 +8,7 @@ import Specialist from "@/components/Sections/Specialist/Specialist";
 import Articles from "@/components/Sections/Articles/Articles";
 import FAQ from "@/components/Sections/FAQ/FAQ";
 import Reviews from "@/components/Sections/Reviews/Reviews";
+import Media from "@/components/Sections/Media/Media";
 
 type Props = {
 	params: Promise<{ locale: Locale }>;
@@ -21,14 +22,15 @@ export default async function IndexPage({ params }: Props) {
 
 	return (
 		<>
-			<Hero />
+			{/* <Hero />
 			<About />
 			<Services />
 			<Features />
 			<Specialist />
 			<Articles />
-			<FAQ />
+			<FAQ /> */}
 			<Reviews />
+			<Media />
 		</>
 	);
 }

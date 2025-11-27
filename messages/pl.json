@@ -235,6 +235,11 @@
 		"answers": "Dziękujemy pięknie! 💖 To dla nas ogromna radość wiedzieć, że czujesz się tak dobrze po zabiegu. Do zobaczenia wkrótce! 🥰"
 	},
 
+	"Media": {
+		"reels": "Reels",
+		"gallery": "Galeria"
+	},
+
 	"Footer": {
 		"enter": "LOGOWANIE ADMINISTRATORA",
 		"exit": "ВЫХОД АДМИНИСТРАТОРА"

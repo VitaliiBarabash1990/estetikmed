@@ -125,4 +125,14 @@
 	.imageWrapper {
 		aspect-ratio: 576 / 480;
 	}
+	.rewiewsList {
+		width: 100%;
+		aspect-ratio: 576 / calc(480 - 68);
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		gap: 8px;
+		overflow-y: auto;
+	}
 }

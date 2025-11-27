@@ -235,6 +235,11 @@
 		"answers": "Vielen Dank! 💖 Es macht uns große Freude zu wissen, dass es Ihnen nach dem Eingriff so gut geht. Bis bald! 🥰"
 	},
 
+	"Media": {
+		"reels": "Rollen",
+		"gallery": "Galerie"
+	},
+
 	"Footer": { "enter": "ADMINISTRATOR-LOGIN", "exit": "ВЫХОД АДМИНИСТРАТОРА" },
 
 	"LocaleLayout": {
