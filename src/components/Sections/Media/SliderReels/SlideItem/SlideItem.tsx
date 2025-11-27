@@ -1,16 +1,17 @@
 "use client";
-import React from "react";
+import React, { SetStateAction } from "react";
 import s from "./SlideItem.module.css";
 import Image from "next/image";
 
 type SlideItemProps = {
 	item: string;
+	setModalVideo: React.Dispatch<SetStateAction<string | null>>;
 };
 
-const SlideItem: React.FC<SlideItemProps> = ({ item }) => {
+const SlideItem: React.FC<SlideItemProps> = ({ item, setModalVideo }) => {
 	return (
 		<div className={s.slideWrapper}>
-			<div className={s.imageWrapper}>
+			<div className={s.imageWrapper} onClick={() => setModalVideo(item)}>
 				{/* <Image
 					src={item}
 					width={80}

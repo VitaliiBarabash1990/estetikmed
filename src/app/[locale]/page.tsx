@@ -22,13 +22,13 @@ export default async function IndexPage({ params }: Props) {
 
 	return (
 		<>
-			{/* <Hero />
+			<Hero />
 			<About />
 			<Services />
 			<Features />
 			<Specialist />
 			<Articles />
-			<FAQ /> */}
+			<FAQ />
 			<Reviews />
 			<Media />
 		</>
