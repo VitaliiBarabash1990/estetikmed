@@ -4,38 +4,36 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: black;
-	z-index: 100;
 	backdrop-filter: blur(6px);
 	background: rgba(5, 5, 5, 0.1);
+	padding: 10px;
+	z-index: 100;
 }
 
 .content {
-	/* margin-top: 75px; */
 	position: relative;
-	overflow: hidden;
-	z-index: 9;
-	width: calc(100% - 20px);
-	max-width: 638px;
+	min-width: auto;
+	max-width: 90vw;
+	max-height: 90vh; /* гумова висота */
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 24px;
-	padding: 40px 25px;
+	gap: 16px;
+	padding: 20px;
 	border-radius: 15px;
-
 	background: var(--background-modal);
+	overflow: hidden;
 }
+
 .modalTitle {
 	color: rgba(242, 94, 218, 1);
-
 	font-family: var(--font-family);
 	font-size: 28px;
 	font-weight: 500;
 	line-height: 40px;
-	letter-spacing: 0%;
 	text-align: left;
+	width: 100%;
 }
 
 .closeBtn {
@@ -47,7 +45,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	cursor: pointer;
 }
+
 .closeBtnIcon {
 	width: 24px;
 	height: 24px;

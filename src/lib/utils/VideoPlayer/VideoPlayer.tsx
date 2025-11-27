@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import s from "./VideoPlayer.module.css";
 
 type Props = {
 	src: string;
@@ -11,7 +12,7 @@ const VideoPlayer = ({ src }: Props) => {
 	const [progress, setProgress] = useState(0);
 	const [volume, setVolume] = useState(1);
 
-	// Перезапуск відео при кожному відкритті модалки
+	// Перезапуск відео при відкритті модалки
 	useEffect(() => {
 		if (videoRef.current) {
 			videoRef.current.currentTime = 0;
@@ -22,7 +23,6 @@ const VideoPlayer = ({ src }: Props) => {
 
 	const togglePlay = () => {
 		if (!videoRef.current) return;
-
 		if (videoRef.current.paused) {
 			videoRef.current.play();
 			setIsPlaying(true);
@@ -53,53 +53,29 @@ const VideoPlayer = ({ src }: Props) => {
 	};
 
 	return (
-		<div style={{ width: "100%" }}>
+		<div className={s.videoWrapper}>
 			<video
 				ref={videoRef}
 				src={src}
 				autoPlay
 				onTimeUpdate={onTimeUpdate}
-				style={{
-					width: "100%",
-					borderRadius: "16px",
-					maxHeight: "70vh",
-				}}
+				className={s.videoElement}
 			/>
 
-			{/* Панель керування */}
-			<div
-				style={{
-					display: "flex",
-					flexDirection: "column",
-					gap: "10px",
-					marginTop: "10px",
-				}}
-			>
-				{/* Кнопка play/pause */}
-				<button
-					onClick={togglePlay}
-					style={{
-						padding: "8px 14px",
-						background: "#F25EDA",
-						borderRadius: "10px",
-						color: "#fff",
-						border: "none",
-						cursor: "pointer",
-					}}
-				>
+			<div className={s.controls}>
+				<button onClick={togglePlay} className={s.playButton}>
 					{isPlaying ? "Pause" : "Play"}
 				</button>
 
-				{/* Прогресбар */}
 				<input
 					type="range"
 					min={0}
 					max={100}
 					value={progress}
 					onChange={handleSeek}
+					className={s.rangeInput}
 				/>
 
-				{/* Гучність */}
 				<input
 					type="range"
 					min={0}
@@ -107,6 +83,7 @@ const VideoPlayer = ({ src }: Props) => {
 					step={0.05}
 					value={volume}
 					onChange={handleVolume}
+					className={s.rangeInput}
 				/>
 			</div>
 		</div>

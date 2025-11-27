@@ -52,9 +52,14 @@ const SliderReels = () => {
 						}}
 						modules={[Pagination, Navigation]}
 						loop={true} // можна і true, але з 10 видимими треба тестити
-						slidesPerView={10} // показуємо 10 картинок
-						slidesPerGroup={1} // гортати по одній
-						spaceBetween={16} // відступи між слайдами
+						breakpoints={{
+							320: { slidesPerView: 6, slidesPerGroup: 1, spaceBetween: 16 },
+							768: { slidesPerView: 8, slidesPerGroup: 1, spaceBetween: 16 },
+							1280: { slidesPerView: 10, slidesPerGroup: 1, spaceBetween: 16 },
+						}}
+						// slidesPerView={10} // показуємо 10 картинок
+						// slidesPerGroup={1} // гортати по одній
+						// spaceBetween={16} // відступи між слайдами
 					>
 						{GalerryList.map((item, index) => (
 							<SwiperSlide key={index} className={s.slide}>
