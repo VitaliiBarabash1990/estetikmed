@@ -1,0 +1,181 @@
+.callbackFormWrapper {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 24px;
+	border: 1px solid blue;
+}
+.titleBlock {
+	width: 100%;
+}
+.title {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 8px;
+}
+.titleTop,
+.titleBottom {
+	color: #a3a3a3;
+	font-family: var(--font-family);
+	font-size: clamp(24px, calc((36 / 768) * 100vw), 40px);
+	font-weight: 500;
+	line-height: 120%;
+	letter-spacing: 0%;
+	text-align: left;
+	text-transform: uppercase;
+}
+.titleTop .lastWord,
+.titleBottom .lastWord {
+	color: #333735;
+}
+
+.form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-end;
+	gap: 24px;
+}
+.componentField {
+	display: flex;
+	width: 100%;
+}
+.label {
+	width: 100%;
+	min-height: 56px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 10px;
+	padding: 17px 24px;
+	position: relative;
+
+	box-sizing: border-box;
+	border: 1px dashed rgba(163, 163, 163, 1);
+	border-radius: 30px;
+	backdrop-filter: blur(13.899999618530273px);
+}
+.labelTitle {
+	position: absolute;
+	top: -12px;
+	left: 12px;
+
+	color: rgba(163, 163, 163, 1);
+	background: #eaeaea;
+
+	font-family: var(--font-family);
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 136%;
+	letter-spacing: 0%;
+	text-align: left;
+}
+.input {
+	width: 100%;
+	height: 22px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	color: rgba(163, 163, 163, 1);
+
+	font-family: var(--font-family);
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 136%;
+	letter-spacing: 0%;
+	text-align: left;
+	background: inherit;
+	border: none;
+}
+
+.fileBtnGroup {
+	width: 100%;
+	height: 56px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 24px;
+}
+.labelFile {
+	width: 30%;
+	height: 56px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	padding: 12px 64px;
+	box-sizing: border-box;
+	border: 1px dashed rgba(163, 163, 163, 1);
+	border-radius: 30px;
+	position: relative;
+}
+.btnFile {
+	width: 70%;
+	height: 56px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	padding: 12px 12px;
+
+	border-radius: 30px;
+	background: rgba(242, 94, 218, 1);
+
+	color: rgba(244, 244, 247, 1);
+
+	font-family: var(--second-family);
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 136%;
+	letter-spacing: 0%;
+	text-align: left;
+}
+
+.fileInputHidden {
+	display: none; /* повністю ховаємо стандартний інпут */
+}
+
+.fileIcon {
+	min-width: 20px;
+	height: 20px;
+	stroke: var(--color-icon);
+	fill: none;
+
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.fileIcon:hover {
+	opacity: 0.7;
+}
+
+@media screen and (min-width: 768px) {
+	.callbackFormWrapper {
+		gap: 40px;
+	}
+	.titleBlock {
+		width: 100%;
+		border-left: 3px solid rgba(51, 55, 53, 1);
+		padding-left: 32px;
+	}
+}
+@media screen and (min-width: 1280px) {
+	.callbackFormWrapper {
+		gap: 0;
+	}
+	.titleBlock {
+		padding-left: 40px;
+	}
+}

@@ -1,0 +1,16 @@
+.sectionContacts {
+	padding: 20px 0;
+}
+.containerContacts {
+	padding: 0 12px;
+}
+@media screen and (min-width: 768px) {
+	.containerContacts {
+		padding: 0 24px;
+	}
+}
+@media screen and (min-width: 1280px) {
+	.containerContacts {
+		padding: 0 24px;
+	}
+}

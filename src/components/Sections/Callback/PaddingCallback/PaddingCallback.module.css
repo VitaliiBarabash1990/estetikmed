@@ -1,0 +1,16 @@
+.sectionCallback {
+	padding: 20px 0;
+}
+.containerCallback {
+	padding: 0 12px;
+}
+@media screen and (min-width: 768px) {
+	.containerCallback {
+		padding: 0 24px;
+	}
+}
+@media screen and (min-width: 1280px) {
+	.containerCallback {
+		padding: 0 44px;
+	}
+}

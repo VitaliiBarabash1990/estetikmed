@@ -240,6 +240,17 @@
 		"gallery": "Galerie"
 	},
 
+	"Callback": {
+		"titleTop": "Sie haben eine Frage",
+		"titleBottom": "Was ist mit diesem Verfahren?",
+		"name": "Name *",
+		"phone": "Telefonnummer",
+		"email": "Email *",
+		"message": "Nachricht",
+		"file": "Datei",
+		"btn": "Schicken"
+	},
+
 	"Footer": { "enter": "ADMINISTRATOR-LOGIN", "exit": "ВЫХОД АДМИНИСТРАТОРА" },
 
 	"LocaleLayout": {

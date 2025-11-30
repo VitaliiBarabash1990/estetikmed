@@ -1,0 +1,314 @@
+.contactWrapper {
+	display: flex;
+	width: 100%;
+	max-width: 1392px;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	margin: 0 auto;
+}
+.contactListWrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+}
+.contactsList {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+}
+
+.iconBlock {
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.contactsItem {
+	width: 100%;
+	height: 124px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+.contactsItem:nth-child(odd) {
+	border-radius: 8px;
+	background: rgba(244, 244, 247, 1);
+}
+.contactsItem:nth-child(even) {
+	box-sizing: border-box;
+	border: 1px solid rgba(51, 55, 53, 1);
+	border-radius: 15px;
+}
+.contactsItem:last-child {
+	border: none;
+}
+
+.textItem {
+	color: rgba(51, 55, 53, 1);
+
+	font-family: var(--font-family);
+	font-size: clamp(14px, calc((18 / 768) * 100vw), 18px);
+	font-weight: 500;
+	line-height: 40px;
+	letter-spacing: 0%;
+	text-align: left;
+}
+.iconItem {
+	width: auto;
+	height: 24px;
+	stroke: var(--color-icon);
+	fill: none;
+}
+.facebookWrapper {
+	width: 100%;
+	height: 120px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+.facebookBlock {
+	width: 60%;
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+	padding: 40px;
+	border-radius: 15px;
+	background: rgba(242, 94, 218, 1);
+}
+.iconBlockFacebook {
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transform: scale(1);
+	transition: transform 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.iconBlockFacebook:hover {
+	transform: scale(1.04);
+	transition: transform 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.iconItemFacebook {
+	width: 100%;
+	height: 100%;
+	fill: var(--white-background);
+}
+.arrowBlock {
+	width: 40%;
+	height: auto;
+	display: flex;
+	position: relative;
+}
+.arrowBlockTop {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 48px;
+	height: 48px;
+	display: flex;
+
+	padding: 16px;
+
+	box-sizing: border-box;
+	border: 1px solid rgba(51, 55, 53, 1);
+	border-radius: 100px;
+	background: rgba(51, 55, 53, 1);
+	transform: scale(1);
+	transition: transform 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.arrowBlockTop:hover {
+	transform: scale(1.04);
+	transition: transform 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.arrowIcon {
+	width: 16px;
+	height: 16px;
+	stroke: var(--background);
+	fill: none;
+}
+
+.scheduleList {
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 24px;
+	padding: 20px;
+
+	border-radius: 15px;
+	background: rgba(244, 244, 247, 1);
+}
+.scheduleItem {
+	width: 100%;
+	height: 32px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+}
+.scheduleItemText {
+	color: rgba(51, 55, 53, 1);
+
+	font-family: var(--font-family);
+	font-size: clamp(14px, calc((18 / 768) * 100vw), 18px);
+	font-weight: 400;
+	line-height: 32px;
+	letter-spacing: 0%;
+	text-align: left;
+}
+.menuList {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	row-gap: 16px;
+	column-gap: 40px;
+	padding: 24px 24px 0 24px;
+}
+.menuItem {
+	width: calc((100% - 80px) / 3);
+	height: 40px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+
+	color: rgba(119, 119, 119, 1);
+
+	font-family: var(--font-family);
+	font-size: clamp(14px, calc((18 / 768) * 100vw), 18px);
+	font-weight: 400;
+	line-height: 40px;
+	letter-spacing: 0%;
+	text-align: center;
+	text-transform: uppercase;
+}
+.contactMap {
+	width: 100%;
+	aspect-ratio: 306 / 360;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 32px;
+	overflow: hidden;
+	border-radius: 15px;
+	/* border: 1px solid red; */
+}
+.googleMap {
+	width: 100%;
+	height: 100%;
+}
+
+@media screen and (min-width: 768px) {
+	.contactWrapper {
+		gap: 24px;
+	}
+	.contactListWrapper {
+		gap: 24px;
+	}
+	.contactsList {
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+	.contactsItem {
+		width: calc((100% - 12px) / 2);
+		height: 120px;
+		flex-direction: row;
+	}
+	.iconBlock {
+		width: 40px;
+		height: 40px;
+	}
+	.iconItem {
+		width: auto;
+		height: 40px;
+	}
+	.contactItem_0 {
+		width: calc(40% - 6px);
+	}
+	.contactItem_1 {
+		width: calc(60% - 6px);
+	}
+	.contactItem_4 {
+		width: calc(60% - 6px);
+	}
+	.contactItem_5 {
+		width: calc(40% - 6px);
+	}
+	.scheduleList {
+		padding: 40px;
+		flex-direction: row;
+	}
+	.menuList {
+		display: flex;
+		width: 100%;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		padding-top: 24px;
+	}
+	.menuItem {
+		width: auto;
+	}
+	.contactMap {
+		width: 100%;
+		aspect-ratio: 704 / 500;
+	}
+}
+@media screen and (min-width: 1280px) {
+	.contactWrapper {
+		flex-direction: row-reverse;
+	}
+	.contactListWrapper,
+	.contactMap {
+		width: calc(50% - 12px);
+		aspect-ratio: 604 / 580;
+	}
+	.contactListWrapper,
+	.contactsList {
+		gap: 12px;
+		justify-content: space-between;
+	}
+	.contactsList {
+		row-gap: clamp(12px, calc((16 / 1280) * 100vw), 24px);
+	}
+	.contactItem_0 {
+		width: calc(30% - 6px);
+	}
+	.contactItem_1 {
+		width: calc(70% - 6px);
+	}
+	.contactItem_4 {
+		width: calc(70% - 6px);
+	}
+	.contactItem_5 {
+		width: calc(30% - 6px);
+	}
+	.scheduleList {
+		padding: 40px 17px;
+	}
+	.menuItem {
+		height: 36px;
+	}
+}

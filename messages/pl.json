@@ -240,6 +240,17 @@
 		"gallery": "Galeria"
 	},
 
+	"Callback": {
+		"titleTop": "Masz pytanie",
+		"titleBottom": "A co z tą procedurą?",
+		"name": "Imię *",
+		"phone": "Numer telefonu *",
+		"email": "Email *",
+		"message": "Wiadomość",
+		"file": "Plik",
+		"btn": "Wysłać"
+	},
+
 	"Footer": {
 		"enter": "LOGOWANIE ADMINISTRATORA",
 		"exit": "ВЫХОД АДМИНИСТРАТОРА"

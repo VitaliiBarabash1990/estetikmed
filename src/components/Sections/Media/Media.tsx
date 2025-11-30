@@ -8,7 +8,7 @@ function Media() {
 	return (
 		<PaddingMedia>
 			<div className={s.mediaWrapper}>
-				<SliderReels />
+				{/* <SliderReels /> */}
 				<SliderGallery />
 			</div>
 		</PaddingMedia>

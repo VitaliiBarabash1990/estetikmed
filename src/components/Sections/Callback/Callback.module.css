@@ -1,0 +1,60 @@
+.callbackWrapper {
+	width: 100%;
+	max-width: 1392px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 24px;
+	border: 1px solid red;
+	margin: 0 auto;
+}
+.formWrapper {
+	width: 100%;
+}
+.imageWraper {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 576 / 520;
+	border-radius: 15px;
+	overflow: hidden;
+}
+
+@media screen and (min-width: 768px) {
+	.callbackWrapper {
+		gap: 40px;
+	}
+	.formWrapper {
+		border: 1px solid green;
+	}
+	.imageWraper {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 704 / 520;
+	}
+	.image {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}
+@media screen and (min-width: 1280px) {
+	.callbackWrapper {
+		flex-direction: row;
+	}
+	.formWrapper,
+	.imageWrapper {
+		width: calc((100% - 40px) / 2);
+		aspect-ratio: 576 / 520;
+	}
+	.imageWraper {
+		position: relative;
+		width: calc((100% - 40px) / 2);
+		aspect-ratio: 576 / 520;
+		border-radius: 15px;
+		overflow: hidden;
+	}
+}

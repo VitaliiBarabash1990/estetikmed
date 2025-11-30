@@ -3,7 +3,11 @@ import { useLocale } from "next-intl";
 import React, { useTransition } from "react";
 import s from "./LanguageSwitcher.module.css";
 
-const LanguageSwitcher = () => {
+type Props = {
+	section?: string;
+};
+
+const LanguageSwitcher = ({ section }: Props) => {
 	const router = useRouter();
 	// const path = usePathname().split("/")[1];
 	const pathname = usePathname();
@@ -27,7 +31,9 @@ const LanguageSwitcher = () => {
 				<React.Fragment key={item}>
 					<li
 						className={`${s.menuLanguageItem} ${
-							path === "admin" || path === "blog" ? s.darkColor : ""
+							path === "admin" || path === "blog" || section === "contacts"
+								? s.darkColor
+								: ""
 						} ${item === locale ? s.activeLang : ""}`}
 						onClick={() => handleLocaleChange(item)}
 					>
@@ -35,7 +41,9 @@ const LanguageSwitcher = () => {
 					</li>
 					<div
 						className={`${s.separator} ${
-							path === "admin" || path === "blog" ? s.darkColor : ""
+							path === "admin" || path === "blog" || section === "contacts"
+								? s.darkColor
+								: ""
 						}`}
 					>
 						|
