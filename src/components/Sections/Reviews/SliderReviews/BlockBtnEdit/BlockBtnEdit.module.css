@@ -1,0 +1,38 @@
+.wrapperBlockBtn {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 8px;
+}
+.btn {
+	width: 93px;
+	height: 44px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	padding: 4px;
+
+	border-radius: 20px;
+	background: rgba(244, 244, 247, 1);
+}
+.deleteBtn,
+.editBtn {
+	width: clamp(18px, calc((24 / 768) * 100vw), 24px);
+	height: clamp(18px, calc((24 / 768) * 100vw), 24px);
+	fill: var(--pink);
+}
+.editBtn {
+	stroke: var(--pink);
+	fill: none;
+}
+@media screen and (min-width: 768px) {
+	.wrapperBlockBtn {
+		gap: 16px;
+	}
+	.btn {
+		width: 40px;
+		height: 56px;
+	}
+}

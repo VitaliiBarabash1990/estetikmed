@@ -102,5 +102,13 @@
 <path stroke-width="2.7369" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M1.374 15.224l14.597-13.786 14.597 13.786M15.971 30.632v-29.194"></path>
 </symbol>
 
+<symbol id="icon-edit" viewBox="0 0 32 32">
+<path stroke-width="2.6667" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M4 28h24M20.067 4l6.6 6.6-11.247 11.247c-0.25 0.25-0.589 0.391-0.943 0.391h-6.048v-6.048c0-0.354 0.141-0.693 0.391-0.943l11.247-11.247zM16.296 7.771l6.6 6.6"></path>
+</symbol>
+
+<symbol id="icon-delete" viewBox="0 0 32 32">
+<path d="M9.333 28c-0.733 0-1.361-0.261-1.883-0.783s-0.783-1.15-0.784-1.884v-17.333h-1.333v-2.667h6.667v-1.333h8v1.333h6.667v2.667h-1.333v17.333c0 0.733-0.261 1.361-0.783 1.884s-1.15 0.784-1.884 0.783h-13.333zM22.667 8h-13.333v17.333h13.333v-17.333zM12 22.667h2.667v-12h-2.667v12zM17.333 22.667h2.667v-12h-2.667v12z"></path>
+</symbol>
+
 </defs>
 </svg>

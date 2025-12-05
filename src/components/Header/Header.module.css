@@ -26,7 +26,7 @@
 	width: 100%;
 
 	backdrop-filter: blur(10px);
-	background: rgba(16, 16, 16, 0.1);
+	background: rgba(16, 16, 16, 0.4);
 	z-index: 10;
 	transition: left 1000ms ease;
 }
@@ -41,7 +41,7 @@
 	z-index: 10;
 
 	backdrop-filter: blur(10px);
-	background: rgba(16, 16, 16, 0.1);
+	background: rgba(16, 16, 16, 0.4);
 }
 @media screen and (min-width: 768px) {
 	.headerWrapper {

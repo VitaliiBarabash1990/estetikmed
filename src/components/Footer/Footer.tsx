@@ -3,21 +3,22 @@ import React from "react";
 import s from "./Footer.module.css";
 import { useTranslations } from "next-intl";
 import { useDispatch, useSelector } from "react-redux";
-import { selectIsEnterAuth } from "@/redux/auth/selectors";
+import { selectIsToken } from "@/redux/auth/selectors";
 import { AppDispatch } from "@/redux/store";
-import { authEnter, authExit } from "@/redux/auth/authSlice";
+import { authEnter } from "@/redux/auth/authSlice";
 import WrapperForComponents from "@/lib/utils/WrapperForComponents/WrapperForComponents";
+import { logOut } from "@/redux/auth/operations";
 
 const Footer = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const t = useTranslations("Footer");
-	const isEnterAuth = useSelector(selectIsEnterAuth);
+	const isToken = useSelector(selectIsToken);
 
 	const hundlerSwitchEnterAuth = () => {
 		dispatch(authEnter());
 	};
 	const hundlerSwitchExitAuth = () => {
-		dispatch(authExit());
+		dispatch(logOut());
 	};
 
 	return (
@@ -31,11 +32,9 @@ const Footer = () => {
 					<button
 						type="button"
 						className={s.enterBtn}
-						onClick={
-							isEnterAuth ? hundlerSwitchExitAuth : hundlerSwitchEnterAuth
-						}
+						onClick={isToken ? hundlerSwitchExitAuth : hundlerSwitchEnterAuth}
 					>
-						{isEnterAuth ? t("exit") : t("enter")}
+						{isToken ? t("exit") : t("enter")}
 					</button>
 				</div>
 			</div>

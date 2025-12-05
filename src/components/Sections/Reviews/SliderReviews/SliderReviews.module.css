@@ -35,6 +35,17 @@
 	align-items: center;
 	padding: 0px clamp(8px, calc((40 / 768) * 100vw), 40px);
 }
+.reverseHeadBlock {
+	flex-direction: row-reverse;
+	padding: 0;
+}
+@media screen and (min-width: 768px) {
+	.reverseHeadBlock {
+		flex-direction: row;
+		justify-content: flex-end;
+		gap: 16px;
+	}
+}
 .title {
 	color: rgba(51, 55, 53, 1);
 
@@ -52,7 +63,7 @@
 	align-items: center;
 	justify-content: flex-end;
 	gap: 8px;
-	width: 100px;
+	/* width: 100px; */
 	height: 48px;
 }
 

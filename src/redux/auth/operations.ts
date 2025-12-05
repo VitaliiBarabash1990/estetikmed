@@ -4,9 +4,8 @@ import { toast } from "react-toastify";
 import { AuthResponse, SendOrderPayload } from "@/lib/types/types";
 
 export const esteticMedAPI = axios.create({
-	// baseURL: "http://localhost:4000/",
-	baseURL: "https://cosmetolog-backend.onrender.com",
-	// baseURL: "https://gloria-life-back.onrender.com",
+	baseURL: "http://localhost:4000",
+	// baseURL: "https://cosmetolog-backend.onrender.com",
 	withCredentials: true,
 });
 
@@ -29,12 +28,12 @@ export const adminLogIn = createAsyncThunk<
 	{ rejectValue: string }
 >("auth/adminlogin", async (credentials, thunkAPI) => {
 	try {
-		const res = await esteticMedAPI.post("/auth/login", credentials);
-		console.log("Data", res.data.token);
-		const token = res.data?.token;
+		const res = await esteticMedAPI.post("/auth/adminlogin", credentials);
+		console.log("Data", res.data.data.data);
+		const token = res.data?.data?.data?.token;
 		if (token) setAuthHeader(token);
-		toast.success(`Welcome Admin ${res.data?.email ?? ""}`);
-		return res.data;
+		toast.success(`Welcome Admin ${res.data?.data?.data?.email ?? ""}`);
+		return res.data.data.data;
 	} catch (error: unknown) {
 		const message =
 			error instanceof Error ? error.message : "Unknown admin login error";

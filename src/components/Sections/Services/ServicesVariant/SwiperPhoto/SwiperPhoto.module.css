@@ -1,6 +1,11 @@
+.worksSwiper {
+	flex: 1; /* Займає всю ширину що залишилась */
+	max-width: 100%;
+}
 .sliderContainer {
 	width: 100%;
-	max-width: clamp(375px, calc((800 / 768) * 100vw), 800px);
+	/* max-width: 888px; */
+	/* max-width: clamp(375px, calc((888 / 1280) * 100vw), 888px); */
 	display: flex;
 	flex-direction: column-reverse;
 	align-items: flex-end;

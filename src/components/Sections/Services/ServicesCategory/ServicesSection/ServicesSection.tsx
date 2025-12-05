@@ -1,58 +1,78 @@
 "use client";
-import React from "react";
+import React, { useState, useMemo } from "react";
 import s from "./ServicesSection.module.css";
 import PaginationBlock from "../PaginationBlock/PaginationBlock";
 import PaginationBoolit from "../PaginationBoolit/PaginationBoolit";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { CategoryProps } from "../ServicesCategory";
-import { services } from "@/lib/data/services";
-import { usePathname } from "@/i18n/routing";
-
-export type ItemProps = {
-	id: number;
-	name: string;
-	price: string;
-	currency: string;
-	description: string;
-};
+import { Locale, usePathname } from "@/i18n/routing";
+import { useSelector } from "react-redux";
+import { selectServices } from "@/redux/services/selectors";
+import { ServicesPayload } from "@/lib/types/types";
 
 const ServicesSection = ({ id, setOpenSCInfo }: CategoryProps) => {
 	const isAdmin = usePathname().split("/")[1] === "admin";
+	const locale = useLocale() as Locale;
 
 	const t = useTranslations("Services");
-	const countItem = 8;
 
-	const localizedServices = Object.fromEntries(
-		Object.entries(services).map(([groupName, serviceArray]) => [
-			groupName,
-			serviceArray.map((item) => ({
-				...item,
-				name: t(item.nameKey),
-				price: t(item.priceKey),
-				currency: t(item.currencyKey),
-				description: t(item.description),
-			})),
-		])
+	const servicesTypeToId: Record<number, string> = {
+		0: t("services.0"),
+		1: t("services.1"),
+		2: t("services.2"),
+	};
+
+	const idInType: Record<number, string> = {
+		0: "medycyna",
+		1: "depilacja_woman",
+		2: "depilacja_man",
+	};
+
+	const servicesData = useSelector(selectServices);
+
+	const filterServicesData = useMemo(
+		() => servicesData.filter((item) => item.type === idInType[id]),
+		[servicesData, id]
 	);
 
-	const list = localizedServices[`services_${id}`] || [];
+	// -----------------------------
+	// PAGINATION
+	// -----------------------------
+	const itemsPerPage = 6;
+	const [page, setPage] = useState(1);
 
-	const hundlerClickInfo = (item: ItemProps) => {
+	const totalPages = Math.ceil(filterServicesData.length / itemsPerPage);
+
+	const paginatedList = useMemo(() => {
+		const start = (page - 1) * itemsPerPage;
+		return filterServicesData.slice(start, start + itemsPerPage);
+	}, [filterServicesData, page]);
+
+	// -----------------------------
+
+	const hundlerClickInfo = (item: ServicesPayload) => {
 		setOpenSCInfo(item);
 	};
 
 	return (
 		<div className={isAdmin ? s.servicesSectionAdmin : s.servicesSection}>
 			<div className={s.servicesHead}>
-				<h4 className={s.servicesTitle}>{t(`services.${id}`)}</h4>
-				<PaginationBlock />
+				<h4 className={s.servicesTitle}>{servicesTypeToId[id]}</h4>
+
+				<PaginationBlock
+					page={page}
+					setPage={setPage}
+					totalPages={totalPages}
+				/>
 			</div>
+
 			<ul className={s.servicesList}>
-				{list.map((item) => (
-					<li key={item.id} className={s.servicesItem}>
-						{item.name}
+				{paginatedList.map((item) => (
+					<li key={item._id} className={s.servicesItem}>
+						{item[locale].name}
+
 						<div className={s.infoBlock}>
-							{item.price} {item.currency}
+							{item.price} PLN
 							<svg
 								className={s.iconInfo}
 								onClick={() => hundlerClickInfo(item)}
@@ -63,7 +83,8 @@ const ServicesSection = ({ id, setOpenSCInfo }: CategoryProps) => {
 					</li>
 				))}
 			</ul>
-			<PaginationBoolit countItem={countItem} />
+
+			<PaginationBoolit page={page} setPage={setPage} totalPages={totalPages} />
 		</div>
 	);
 };

@@ -4,7 +4,7 @@ import { AuthState } from "@/lib/types/types";
 
 const initialState: AuthState = {
 	user: {
-		name: null,
+		user: null,
 		email: null,
 	},
 	token: null,
@@ -40,11 +40,12 @@ export const authSlice = createSlice({
 				state.isError = false;
 			})
 			.addCase(adminLogIn.fulfilled, (state, { payload }) => {
-				console.log("Payload", payload.user);
-				state.user.name = payload.user.name ?? null;
-				state.user.email = payload.user.email;
-				state.token = payload.token;
-				state.role = payload.user.role;
+				console.log("Payload", payload);
+				state.user.user = payload.user ?? null;
+				state.user.email = payload.email;
+				state.token = payload.accessToken;
+				state.role = payload.role;
+				state.isEnterAuth = false;
 				state.isLoggedIn = true;
 				state.isLoading = false;
 				state.isError = false;
@@ -60,7 +61,7 @@ export const authSlice = createSlice({
 			})
 			.addCase(logOut.fulfilled, (state) => {
 				state.user = {
-					name: null,
+					user: null,
 					email: null,
 				};
 				state.token = null;

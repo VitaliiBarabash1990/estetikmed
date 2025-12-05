@@ -24,7 +24,7 @@ export default async function IndexPage({ params }: Props) {
 
 	return (
 		<>
-			{/* <Hero />
+			<Hero />
 			<About />
 			<Services />
 			<Features />
@@ -32,7 +32,7 @@ export default async function IndexPage({ params }: Props) {
 			<Articles />
 			<FAQ />
 			<Reviews />
-			<Media /> */}
+			<Media />
 			<Callback />
 			<Contacts />
 		</>

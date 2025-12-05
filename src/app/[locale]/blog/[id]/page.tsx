@@ -19,7 +19,7 @@ const Page = () => {
 			paddingLeft={isMobile ? 12 : 24}
 			paddingRight={isMobile ? 12 : 24}
 		>
-			<ArticlesItem id={id} />
+			<ArticlesItem id={id} type="article" />
 			<div
 				style={{
 					display: "flex",

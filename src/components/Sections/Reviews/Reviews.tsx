@@ -5,7 +5,7 @@ import SliderReviews from "./SliderReviews/SliderReviews";
 function Reviews() {
 	return (
 		<PaddingRevies>
-			<SliderReviews />
+			<SliderReviews page="main" />
 		</PaddingRevies>
 	);
 }

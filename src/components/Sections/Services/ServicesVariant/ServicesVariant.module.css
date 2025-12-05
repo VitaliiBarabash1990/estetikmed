@@ -1,6 +1,6 @@
 .ServicesVariantWrapper {
 	width: 100%;
-	/* max-width: 1392px; */
+	max-width: 1392px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -31,6 +31,12 @@
 	text-align: left;
 	text-transform: capitalize;
 }
+.servicesBtnBlock {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 8px;
+}
 .btnWraper {
 	width: clamp(32px, calc((40 / 768) * 100vw), 40px);
 	height: clamp(44px, calc((56 / 768) * 100vw), 56px);
@@ -48,6 +54,10 @@
 	width: clamp(16px, calc((24 / 768) * 100vw), 24px);
 	height: clamp(16px, calc((24 / 768) * 100vw), 24px);
 	fill: var(--pink);
+}
+.iconEdit {
+	stroke: var(--pink);
+	fill: none;
 }
 .price {
 	color: rgba(51, 55, 53, 1);
@@ -71,11 +81,17 @@
 }
 @media screen and (min-width: 768px) {
 	.ServicesVariantWrapper {
+		display: flex;
+		width: 100%;
+
 		gap: 40px;
 		padding: 40px;
 	}
 	.serviceHead {
 		height: 56px;
+	}
+	.servicesBtnBlock {
+		gap: 16px;
 	}
 }
 @media screen and (min-width: 1280px) {

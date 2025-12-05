@@ -48,7 +48,7 @@
 	flex-wrap: wrap;
 }
 .servicesCategoryItem {
-	max-width: calc((100% - 8px) / 2);
+	max-width: calc((100% - 4px) / 2);
 }
 
 @media screen and (min-width: 768px) {
@@ -76,6 +76,10 @@
 		border: 2px solid rgba(163, 163, 163, 1);
 		border-radius: 60px;
 	}
+	.servicesCategoryItem {
+		max-width: calc((100% - 8px) / 2);
+	}
+
 	.servicesOptionsItem {
 		border: 1px solid rgba(51, 55, 53, 1);
 	}

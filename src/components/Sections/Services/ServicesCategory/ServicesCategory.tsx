@@ -2,11 +2,12 @@
 import React, { SetStateAction } from "react";
 import s from "./ServicesCategory.module.css";
 import Image from "next/image";
-import ServicesSection, { ItemProps } from "./ServicesSection/ServicesSection";
+import ServicesSection from "./ServicesSection/ServicesSection";
+import { ServicesPayload } from "@/lib/types/types";
 
 export type CategoryProps = {
 	id: number;
-	setOpenSCInfo: React.Dispatch<SetStateAction<ItemProps | null>>;
+	setOpenSCInfo: React.Dispatch<SetStateAction<ServicesPayload | null>>;
 };
 
 const ServicesCategory: React.FC<CategoryProps> = ({ id, setOpenSCInfo }) => {

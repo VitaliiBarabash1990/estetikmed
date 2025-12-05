@@ -14,7 +14,7 @@ type HowItWorksProps = { cardLists: string[] };
 
 const SwiperPhoto: React.FC<HowItWorksProps> = ({ cardLists }) => {
 	return (
-		<div id="HowItWorksSwiper" className={s.worksSwiper}>
+		<div id="ServicesItem" className={s.worksSwiper}>
 			<div className={s.sliderContainer}>
 				<Swiper
 					className={s.swiper}

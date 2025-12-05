@@ -26,7 +26,12 @@ const Selectors: React.FC<SelectorsProps> = ({
 
 	const isMobile = useIsMobile();
 
-	const services = ["Мои услуги", "Добавить услугу"];
+	const services: { [key: string]: string[] } = {
+		services: ["Мои услуги", "Добавить услугу"],
+		articles: ["Мои статьи", "Добавить статью"],
+		media: ["Мои фото", "Мои видео"],
+		reviews: ["Мои отзывы", "Добавить отзыв"],
+	};
 	const languages = ["Польский", "Немецкий"];
 	const categories = isMobile
 		? [
@@ -41,10 +46,13 @@ const Selectors: React.FC<SelectorsProps> = ({
 				"Depilacja laserowa dla kobiet", // 2 (sub)
 				"Depilacja laserowa dla mężczyzn", // 3 (sub)
 		  ];
+
+	const servicesCurrent = services[type];
+
 	return (
 		<div className={s.selectors}>
 			<ul className={s.servicesOptionsList}>
-				{services.map((item, idx) => (
+				{servicesCurrent.map((item, idx) => (
 					<li
 						key={idx}
 						className={`${s.servicesOptionsItem} ${
@@ -57,74 +65,78 @@ const Selectors: React.FC<SelectorsProps> = ({
 				))}
 			</ul>
 
-			<ul className={s.servicesCategoryList}>
-				{categories.map((item, index) => {
-					const isMain = index === 1;
-					const isSub = index === 2 || index === 3;
+			{type === "services" && (
+				<ul className={s.servicesCategoryList}>
+					{categories.map((item, index) => {
+						const isMain = index === 1;
+						const isSub = index === 2 || index === 3;
 
-					// Якщо підкатегорії сховані у верхньому списку — не рендеримо їх тут
-					if (subHidden && isSub) return null;
+						// Якщо підкатегорії сховані у верхньому списку — не рендеримо їх тут
+						if (subHidden && isSub) return null;
 
-					const isActiveMain = mainCategory === 1 && index === 1; // підсвічування головного
-					const isActiveCat = category === index; // підсвічування вибраної підкатегорії / категорії
+						const isActiveMain = mainCategory === 1 && index === 1; // підсвічування головного
+						const isActiveCat = category === index; // підсвічування вибраної підкатегорії / категорії
 
-					return (
-						<li
-							key={index}
-							className={`${s.servicesCategoryItem} ${
-								isActiveMain ? s.active : ""
-							} ${isActiveCat ? s.active : ""}`}
-							onClick={() => {
-								if (isMain) {
-									// toggle видимість підкатегорій
-									setSubHidden((prev) => {
-										const next = !prev;
-										if (next) {
-											// коли ховаємо підкатегорії — за замовчуванням виділяємо підкатегорію 0
-											setMainCategory(null);
-											setCategory(0);
-										} else {
-											setMainCategory(1);
-											setCategory(2);
-											// коли показуємо підкатегорії знову — просто виділяємо підкатегорію 2
-											// (можна очистити mainCategory, якщо треба)
-										}
-										return next;
-									});
-								} else {
-									// клік по звичайній категорії або по підкатегорії
-									setCategory(index);
-									// якщо натиснули підкатегорію — зберігаємо, що mainCategory = 1 (щоб 1 залишався підсіченим)
-									if (isSub) setMainCategory(1);
-									// якщо натиснули іншу (0) — можна зняти mainCategory
-									if (!isSub && !isMain) setMainCategory(null);
-								}
-							}}
-						>
-							{item}
-						</li>
-					);
-				})}
-			</ul>
+						return (
+							<li
+								key={index}
+								className={`${s.servicesCategoryItem} ${
+									isActiveMain ? s.active : ""
+								} ${isActiveCat ? s.active : ""}`}
+								onClick={() => {
+									if (isMain) {
+										// toggle видимість підкатегорій
+										setSubHidden((prev) => {
+											const next = !prev;
+											if (next) {
+												// коли ховаємо підкатегорії — за замовчуванням виділяємо підкатегорію 0
+												setMainCategory(null);
+												setCategory(0);
+											} else {
+												setMainCategory(1);
+												setCategory(2);
+												// коли показуємо підкатегорії знову — просто виділяємо підкатегорію 2
+												// (можна очистити mainCategory, якщо треба)
+											}
+											return next;
+										});
+									} else {
+										// клік по звичайній категорії або по підкатегорії
+										setCategory(index);
+										// якщо натиснули підкатегорію — зберігаємо, що mainCategory = 1 (щоб 1 залишався підсіченим)
+										if (isSub) setMainCategory(1);
+										// якщо натиснули іншу (0) — можна зняти mainCategory
+										if (!isSub && !isMain) setMainCategory(null);
+									}
+								}}
+							>
+								{item}
+							</li>
+						);
+					})}
+				</ul>
+			)}
 
-			<ul className={s.servicesLanguageList}>
-				{languages.map((item, idx) => {
-					const value = idx === 0 ? "pl" : "de";
-					const isActive = language === value;
+			{type !== "media" && (
+				<ul className={s.servicesLanguageList}>
+					{languages.map((item, idx) => {
+						const value = idx === 0 ? "pl" : "de";
+						const isActive = language === value;
 
-					return (
-						<li
-							key={idx}
-							className={`${s.servicesLanguageItem} ${
-								isActive ? s.active : ""
-							}`}
-							onClick={() => setLanguage(value)}
-						>
-							{item}
-						</li>
-					);
-				})}
-			</ul>
+						return (
+							<li
+								key={idx}
+								className={`${s.servicesLanguageItem} ${
+									isActive ? s.active : ""
+								}`}
+								onClick={() => setLanguage(value)}
+							>
+								{item}
+							</li>
+						);
+					})}
+				</ul>
+			)}
 		</div>
 	);
 };

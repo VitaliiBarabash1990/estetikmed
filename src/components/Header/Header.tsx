@@ -5,7 +5,7 @@ import BurgerButton from "./BurgerButton/BurgerButton";
 import LanguageSwitcher from "./LanguageSwitcher/LanguageSwitcher";
 import { NavigationMenu } from "./NavigationMenu/NavigationMenu";
 import { useSelector } from "react-redux";
-import { selectIsEnterAuth } from "@/redux/auth/selectors";
+import { selectIsEnterAuth, selectIsToken } from "@/redux/auth/selectors";
 import { usePathname } from "@/i18n/routing";
 import LogoAdmin from "./LogoAdmin/LogoAdmin";
 
@@ -29,13 +29,14 @@ const Header = () => {
 	}, [openMenu]);
 
 	const isEnterAuth = useSelector(selectIsEnterAuth);
+	const isToken = useSelector(selectIsToken);
 	console.log("isEnterAuth", isEnterAuth);
 
 	useEffect(() => {
 		if (isEnterAuth) {
 			setOpenMenu(true);
-		}
-	}, [isEnterAuth]);
+		} else if (isToken) setOpenMenu(false);
+	}, [isEnterAuth, isToken]);
 
 	return (
 		<>

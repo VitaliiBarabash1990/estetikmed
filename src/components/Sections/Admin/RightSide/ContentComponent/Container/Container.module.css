@@ -4,7 +4,7 @@
 	padding: 12px 8px;
 	border: 1px solid red;
 }
-.servicesContainer {
+/* .servicesContainer {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -15,12 +15,12 @@
 	border: 1px solid green;
 	border-radius: 15px;
 	background: rgba(244, 244, 247, 1);
-}
+} */
 @media screen and (min-width: 768px) {
 	.container {
 		padding: 0;
 	}
-	.servicesContainer {
+	/* .servicesContainer {
 		padding: 40px;
-	}
+	} */
 }

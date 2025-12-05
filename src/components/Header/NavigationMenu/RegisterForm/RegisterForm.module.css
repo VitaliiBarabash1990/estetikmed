@@ -53,7 +53,7 @@
 	gap: 10px;
 	padding: 17px 24px;
 
-	color: rgba(234, 234, 234, 1);
+	color: var(--color-icon);
 
 	font-family: var(--font-family);
 	font-size: 16px;

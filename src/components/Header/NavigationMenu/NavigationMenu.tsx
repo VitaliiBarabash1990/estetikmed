@@ -7,36 +7,34 @@ import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 import BurgerButton from "../BurgerButton/BurgerButton";
 import { useTranslations } from "next-intl";
 import { useSelector } from "react-redux";
-import { selectIsEnterAuth, selectIsLoggedIn } from "@/redux/auth/selectors";
+import { selectIsEnterAuth, selectIsToken } from "@/redux/auth/selectors";
 import RegisterForm from "./RegisterForm/RegisterForm";
 import Logo from "./Logo/Logo";
+import { Link, Pathnames } from "@/i18n/routing";
 
 type MyComponentProps = {
 	setOpenMenu: React.Dispatch<SetStateAction<boolean>>;
 	openMenu: boolean;
 };
 
-type LinkData = {
-	id: number;
-	link: string;
-	text: string;
-};
+type LinkData =
+	| { id: number; type: "route"; link: Pathnames; text: string }
+	| { id: number; type: "scroll"; link: string; text: string };
 
 export const NavigationMenu = ({ setOpenMenu, openMenu }: MyComponentProps) => {
 	const t = useTranslations("Hero");
 	const isEnterAuth = useSelector(selectIsEnterAuth);
-	// const isLoggedIn = useSelector(selectIsLoggedIn);
-	const isLoggedIn = false;
+	const isToken = useSelector(selectIsToken);
 	const linkDatas: LinkData[] = [
-		{ id: 0, link: "/Admin", text: t("menu.0") },
-		{ id: 1, link: "AboutMe", text: t("menu.1") },
-		{ id: 2, link: "BlogSwiper", text: t("menu.2") },
-		{ id: 3, link: "Barber", text: t("menu.3") },
-		{ id: 4, link: "Psychologist", text: t("menu.4") },
-		{ id: 5, link: "Gallery", text: t("menu.5") },
-		{ id: 6, link: "Contacts", text: t("menu.6") },
+		{ id: 0, type: "route", link: "/admin" as Pathnames, text: t("menu.0") },
+		{ id: 1, type: "scroll", link: "about", text: t("menu.1") },
+		{ id: 2, type: "scroll", link: "BlogSwiper", text: t("menu.2") },
+		{ id: 3, type: "scroll", link: "Barber", text: t("menu.3") },
+		{ id: 4, type: "scroll", link: "Psychologist", text: t("menu.4") },
+		{ id: 5, type: "scroll", link: "Gallery", text: t("menu.5") },
+		{ id: 6, type: "scroll", link: "Contacts", text: t("menu.6") },
 	];
-	const linksDatasCurrent = !isLoggedIn
+	const linksDatasCurrent = !isToken
 		? linkDatas.filter((item) => item.id !== 0)
 		: linkDatas;
 
@@ -52,16 +50,26 @@ export const NavigationMenu = ({ setOpenMenu, openMenu }: MyComponentProps) => {
 
 			{!isEnterAuth && (
 				<ul className={s.navMenuList}>
-					{linksDatasCurrent.map((linkData) => (
-						<li key={linkData.id} className={s.navMenuItem}>
-							<LocalizedScrollLink
-								href="/"
-								scrollId={linkData.link}
-								className={s.navMenuLink}
-								onClick={handlerSubmit}
-							>
-								{linkData.text}
-							</LocalizedScrollLink>
+					{linksDatasCurrent.map((item) => (
+						<li key={item.id} className={s.navMenuItem}>
+							{item.type === "route" ? (
+								<Link
+									href={item.link}
+									className={s.navMenuLink}
+									onClick={handlerSubmit}
+								>
+									{item.text}
+								</Link>
+							) : (
+								<LocalizedScrollLink
+									href="/"
+									scrollId={item.link}
+									className={s.navMenuLink}
+									onClick={handlerSubmit}
+								>
+									{item.text}
+								</LocalizedScrollLink>
+							)}
 							<div className={s.fadingLine}></div>
 						</li>
 					))}

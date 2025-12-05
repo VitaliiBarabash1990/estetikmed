@@ -6,6 +6,7 @@
 }
 @media screen and (min-width: 768px) {
 	.content {
+		max-width: calc(100% - 144px - 40px);
 		gap: 27px;
 	}
 }

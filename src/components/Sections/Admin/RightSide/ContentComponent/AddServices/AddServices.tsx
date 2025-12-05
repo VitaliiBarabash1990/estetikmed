@@ -6,13 +6,19 @@ import { ServicesFormProps } from "@/lib/types/types";
 import { ValidationSchemaServices } from "@/lib/utils/validationSchema";
 import ServicesField from "./ServicesField/ServicesField";
 import Image from "next/image";
+import { ServicesItemProps } from "@/components/Sections/Services/ServicesCategory/ServicesSection/ServicesSection";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { createServices } from "@/redux/services/operations";
 
 type AddServicesProps = {
 	language: string;
 	id: number;
+	category?: ServicesItemProps | null;
 };
 
-const AddServices = ({ language, id }: AddServicesProps) => {
+const AddServices = ({ language, id, category }: AddServicesProps) => {
+	const dispatch = useDispatch<AppDispatch>();
 	const isLanguagePl = language === "pl";
 	console.log("IDTYPE", id);
 
@@ -23,11 +29,11 @@ const AddServices = ({ language, id }: AddServicesProps) => {
 	};
 
 	const initialValues: ServicesFormProps = {
-		namePl: "",
-		nameDe: "",
-		descriptionPl: "",
-		descriptionDe: "",
-		price: 0,
+		namePl: category?.name ?? "",
+		nameDe: category?.name ?? "",
+		descriptionPl: category?.description ?? "",
+		descriptionDe: category?.description ?? "",
+		price: Number(category?.price ?? 0),
 		type: categoryToId[id],
 		imgs: [],
 		existingImg: [],
@@ -76,7 +82,8 @@ const AddServices = ({ language, id }: AddServicesProps) => {
 			}
 		});
 
-		console.log("SEND FormData:", values);
+		console.log("SEND FormData:", formData);
+		dispatch(createServices(formData));
 	};
 
 	return (
@@ -113,7 +120,7 @@ const AddServices = ({ language, id }: AddServicesProps) => {
 
 						{/* 📌 Блок завантаження зображень */}
 						<ul className={s.imageList}>
-							<li className={s.imgItem}>
+							<li className={`${s.imgItem} ${s.imgItemUpload}`}>
 								<label className={s.uploadBox}>
 									<input
 										type="file"

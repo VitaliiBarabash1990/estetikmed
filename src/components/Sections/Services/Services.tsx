@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import s from "./Services.module.css";
 import WrapperForComponentsAllSides from "@/lib/utils/WrapperForComponentsAllSides/WrapperForComponentsAllSides";
 import useSizeWindows from "@/lib/useSizeWindows/useSizeWindows";
@@ -8,14 +8,25 @@ import useIsMobile from "@/lib/isMobile/isMobile";
 import BtnBlock from "./BtnBlock/BtnBlock";
 import ServicesCategory from "./ServicesCategory/ServicesCategory";
 import ServicesVariant from "./ServicesVariant/ServicesVariant";
-import { ItemProps } from "./ServicesCategory/ServicesSection/ServicesSection";
+import { ServicesPayload } from "@/lib/types/types";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { getAllServices } from "@/redux/services/operations";
 
 const Services = () => {
-	const [openSCInfo, setOpenSCInfo] = useState<null | ItemProps>(null);
-	console.log("OpenSCInfo", openSCInfo);
+	const dispatch = useDispatch<AppDispatch>();
+	const [openSCInfo, setOpenSCInfo] = useState<null | ServicesPayload>(null);
+
+	useEffect(() => {
+		dispatch(getAllServices());
+	}, [dispatch]);
+
 	const isMobile = useIsMobile();
 	const { left, right } = useSizeWindows();
 	const t = useTranslations("Services");
+	const hundlerCloseServices = () => {
+		setOpenSCInfo(null);
+	};
 	return (
 		<>
 			<WrapperForComponentsAllSides
@@ -32,7 +43,11 @@ const Services = () => {
 				</div>
 			</WrapperForComponentsAllSides>
 			{openSCInfo ? (
-				<ServicesVariant openSCInfo={openSCInfo} />
+				<ServicesVariant
+					openSCInfo={openSCInfo}
+					page="main"
+					hundlerCloseServices={hundlerCloseServices}
+				/>
 			) : (
 				<>
 					<ServicesCategory id={0} setOpenSCInfo={setOpenSCInfo} />

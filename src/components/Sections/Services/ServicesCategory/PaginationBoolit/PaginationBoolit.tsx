@@ -2,15 +2,21 @@
 import React from "react";
 import s from "./PaginationBoolit.module.css";
 
-type CountItemProps = {
-	countItem: number;
+type Props = {
+	page: number; // активна сторінка
+	setPage: (p: number) => void;
+	totalPages: number; // скільки ВСЬОГО сторінок
 };
 
-const PaginationBoolit: React.FC<CountItemProps> = ({ countItem }) => {
+const PaginationBoolit = ({ page, setPage, totalPages }: Props) => {
 	return (
 		<ul className={s.boolitList}>
-			{[0, 1, 2, 3, 4, 5, 6, 7].map((item) => (
-				<li key={item} className={s.boolitItem}></li>
+			{Array.from({ length: totalPages }).map((_, i) => (
+				<li
+					key={i}
+					className={`${s.boolitItem} ${page === i + 1 ? s.active : ""}`}
+					onClick={() => setPage(i + 1)}
+				></li>
 			))}
 		</ul>
 	);
