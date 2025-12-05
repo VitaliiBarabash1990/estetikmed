@@ -24,8 +24,8 @@ export type ReviewsItemProps = {
 };
 export type ReviewsProps = {
 	page: string;
-	hundlerEdit: () => void;
-	setOpenRSInfo: React.Dispatch<SetStateAction<ReviewsItemProps | null>>;
+	hundlerEdit?: () => void;
+	setOpenRSInfo?: React.Dispatch<SetStateAction<ReviewsItemProps | null>>;
 };
 
 const SliderReviews = ({ page, hundlerEdit, setOpenRSInfo }: ReviewsProps) => {
@@ -81,10 +81,10 @@ const SliderReviews = ({ page, hundlerEdit, setOpenRSInfo }: ReviewsProps) => {
 					{page === "admin" ? (
 						<BlockBtnEdit
 							hundlerEdit={() => {
-								if (activeSlide) {
+								if (activeSlide && setOpenRSInfo) {
 									setOpenRSInfo(activeSlide);
 								}
-								hundlerEdit();
+								hundlerEdit?.();
 							}}
 						/>
 					) : (
