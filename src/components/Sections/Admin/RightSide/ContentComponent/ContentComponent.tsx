@@ -72,6 +72,7 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 				setOption={setOption}
 				language={language}
 				setLanguage={setLanguage}
+				setOpenSCInfo={setOpenSCInfo}
 			/>
 
 			{type === "services" &&
@@ -93,6 +94,7 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 					</Container>
 				) : (
 					<AddServices
+						isEdit={!isServices}
 						language={language}
 						id={categoryToId[category]}
 						category={openSCInfo}

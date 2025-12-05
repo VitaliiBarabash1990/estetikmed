@@ -3,7 +3,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { esteticMedAPI } from "../auth/operations";
 import { RootState } from "../store";
-import { ServicesFormProps } from "@/lib/types/types";
 
 // GET ALL
 export const getAllServices = createAsyncThunk(
@@ -45,10 +44,7 @@ export const createServices = createAsyncThunk(
 
 export const updateServices = createAsyncThunk(
 	"services/updateServices",
-	async (
-		{ id, formData }: { id: string; formData: ServicesFormProps },
-		thunkAPI
-	) => {
+	async ({ id, formData }: { id: string; formData: FormData }, thunkAPI) => {
 		try {
 			const state = thunkAPI.getState() as RootState;
 			const token = state.auth.token;

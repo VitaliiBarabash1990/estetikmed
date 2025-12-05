@@ -7,17 +7,9 @@ type SlideItemProps = {
 };
 
 const SlideItem: React.FC<SlideItemProps> = ({ item }) => {
-	console.log("item", item);
 	return (
 		<div className={s.slideWrapper}>
-			<Image
-				src={item}
-				width={100}
-				height={100}
-				sizes="100vw"
-				className={s.image}
-				alt="image"
-			/>
+			<Image src={item} fill className={s.image} alt="image" />
 		</div>
 	);
 };

@@ -3,11 +3,17 @@
 	aspect-ratio: 266 / 266;
 	border-radius: 15px;
 	overflow: hidden;
+	position: relative; /* важливо */
 
 	/* border: 1px solid blue; */
 }
+
 .image {
-	object-fit: cover;
-	width: 100%;
-	display: flex;
+	object-fit: cover; /* обрізає краї, але заповнює блок */
+	object-position: center; /* центрує */
+
+	/* Чтоб по середине
+	object-fit: contain;
+	height: 100%;
+	width: auto; */
 }

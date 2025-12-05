@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 import s from "./SwiperPhoto.module.css";
 import SlideItem from "./SlideItem/SlideItem";
 
-type HowItWorksProps = { cardLists: string[] };
+type HowItWorksProps = { cardLists: string[] | undefined };
 
 const SwiperPhoto: React.FC<HowItWorksProps> = ({ cardLists }) => {
 	return (

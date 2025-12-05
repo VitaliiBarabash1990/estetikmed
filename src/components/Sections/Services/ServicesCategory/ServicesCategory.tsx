@@ -10,6 +10,12 @@ export type CategoryProps = {
 	setOpenSCInfo: React.Dispatch<SetStateAction<ServicesPayload | null>>;
 };
 
+const imageList: Record<number, string> = {
+	0: "/img/Services/service_med_est_reg.webp",
+	1: "/img/Services/service_dep_laz_dla_wooman.webp",
+	2: "/img/Services/service_depilation_laz_dla_man.webp",
+};
+
 const ServicesCategory: React.FC<CategoryProps> = ({ id, setOpenSCInfo }) => {
 	return (
 		<div className={s.wrapperComponent}>
@@ -20,7 +26,7 @@ const ServicesCategory: React.FC<CategoryProps> = ({ id, setOpenSCInfo }) => {
 			>
 				<div className={s.imgWrapper}>
 					<Image
-						src="/img/Services/service_med_est_reg.webp"
+						src={imageList[id]}
 						width={604}
 						height={664}
 						alt={`img_` + id}

@@ -10,7 +10,7 @@
 	justify-content: flex-start;
 	align-items: flex-start;
 	gap: 12px;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 }
 /* .imgWrapper {
 	width: 314px 728px 604px;
@@ -22,7 +22,7 @@
 	aspect-ratio: 314 / 360;
 	border-radius: 15px;
 	overflow: hidden;
-	border: 1px solid green;
+	/* border: 1px solid green; */
 }
 .image {
 	width: 100%;
@@ -52,7 +52,7 @@
 	}
 	.sectionComponentReverse {
 		flex-direction: row-reverse;
-		border: 1px solid green;
+		/* border: 1px solid green; */
 	}
 	.imgWrapper {
 		width: calc(50% - 12px);

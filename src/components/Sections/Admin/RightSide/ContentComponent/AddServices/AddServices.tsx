@@ -2,25 +2,25 @@
 import React from "react";
 import s from "./AddServices.module.css";
 import { Form, Formik, ErrorMessage, FormikHelpers } from "formik";
-import { ServicesFormProps } from "@/lib/types/types";
+import { ServicesFormProps, ServicesPayload } from "@/lib/types/types";
 import { ValidationSchemaServices } from "@/lib/utils/validationSchema";
 import ServicesField from "./ServicesField/ServicesField";
 import Image from "next/image";
-import { ServicesItemProps } from "@/components/Sections/Services/ServicesCategory/ServicesSection/ServicesSection";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { createServices } from "@/redux/services/operations";
+import { createServices, updateServices } from "@/redux/services/operations";
 
 type AddServicesProps = {
 	language: string;
 	id: number;
-	category?: ServicesItemProps | null;
+	category?: ServicesPayload | null;
+	isEdit: boolean;
 };
 
-const AddServices = ({ language, id, category }: AddServicesProps) => {
+const AddServices = ({ language, id, category, isEdit }: AddServicesProps) => {
+	console.log("Category", category);
 	const dispatch = useDispatch<AppDispatch>();
 	const isLanguagePl = language === "pl";
-	console.log("IDTYPE", id);
 
 	const categoryToId: Record<number, string> = {
 		0: "medycyna",
@@ -29,14 +29,14 @@ const AddServices = ({ language, id, category }: AddServicesProps) => {
 	};
 
 	const initialValues: ServicesFormProps = {
-		namePl: category?.name ?? "",
-		nameDe: category?.name ?? "",
-		descriptionPl: category?.description ?? "",
-		descriptionDe: category?.description ?? "",
-		price: Number(category?.price ?? 0),
+		namePl: isEdit ? category?.pl.name ?? "" : "",
+		nameDe: isEdit ? category?.de.name ?? "" : "",
+		descriptionPl: isEdit ? category?.pl.description ?? "" : "",
+		descriptionDe: isEdit ? category?.de.description ?? "" : "",
+		price: Number(isEdit ? category?.price ?? 0 : 0),
 		type: categoryToId[id],
 		imgs: [],
-		existingImg: [],
+		existingImg: isEdit ? category?.imgs ?? [] : [],
 	};
 
 	// medycyna", "depolacja_man", "depolacja_woman
@@ -56,7 +56,16 @@ const AddServices = ({ language, id, category }: AddServicesProps) => {
 	};
 
 	// ❌ Видалити одне фото
-	const handleImageDelete = (
+	const handleExistingDelete = (
+		index: number,
+		setFieldValue: FormikHelpers<ServicesFormProps>["setFieldValue"],
+		values: ServicesFormProps
+	) => {
+		const updated = values.existingImg?.filter((_, i) => i !== index);
+		setFieldValue("existingImg", updated);
+	};
+
+	const handleNewImageDelete = (
 		index: number,
 		setFieldValue: FormikHelpers<ServicesFormProps>["setFieldValue"],
 		values: ServicesFormProps
@@ -66,6 +75,7 @@ const AddServices = ({ language, id, category }: AddServicesProps) => {
 	};
 
 	// 📤 submit
+
 	const hundlerSubmit = (values: ServicesFormProps) => {
 		const formData = new FormData();
 
@@ -76,14 +86,23 @@ const AddServices = ({ language, id, category }: AddServicesProps) => {
 		formData.append("price", String(values.price));
 		formData.append("type", categoryToId[id]);
 
+		// 🔥 ГОЛОВНЕ! Передаємо існуючі картинки
+		formData.append("existingImgs", JSON.stringify(values.existingImg));
+
+		// 🔥 Нові картинки
 		values.imgs.forEach((file) => {
 			if (file instanceof File) {
 				formData.append("imgs", file);
 			}
 		});
 
-		console.log("SEND FormData:", formData);
-		dispatch(createServices(formData));
+		if (isEdit) {
+			console.log("FOrmData", formData);
+			dispatch(createServices(formData));
+		} else if (!isEdit && category?._id) {
+			console.log("FOrmDataUpdate", formData);
+			dispatch(updateServices({ id: category._id, formData }));
+		}
 	};
 
 	return (
@@ -119,7 +138,9 @@ const AddServices = ({ language, id, category }: AddServicesProps) => {
 						<ServicesField title="Цена, PLN" description="price" />
 
 						{/* 📌 Блок завантаження зображень */}
+						{/* СТАРІ ФОТО */}
 						<ul className={s.imageList}>
+							{/* КНОПКА ДОДАВАННЯ */}
 							<li className={`${s.imgItem} ${s.imgItemUpload}`}>
 								<label className={s.uploadBox}>
 									<input
@@ -137,26 +158,46 @@ const AddServices = ({ language, id, category }: AddServicesProps) => {
 								</label>
 							</li>
 
-							{/* Прев'ю */}
-							{values.imgs.map((img, i) => {
-								// TypeScript-safe: only File can be used for preview
-								const src = img instanceof File ? URL.createObjectURL(img) : "";
+							{values.existingImg?.map((img, i) => (
+								<li key={i} className={s.imgItem}>
+									<Image
+										src={img}
+										alt={`existing-${i}`}
+										width={150}
+										height={100}
+										className={s.imgPreview}
+									/>
+									<button
+										type="button"
+										className={s.deleteBtn}
+										onClick={() =>
+											handleExistingDelete(i, setFieldValue, values)
+										}
+									>
+										<svg className={s.deleteIcon}>
+											<use href="/sprite.svg#icon-delete"></use>
+										</svg>
+									</button>
+								</li>
+							))}
 
+							{/* НОВІ ФОТО */}
+							{values.imgs.map((img, i) => {
+								const src = img instanceof File ? URL.createObjectURL(img) : "";
 								return (
 									<li key={i} className={s.imgItem}>
 										<Image
 											src={src}
-											alt={`service-img-${i}`}
+											alt={`new-${i}`}
 											width={150}
 											height={100}
 											className={s.imgPreview}
 										/>
-
 										<button
 											type="button"
 											className={s.deleteBtn}
 											onClick={() =>
-												handleImageDelete(i, setFieldValue, values)
+												handleNewImageDelete(i, setFieldValue, values)
 											}
 										>
 											<svg className={s.deleteIcon}>

@@ -1,6 +1,7 @@
 import React, { SetStateAction, useState } from "react";
 import s from "./Selectors.module.css";
 import useIsMobile from "@/lib/isMobile/isMobile";
+import { ServicesPayload } from "@/lib/types/types";
 
 type SelectorsProps = {
 	type: string;
@@ -10,6 +11,7 @@ type SelectorsProps = {
 	setCategory: React.Dispatch<SetStateAction<number>>;
 	setOption: React.Dispatch<SetStateAction<number>>;
 	setLanguage: React.Dispatch<SetStateAction<string>>;
+	setOpenSCInfo: React.Dispatch<SetStateAction<ServicesPayload | null>>;
 };
 
 const Selectors: React.FC<SelectorsProps> = ({
@@ -20,6 +22,7 @@ const Selectors: React.FC<SelectorsProps> = ({
 	setCategory,
 	setOption,
 	setLanguage,
+	setOpenSCInfo,
 }) => {
 	const [subHidden, setSubHidden] = useState(true);
 	const [mainCategory, setMainCategory] = useState<number | null>(null);
@@ -58,7 +61,14 @@ const Selectors: React.FC<SelectorsProps> = ({
 						className={`${s.servicesOptionsItem} ${
 							option === idx ? s.activeOptions : ""
 						}`}
-						onClick={() => setOption(idx)}
+						onClick={() => {
+							setOption(idx);
+
+							// Якщо це "Добавить услугу" → idx === 1 → чистимо openSCInfo
+							if (idx === 1) {
+								setOpenSCInfo(null);
+							}
+						}}
 					>
 						{item}
 					</li>

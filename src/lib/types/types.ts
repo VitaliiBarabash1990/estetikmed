@@ -31,7 +31,8 @@ export interface ServicesPayload {
 	};
 	price: string;
 	type: string;
-	_id?: undefined | string;
+	imgs: string[];
+	_id?: string | undefined;
 }
 
 export interface ServicesLangPayload {

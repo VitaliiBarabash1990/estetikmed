@@ -31,59 +31,19 @@ export const ValidationSchemaServices = Yup.object().shape({
 		.typeError("Цена должна быть числом!")
 		.required("Введите цену. Это обязательно!")
 		.min(1, "Цена должна быть не меньше 1"),
-	imgs: Yup.array()
-		.of(
-			Yup.mixed().test(
-				"is-file",
-				"Файл должен быть изображением",
-				(value) => value instanceof File
-			)
-		)
-		.min(1, "Добавьте хотя бы 1 фото")
-		.max(10, "Не можна добавлять больше 10 фото")
-		.test(
-			"file-type-check",
-			"Файл должен быть изображением (jpg, png, jpeg, webp)",
-			(value) => {
-				if (!Array.isArray(value)) return true;
-				return value.every((file) => {
-					if (!file) return true;
-					if (!(file instanceof File)) return true;
-					return ["image/jpeg", "image/png", "image/webp"].includes(file.type);
-				});
-			}
-		),
-	// imgs: Yup.array()
-	// 	.of(Yup.mixed().nullable())
-	// 	.test(
-	// 		"four-images-required",
-	// 		"Необходимо загрузить до 5 фотографий",
-	// 		function (value) {
-	// 			const existingImgs = this.parent?.existingImgs || [];
 
-	// 			// Підрахунок усіх фото (нові файли + існуючі)
-	// 			const total = [
-	// 				...(Array.isArray(existingImgs) ? existingImgs.filter((v) => v) : []),
-	// 				...(Array.isArray(value)
-	// 					? value.filter((v) => v instanceof File || v instanceof Blob)
-	// 					: []),
-	// 			];
+	imgs: Yup.array().test(
+		"at-least-one-image",
+		"Добавьте хотя бы 1 фото",
+		function (imgs) {
+			const { existingImg } = this.parent;
 
-	// 			return total.length >= 5;
-	// 		}
-	// 	)
-	// 	.test(
-	// 		"file-type-check",
-	// 		"Файл должен быть изображением (jpg, png, jpeg, webp)",
-	// 		(value) => {
-	// 			if (!Array.isArray(value)) return true;
-	// 			return value.every((file) => {
-	// 				if (!file) return true;
-	// 				if (!(file instanceof File)) return true;
-	// 				return ["image/jpeg", "image/png", "image/webp"].includes(file.type);
-	// 			});
-	// 		}
-	// 	),
+			const noExisting = !existingImg || existingImg.length === 0;
+			const noNew = !imgs || imgs.length === 0;
+
+			return !(noExisting && noNew); // повинно бути хоча б щось
+		}
+	),
 });
 
 export const ValidationSchemaArticles = Yup.object().shape({
