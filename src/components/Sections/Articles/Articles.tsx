@@ -1,22 +1,24 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import s from "./Articles.module.css";
 import { articles } from "@/lib/data/articles";
 import { useTranslations } from "next-intl";
 import ArticlesSwiper from "./ArticlesSwiper/ArticlesSwiper";
 import AllArticles from "./AllArticles/AllArticles";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { getAllArticles } from "@/redux/articles/operations";
 
 const Articles = () => {
+	const dispatch = useDispatch<AppDispatch>();
 	const t = useTranslations("Articles");
-	const articlesList = articles.map((item) => ({
-		id: item.id,
-		img: "/img/Articles/Photo.webp",
-		title: t(item.titleKey),
-		text: t(item.textKey),
-	}));
+	useEffect(() => {
+		dispatch(getAllArticles());
+	}, [dispatch]);
+
 	return (
 		<div className={s.sectionWrapper}>
-			<ArticlesSwiper articlesList={articlesList} />
+			<ArticlesSwiper />
 			<AllArticles text={t("btn")} />
 		</div>
 	);

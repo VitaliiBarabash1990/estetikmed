@@ -3,13 +3,17 @@ import React, { SetStateAction } from "react";
 import s from "./TitleGroup.module.css";
 import { redirect, usePathname } from "@/i18n/routing";
 import { useLocale } from "next-intl";
-import { ArticleItemProps } from "@/lib/types/types";
+import { ArticlesPayload } from "@/lib/types/types";
+import { deleteArticles } from "@/redux/articles/operations";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
 
 type TitleGroupProps = {
 	title: string;
 	type?: string;
-	setOpenSAInfo?: React.Dispatch<SetStateAction<ArticleItemProps | null>>;
+	setOpenSAInfo?: React.Dispatch<SetStateAction<ArticlesPayload | null>>;
 	hundlerEdit?: () => void;
+	id: string | null;
 };
 
 const TitleGroup: React.FC<TitleGroupProps> = ({
@@ -17,7 +21,9 @@ const TitleGroup: React.FC<TitleGroupProps> = ({
 	type = "blog",
 	setOpenSAInfo,
 	hundlerEdit,
+	id,
 }) => {
+	const dispatch = useDispatch<AppDispatch>();
 	const path = usePathname().split("/")[1];
 	const segments = usePathname().split("/").filter(Boolean);
 	const locale = useLocale();
@@ -55,7 +61,12 @@ const TitleGroup: React.FC<TitleGroupProps> = ({
 							className={`${s.btnArticle} ${
 								type === "admin" ? s.btnArticleDark : ""
 							}`}
-							onClick={redirectLink}
+							onClick={() => {
+								if (id !== null) {
+									dispatch(deleteArticles(String(id)));
+								}
+								setOpenSAInfo?.(null);
+							}}
 						>
 							<svg className={s.iconClose}>
 								<use href="/sprite.svg#icon-delete"></use>

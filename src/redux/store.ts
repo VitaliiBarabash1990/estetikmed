@@ -12,6 +12,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { ServicesReducer } from "./services/servicesSlice";
+import { ArticlesReducer } from "./articles/articlesSlice";
 
 const authPersistConfig = {
 	key: "auth",
@@ -25,6 +26,7 @@ const store = configureStore({
 	reducer: {
 		auth: persistedAuthReducer,
 		services: ServicesReducer,
+		articles: ArticlesReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

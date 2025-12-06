@@ -7,7 +7,8 @@
 	gap: 12px;
 }
 .articleItem {
-	position: relative;
+	/* position: relative; */
+	width: 100%;
 }
 @media screen and (min-width: 768px) {
 	.articleList {

@@ -2,69 +2,74 @@
 import React from "react";
 import s from "./AddArticles.module.css";
 import { Form, Formik, ErrorMessage, FormikHelpers } from "formik";
-import { ArticleItemProps, ArticlesFormProps } from "@/lib/types/types";
+import { ArticlesFormProps, ArticlesPayload } from "@/lib/types/types";
 import { ValidationSchemaArticles } from "@/lib/utils/validationSchema";
 import Image from "next/image";
 import ArticlesField from "./ArticlesField/ArticlesField";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { createArticles, updateArticles } from "@/redux/articles/operations";
 
 type AddServicesProps = {
 	language: string;
-	id?: number;
-	article?: ArticleItemProps | null;
+	article?: ArticlesPayload | null;
+	isEdit: boolean;
 };
 
-const AddArticles = ({ language, id, article }: AddServicesProps) => {
+const AddArticles = ({ language, article, isEdit }: AddServicesProps) => {
+	const dispatch = useDispatch<AppDispatch>();
 	const isLanguagePl = language === "pl";
-	console.log("IDTYPE", id);
 
 	const initialValues: ArticlesFormProps = {
-		titlePl: article?.title ?? "",
-		titleDe: article?.title ?? "",
-		textPl: article?.text ?? "",
-		textDe: article?.text ?? "",
-		img: null,
-		existingImg: article?.img ?? "",
+		titlePl: isEdit ? article?.pl.title ?? "" : "",
+		titleDe: isEdit ? article?.de.title ?? "" : "",
+		articlePl: isEdit ? article?.pl.article ?? "" : "",
+		articleDe: isEdit ? article?.de.article ?? "" : "",
+		img: isEdit ? article?.img ?? "" : "", // або string, або File
 	};
 
-	// medycyna", "depolacja_man", "depolacja_woman
-
+	console.log("IsEdit", isEdit);
 	// 📌 Додавання зображень
 	const handleImageChange = (
 		e: React.ChangeEvent<HTMLInputElement>,
 		setFieldValue: FormikHelpers<ArticlesFormProps>["setFieldValue"]
 	) => {
 		const file = e.target.files?.[0];
-		if (!file) return;
-
-		setFieldValue("img", file);
+		if (file) setFieldValue("img", file); // File → нове фото
 	};
 
 	// ❌ Видалити одне фото
 	const handleImageDelete = (
 		setFieldValue: FormikHelpers<ArticlesFormProps>["setFieldValue"]
 	) => {
-		setFieldValue("img", null);
+		setFieldValue("img", ""); // видалено → бекенд запише null
 	};
 
 	// 📤 submit
 	const hundlerSubmit = (values: ArticlesFormProps) => {
+		if (!values.img) return;
 		const formData = new FormData();
 
 		formData.append("titlePl", values.titlePl);
 		formData.append("titleDe", values.titleDe);
-		formData.append("textPl", values.textPl);
-		formData.append("textDe", values.textDe);
+		formData.append("articlePl", values.articlePl);
+		formData.append("articleDe", values.articleDe);
 
+		// Якщо новий файл
 		if (values.img instanceof File) {
 			formData.append("img", values.img);
+		} else {
+			// Якщо старе фото (рядок)
+			formData.append("img", values.img as string);
 		}
 
-		// Якщо старе фото не видалене — передаємо його імʼя/URL
-		if (!values.img && values.existingImg) {
-			formData.append("existingImg", values.existingImg);
+		if (isEdit && article?._id) {
+			console.log("FOrmDataUpdate", formData);
+			dispatch(updateArticles({ id: article._id, formData }));
+		} else if (isEdit) {
+			console.log("FOrmData", formData);
+			dispatch(createArticles(formData));
 		}
-
-		console.log("SEND FormData:", values);
 	};
 
 	return (
@@ -105,13 +110,13 @@ const AddArticles = ({ language, id, article }: AddServicesProps) => {
 								</label>
 							</li>
 							{/* 📌 Прев’ю нового або існуючого зображення */}
-							{(values.img || values.existingImg) && (
+							{values.img && (
 								<li className={`${s.imgItem} ${s.imgItemImage}`}>
 									<Image
 										src={
-											values.img
+											values.img instanceof File
 												? URL.createObjectURL(values.img)
-												: (values.existingImg as string)
+												: (values.img as string)
 										}
 										alt="article-img-preview"
 										width={150}
@@ -122,12 +127,7 @@ const AddArticles = ({ language, id, article }: AddServicesProps) => {
 									<button
 										type="button"
 										className={s.deleteBtn}
-										onClick={() => {
-											// Видаляємо нове фото
-											setFieldValue("img", null);
-											// Видаляємо існуюче фото
-											setFieldValue("existingImg", "");
-										}}
+										onClick={() => handleImageDelete(setFieldValue)}
 									>
 										<svg className={s.deleteIcon}>
 											<use href="/sprite.svg#icon-delete"></use>

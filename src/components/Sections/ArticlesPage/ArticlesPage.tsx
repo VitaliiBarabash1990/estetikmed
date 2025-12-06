@@ -4,16 +4,12 @@ import s from "./ArticlesPage.module.css";
 import TitleGroup from "./TitleGroup/TitleGroup";
 import { useTranslations } from "next-intl";
 import ArticleList from "./ArticleList/ArticleList";
-import { articles } from "@/lib/data/articles";
+import { useSelector } from "react-redux";
+import { selectArticles } from "@/redux/articles/selectors";
 
 const ArticlesPage = () => {
 	const t = useTranslations("Articles");
-	const articlesList = articles.map((item) => ({
-		id: item.id,
-		img: item.img,
-		title: t(item.titleKey),
-		text: t(item.textKey),
-	}));
+	const articlesList = useSelector(selectArticles);
 	return (
 		<div className={s.articlePageWrapper}>
 			<TitleGroup title={t("title")} type="blog" />

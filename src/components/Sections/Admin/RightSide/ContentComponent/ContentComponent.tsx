@@ -6,10 +6,8 @@ import Container from "./Container/Container";
 import ServicesSection from "@/components/Sections/Services/ServicesCategory/ServicesSection/ServicesSection";
 import AddServices from "./AddServices/AddServices";
 import ServicesVariant from "@/components/Sections/Services/ServicesVariant/ServicesVariant";
-import { ArticleItemProps, ServicesPayload } from "@/lib/types/types";
+import { ArticlesPayload, ServicesPayload } from "@/lib/types/types";
 import ArticleList from "@/components/Sections/ArticlesPage/ArticleList/ArticleList";
-import { useTranslations } from "next-intl";
-import { articles } from "@/lib/data/articles";
 import ArticlesItem from "@/components/Sections/ArticlesItem/ArticlesItem";
 import AddArticles from "./AddArticles/AddArticles";
 import SliderReviews, {
@@ -17,9 +15,11 @@ import SliderReviews, {
 } from "@/components/Sections/Reviews/SliderReviews/SliderReviews";
 import AddReviews from "./AddReviews/AddReviews";
 import AddMedia from "./AddMedia/AddMedia";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { getAllServices } from "@/redux/services/operations";
+import { getAllArticles } from "@/redux/articles/operations";
+import { selectArticles } from "@/redux/articles/selectors";
 
 export type ContentComponentProps = {
 	type: string;
@@ -28,23 +28,16 @@ export type ContentComponentProps = {
 const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const [openSCInfo, setOpenSCInfo] = useState<null | ServicesPayload>(null);
-	const [openSAInfo, setOpenSAInfo] = useState<null | ArticleItemProps>(null);
+	const [openSAInfo, setOpenSAInfo] = useState<null | ArticlesPayload>(null);
 	const [openRSInfo, setOpenRSInfo] = useState<null | ReviewsItemProps>(null);
 	const [option, setOption] = useState(0);
 	const [category, setCategory] = useState(0); // вибрана категорія (0..n)
 	const [language, setLanguage] = useState("pl");
-	const t = useTranslations("Articles");
 
 	useEffect(() => {
 		dispatch(getAllServices());
+		dispatch(getAllArticles());
 	}, [dispatch]);
-
-	const articlesList = articles.map((item) => ({
-		id: item.id,
-		img: item.img,
-		title: t(item.titleKey),
-		text: t(item.textKey),
-	}));
 
 	const isServices = option === 0;
 
@@ -53,6 +46,8 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 		2: 1,
 		3: 2,
 	};
+
+	const articlesList = useSelector(selectArticles);
 
 	const hundlerEdit = () => {
 		setOption(1);
@@ -72,6 +67,7 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 				language={language}
 				setLanguage={setLanguage}
 				setOpenSCInfo={setOpenSCInfo}
+				setOpenSAInfo={setOpenSAInfo}
 			/>
 
 			{type === "services" &&
@@ -105,7 +101,7 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 					<Container>
 						{openSAInfo ? (
 							<ArticlesItem
-								id={openSAInfo.id}
+								id={openSAInfo?._id ?? null}
 								setOpenSAInfo={setOpenSAInfo}
 								type="admin"
 								hundlerEdit={hundlerEdit}
@@ -118,7 +114,11 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 						)}
 					</Container>
 				) : (
-					<AddArticles language={language} article={openSAInfo} />
+					<AddArticles
+						isEdit={!isServices}
+						language={language}
+						article={openSAInfo}
+					/>
 				))}
 
 			{type === "media" &&

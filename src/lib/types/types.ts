@@ -15,7 +15,6 @@ export interface AuthState {
 //state Services
 export interface ServicesState {
 	servicesList: ServicesPayload[];
-	servicesLangList: ServicesLangPayload[];
 	isLoading: boolean;
 	isError: boolean;
 }
@@ -35,15 +34,24 @@ export interface ServicesPayload {
 	_id?: string | undefined;
 }
 
-export interface ServicesLangPayload {
+//state Articles
+export interface ArticlesState {
+	articlesList: ArticlesPayload[];
+	isLoading: boolean;
+	isError: boolean;
+}
+
+export interface ArticlesPayload {
 	pl: {
-		name: string;
-		description?: string;
+		title: string;
+		article: string;
 	};
 	de: {
-		name: string;
-		description?: string;
+		title: string;
+		article: string;
 	};
+	img: string;
+	_id?: string | undefined;
 }
 
 //forServices
@@ -83,9 +91,9 @@ export type RegisterProps = {
 export interface ArticlesFormProps {
 	titlePl: string;
 	titleDe: string;
-	textPl: string;
-	textDe: string;
-	img: File | null;
+	articlePl: string;
+	articleDe: string;
+	img: File | string | null;
 	existingImg?: string;
 }
 
@@ -111,10 +119,3 @@ export interface ReviewsFormProps {
 	img: File | null;
 	existingImg?: string;
 }
-
-export type ArticleItemProps = {
-	id: number;
-	img: string;
-	title: string;
-	text: string;
-};

@@ -1,18 +1,11 @@
 import React from "react";
 import s from "./ArticleList.module.css";
 import SlideItem from "../../Articles/ArticlesSwiper/SlideItem/SlideItem";
-import { ArticleItemProps } from "@/lib/types/types";
+import { ArticlesPayload } from "@/lib/types/types";
 
 type ArticlesListProps = {
-	articlesList: ItemProps[];
-	setOpenSAInfo?: React.Dispatch<React.SetStateAction<ArticleItemProps | null>>;
-};
-
-export type ItemProps = {
-	id: number;
-	img: string;
-	title: string;
-	text: string;
+	articlesList: ArticlesPayload[];
+	setOpenSAInfo?: React.Dispatch<React.SetStateAction<ArticlesPayload | null>>;
 };
 
 const ArticleList: React.FC<ArticlesListProps> = ({
@@ -22,7 +15,7 @@ const ArticleList: React.FC<ArticlesListProps> = ({
 	return (
 		<ul className={s.articleList}>
 			{articlesList.map((item) => (
-				<li key={item.id} className={s.articleItem}>
+				<li key={item._id} className={s.articleItem}>
 					<SlideItem item={item} setOpenSAInfo={setOpenSAInfo} />
 				</li>
 			))}

@@ -12,11 +12,21 @@
 	justify-content: space-between;
 	align-items: center;
 	gap: 24px;
+	position: relative;
+}
+.imgWrapper {
+	width: 100%;
+	aspect-ratio: 266 / 266;
+	border-radius: 15px;
+	overflow: hidden;
+	position: relative;
 }
 .image {
-	width: 100%;
-	aspect-ratio: 373 / 300;
-	position: relative;
+	/* object-fit: contain;
+	height: 100%;
+	width: auto; */
+	object-fit: cover; /* обрізає краї, але заповнює блок */
+	object-position: center;
 }
 .btnArticle {
 	position: absolute;
@@ -77,4 +87,17 @@
 	line-height: 200%;
 	letter-spacing: 0%;
 	text-align: left;
+}
+@media screen and (min-width: 768px) {
+	.imgWrapper {
+		width: 100%;
+		aspect-ratio: 384 / 300;
+		border-radius: 15px;
+		overflow: hidden;
+		position: relative;
+	}
+	.image {
+		object-fit: cover;
+		object-position: center;
+	}
 }

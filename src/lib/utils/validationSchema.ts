@@ -53,33 +53,27 @@ export const ValidationSchemaArticles = Yup.object().shape({
 	titleDe: Yup.string().required(
 		"Введите название на Немецком. Это обязательно!"
 	),
-	textPl: Yup.string().required(
+	articlePl: Yup.string().required(
 		"Введите описание на Польськом. Это обязательно!"
 	),
-	textDe: Yup.string().required(
+	articleDe: Yup.string().required(
 		"Введите описание на Немецком. Это обязательно!"
 	),
-	img: Yup.array()
-		.of(
-			Yup.mixed()
-				.test(
-					"is-file",
-					"Файл должен быть изображением",
-					(value) => value instanceof File
-				)
-				.test(
-					"file-type-check",
-					"Файл должен быть изображением (jpg, png, jpeg, webp)",
-					(value) => {
-						if (!(value instanceof File)) return true;
-						return ["image/jpeg", "image/png", "image/webp"].includes(
-							value.type
-						);
-					}
-				)
+	img: Yup.mixed()
+		.required("Добавьте фото")
+		.test(
+			"is-file",
+			"Файл должен быть изображением",
+			(value) => value instanceof File
 		)
-		.min(1, "Добавьте 1 фото")
-		.max(1, "Можно добавить только 1 фото"),
+		.test(
+			"file-type-check",
+			"Файл должен быть изображением (jpg, png, jpeg, webp)",
+			(value) => {
+				if (!(value instanceof File)) return false;
+				return ["image/jpeg", "image/png", "image/webp"].includes(value.type);
+			}
+		),
 });
 
 export const ValidationSchemaReviews = Yup.object().shape({

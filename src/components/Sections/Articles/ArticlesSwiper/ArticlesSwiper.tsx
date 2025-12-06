@@ -10,18 +10,13 @@ import "swiper/css/pagination";
 import s from "./ArticlesSwiper.module.css";
 import SlideItem from "./SlideItem/SlideItem";
 import { useTranslations } from "next-intl";
+import { useSelector } from "react-redux";
+import { selectArticles } from "@/redux/articles/selectors";
 
-type HowItWorksProps = { articlesList: ItemProps[] };
-
-export type ItemProps = {
-	id: number;
-	img: string;
-	title: string;
-	text: string;
-};
-
-const ArticlesSwiper: React.FC<HowItWorksProps> = ({ articlesList }) => {
+const ArticlesSwiper = () => {
 	const t = useTranslations("Articles");
+
+	const articlesList = useSelector(selectArticles);
 
 	return (
 		<div id="ArticlesSwiper" className={s.articlesSwiper}>

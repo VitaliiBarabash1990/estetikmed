@@ -19,7 +19,7 @@ const ArticlesField = ({ title, text, lang }: ContentItemProps) => {
 	if (!text) {
 		fieldName = `title${lang}`;
 	} else if (text === "text") {
-		fieldName = `text${lang}`;
+		fieldName = `article${lang}`;
 	}
 
 	// чи це textarea?
