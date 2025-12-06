@@ -2,10 +2,10 @@
 import React from "react";
 import s from "./SlideItem.module.css";
 import Image from "next/image";
-import { ItemProps } from "../SliderReviews";
+import { ReviewsItemProps } from "../SliderReviews";
 
 type SlideItemProps = {
-	item: ItemProps;
+	item: ReviewsItemProps;
 };
 
 const SlideItem: React.FC<SlideItemProps> = ({ item }) => {
