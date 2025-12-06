@@ -7,11 +7,10 @@ import {
 	getServicesById,
 	deleteServices,
 } from "./operations";
-import { ServicesPayload, ServicesState } from "@/lib/types/types";
+import { ServicesState } from "@/lib/types/types";
 
 const initialState: ServicesState = {
 	servicesList: [],
-	servicesLangList: [],
 	isLoading: false,
 	isError: false,
 };
@@ -32,11 +31,7 @@ export const servicesSlice = createSlice({
 				state.isError = false;
 			})
 			.addCase(createServices.fulfilled, (state, { payload }) => {
-				// state.aboutMe = payload;
 				state.servicesList.push(payload);
-
-				const { pl, de } = payload;
-				state.servicesLangList.push({ pl, de });
 				state.isLoading = false;
 			})
 			.addCase(createServices.rejected, (state) => {
@@ -54,11 +49,6 @@ export const servicesSlice = createSlice({
 				state.servicesList = state.servicesList.map((item) =>
 					item._id === payload._id ? payload : item
 				);
-
-				state.servicesLangList = state.servicesList.map((item) => {
-					const { pl, de } = item;
-					return { pl, de };
-				});
 				state.isLoading = false;
 			})
 			.addCase(updateServices.rejected, (state) => {
@@ -69,11 +59,6 @@ export const servicesSlice = createSlice({
 			// GET ALL (поверне масив, беремо перший)
 			.addCase(getAllServices.fulfilled, (state, { payload }) => {
 				state.servicesList = payload;
-
-				state.servicesLangList = payload.map((item: ServicesPayload) => {
-					const { pl, de } = item;
-					return { pl, de };
-				});
 			})
 
 			// GET BY ID
@@ -90,11 +75,6 @@ export const servicesSlice = createSlice({
 				} else {
 					state.servicesList.push(payload);
 				}
-
-				state.servicesLangList = state.servicesList.map((item) => {
-					const { pl, de } = item;
-					return { pl, de };
-				});
 			})
 
 			// DELETE
@@ -103,11 +83,6 @@ export const servicesSlice = createSlice({
 				state.servicesList = state.servicesList.filter(
 					(item) => item._id !== payload
 				);
-
-				state.servicesLangList = state.servicesList.map((item) => {
-					const { pl, de } = item;
-					return { pl, de };
-				});
 			});
 	},
 });
