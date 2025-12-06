@@ -13,7 +13,7 @@ type TitleGroupProps = {
 	type?: string;
 	setOpenSAInfo?: React.Dispatch<SetStateAction<ArticlesPayload | null>>;
 	hundlerEdit?: () => void;
-	id: string | null;
+	id?: string | null;
 };
 
 const TitleGroup: React.FC<TitleGroupProps> = ({
