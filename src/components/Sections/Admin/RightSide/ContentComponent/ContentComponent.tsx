@@ -30,7 +30,6 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 	const [openSCInfo, setOpenSCInfo] = useState<null | ServicesPayload>(null);
 	const [openSAInfo, setOpenSAInfo] = useState<null | ArticleItemProps>(null);
 	const [openRSInfo, setOpenRSInfo] = useState<null | ReviewsItemProps>(null);
-	console.log("openSCInfo", openSCInfo);
 	const [option, setOption] = useState(0);
 	const [category, setCategory] = useState(0); // вибрана категорія (0..n)
 	const [language, setLanguage] = useState("pl");
