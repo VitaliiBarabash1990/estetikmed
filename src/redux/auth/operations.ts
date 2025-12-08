@@ -61,11 +61,16 @@ export const logOut = createAsyncThunk<void, void, { rejectValue: string }>(
 
 export const sendOrderEmail = createAsyncThunk<
 	void,
-	SendOrderPayload,
+	FormData,
 	{ rejectValue: string }
->("order/sendEmail", async (orderData, thunkAPI) => {
+>("order/sendEmail", async (formData, thunkAPI) => {
 	try {
-		await esteticMedAPI.post("/auth/send-order", orderData);
+		await esteticMedAPI.post("/auth/send-email", formData, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+		});
+
 		toast.success("Замовлення успішно відправлено на email!");
 	} catch (error) {
 		// @ts-expect-error TS is not sure about error structure

@@ -1,25 +1,72 @@
 "use client";
-import React from "react";
-import s from "./AddMedia.module.css";
-import { Form, Formik, ErrorMessage, FormikHelpers } from "formik";
-import { MediaFormProps } from "@/lib/types/types";
-import { ValidationSchemaMedia } from "@/lib/utils/validationSchema";
+import React, { useEffect, useMemo } from "react";
+import { Formik, Form, ErrorMessage, FormikHelpers } from "formik";
 import Image from "next/image";
+import s from "./AddMedia.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { selectMedia } from "@/redux/media/selectors";
+import {
+	getAllMedia,
+	uploadMedia,
+	deleteMedia,
+} from "@/redux/media/operations";
+
+// ------------ TYPE GUARDS ------------
+const isFile = (item: unknown): item is File => item instanceof File;
+
+const isBlob = (item: unknown): item is Blob => item instanceof Blob;
+
+// ------------ TYPES ------------
+interface MediaFormCategory {
+	type: string;
+	imgs: (string | File)[];
+	videos: (string | File)[];
+}
+
+interface MediaFormProps {
+	categories: MediaFormCategory[];
+}
 
 type AddMediaProps = {
-	type: number;
+	type: number; // 0 = images, 1 = videos
 };
 
 const AddMedia = ({ type }: AddMediaProps) => {
-	const initialValues: MediaFormProps = {
-		type: type === 0 ? "image" : "video",
-		imgs: [],
-		videos: [],
-		existingImg: [],
-		existingVideos: [],
-	};
+	const dispatch = useDispatch<AppDispatch>();
 
-	// 📌 Додавання зображень
+	useEffect(() => {
+		dispatch(getAllMedia());
+	}, [dispatch]);
+
+	const media = useSelector(selectMedia);
+
+	console.log("MEDIA", media);
+
+	// ===========================
+	// INITIAL VALUES
+	// ===========================
+	const initialValues = useMemo(
+		() => ({
+			categories: [
+				{
+					type: "images",
+					imgs: media.find((c) => c.type === "images")?.imgs || [],
+					videos: [],
+				},
+				{
+					type: "video",
+					imgs: [],
+					videos: media.find((c) => c.type === "video")?.videos || [],
+				},
+			],
+		}),
+		[media]
+	);
+
+	// ===========================
+	// ADD IMAGES
+	// ===========================
 	const handleImageChange = (
 		e: React.ChangeEvent<HTMLInputElement>,
 		setFieldValue: FormikHelpers<MediaFormProps>["setFieldValue"],
@@ -28,12 +75,15 @@ const AddMedia = ({ type }: AddMediaProps) => {
 		const files = e.target.files;
 		if (!files) return;
 
-		const fileArray = Array.from(files).filter((f): f is File => f !== null);
+		const updated = [...values.categories];
+		updated[0].imgs = [...updated[0].imgs, ...Array.from(files)];
 
-		setFieldValue("imgs", [...values.imgs, ...fileArray]);
+		setFieldValue("categories", updated);
 	};
 
-	// 📌 Додавання відео
+	// ===========================
+	// ADD VIDEOS
+	// ===========================
 	const handleVideoChange = (
 		e: React.ChangeEvent<HTMLInputElement>,
 		setFieldValue: FormikHelpers<MediaFormProps>["setFieldValue"],
@@ -42,86 +92,103 @@ const AddMedia = ({ type }: AddMediaProps) => {
 		const files = e.target.files;
 		if (!files) return;
 
-		const fileArray = Array.from(files).filter((f): f is File => f !== null);
+		const updated = [...values.categories];
+		updated[1].videos = [...updated[1].videos, ...Array.from(files)];
 
-		setFieldValue("videos", [...values.videos, ...fileArray]);
+		setFieldValue("categories", updated);
 	};
 
-	// ❌ Видалити одне фото
-	const handleImageDelete = (
-		index: number,
+	// ===========================
+	// DELETE IMAGE
+	// ===========================
+	const handleImageDelete = async (
 		setFieldValue: FormikHelpers<MediaFormProps>["setFieldValue"],
+		index: number,
 		values: MediaFormProps
 	) => {
-		const updated = values.imgs.filter((_, i) => i !== index);
-		setFieldValue("imgs", updated);
+		const updated = structuredClone(values.categories);
+		const target = updated[0].imgs[index];
+
+		if (typeof target === "string") {
+			await dispatch(
+				deleteMedia({
+					type: "images",
+					imageUrl: target,
+				})
+			);
+		}
+
+		updated[0].imgs.splice(index, 1);
+		setFieldValue("categories", updated);
 	};
 
-	// ❌ Видалити одне відео
-	const handleVideoDelete = (
-		index: number,
+	// ===========================
+	// DELETE VIDEO
+	// ===========================
+	const handleVideoDelete = async (
 		setFieldValue: FormikHelpers<MediaFormProps>["setFieldValue"],
+		index: number,
 		values: MediaFormProps
 	) => {
-		const updated = values.videos.filter((_, i) => i !== index);
-		setFieldValue("videos", updated);
+		const updated = structuredClone(values.categories);
+		const target = updated[1].videos[index];
+
+		if (typeof target === "string") {
+			await dispatch(
+				deleteMedia({
+					type: "video",
+					imageUrl: target,
+				})
+			);
+		}
+
+		updated[1].videos.splice(index, 1);
+		setFieldValue("categories", updated);
 	};
 
-	// 📤 submit
-	const hundlerSubmit = (values: MediaFormProps) => {
-		const formData = new FormData();
+	// ===========================
+	// SUBMIT
+	// ===========================
+	const handleSubmit = async (values: MediaFormProps) => {
+		// IMAGES
+		const newImages = values.categories[0].imgs.filter(isFile);
 
-		// Чітко визначаємо тип
-		const mediaType = type === 0 ? "image" : "video";
-		formData.append("type", mediaType);
-
-		// Якщо фото
-		if (mediaType === "image") {
-			values.imgs.forEach((file) => {
-				if (file instanceof File) {
-					formData.append("imgs", file);
-				}
-			});
+		if (newImages.length > 0) {
+			await dispatch(
+				uploadMedia({
+					type: "images",
+					files: newImages,
+				})
+			);
 		}
 
-		// Якщо відео
-		if (mediaType === "video") {
-			values.videos.forEach((file) => {
-				if (file instanceof File) {
-					formData.append("videos", file);
-				}
-			});
+		// VIDEOS
+		const newVideos = values.categories[1].videos.filter(isFile);
+
+		if (newVideos.length > 0) {
+			await dispatch(
+				uploadMedia({
+					type: "video",
+					files: newVideos,
+				})
+			);
 		}
 
-		console.log("SEND FormData:", [...formData.entries()]);
+		dispatch(getAllMedia());
 	};
 
 	return (
 		<div className={s.addServicesWrapper}>
 			<Formik
 				initialValues={initialValues}
-				validationSchema={ValidationSchemaMedia(type)}
-				onSubmit={hundlerSubmit}
+				onSubmit={handleSubmit}
 				enableReinitialize
 			>
 				{({ values, setFieldValue, resetForm }) => (
 					<Form className={s.form}>
-						{type !== 0 && (
-							<div className={s.alarm}>
-								Допускается одновременная загрузка до 13 видеофайлов. При
-								превышении допустимого числа элементов новые загрузки будут
-								вымещать более старые. Чтоб избежать нежелательного удаления
-								контента, рекомендуется сперва вручную освободить место для
-								нового файла, удалив тот, который хотите убрать. Не
-								рекомендуется загружать слишком большие по объему и долгие
-								видео, это может повлечь негативное влияние на скорость загрзки
-								сайта.
-							</div>
-						)}
-
-						{type === 0 ? (
+						{/* ====================== IMAGES ====================== */}
+						{type === 0 && (
 							<>
-								{/* 📌 Блок завантаження зображень */}
 								<ul className={s.imageList}>
 									<li className={`${s.imgItem} ${s.imgItemUpload}`}>
 										<label className={s.uploadBox}>
@@ -129,10 +196,10 @@ const AddMedia = ({ type }: AddMediaProps) => {
 												type="file"
 												accept="image/*"
 												multiple
+												style={{ display: "none" }}
 												onChange={(e) =>
 													handleImageChange(e, setFieldValue, values)
 												}
-												style={{ display: "none" }}
 											/>
 											<svg className={s.uploadIcon}>
 												<use href="/sprite.svg#icon-upload"></use>
@@ -140,17 +207,22 @@ const AddMedia = ({ type }: AddMediaProps) => {
 										</label>
 									</li>
 
-									{/* Прев'ю */}
-									{values.imgs.map((img, i) => {
-										// TypeScript-safe: only File can be used for preview
-										const src =
-											img instanceof File ? URL.createObjectURL(img) : "";
+									{values.categories[0].imgs.map((img, i) => {
+										let src: string;
+
+										if (typeof img === "string") {
+											src = img;
+										} else if (isFile(img) || isBlob(img)) {
+											src = URL.createObjectURL(img);
+										} else {
+											return null;
+										}
 
 										return (
 											<li key={i} className={s.imgItem}>
 												<Image
 													src={src}
-													alt={`galery-img-${i}`}
+													alt={`img-${i}`}
 													width={150}
 													height={100}
 													className={s.imgPreview}
@@ -160,7 +232,7 @@ const AddMedia = ({ type }: AddMediaProps) => {
 													type="button"
 													className={s.deleteBtn}
 													onClick={() =>
-														handleImageDelete(i, setFieldValue, values)
+														handleImageDelete(setFieldValue, i, values)
 													}
 												>
 													<svg className={s.deleteIcon}>
@@ -172,11 +244,17 @@ const AddMedia = ({ type }: AddMediaProps) => {
 									})}
 								</ul>
 
-								<ErrorMessage name="imgs" component="p" className={s.error} />
+								<ErrorMessage
+									name="categories[0].imgs"
+									component="p"
+									className={s.error}
+								/>
 							</>
-						) : (
+						)}
+
+						{/* ====================== VIDEOS ====================== */}
+						{type === 1 && (
 							<>
-								{/* 📌 Блок завантаження відео (тільки якщо type === 1) */}
 								<ul className={s.videoList}>
 									<li className={`${s.videoItem} ${s.videoItemUpload}`}>
 										<label className={s.uploadBox}>
@@ -184,10 +262,10 @@ const AddMedia = ({ type }: AddMediaProps) => {
 												type="file"
 												accept="video/*"
 												multiple
+												style={{ display: "none" }}
 												onChange={(e) =>
 													handleVideoChange(e, setFieldValue, values)
 												}
-												style={{ display: "none" }}
 											/>
 											<svg className={s.uploadIcon}>
 												<use href="/sprite.svg#icon-upload"></use>
@@ -195,10 +273,16 @@ const AddMedia = ({ type }: AddMediaProps) => {
 										</label>
 									</li>
 
-									{/* Прев'ю відео */}
-									{values.videos.map((video, i) => {
-										const src =
-											video instanceof File ? URL.createObjectURL(video) : "";
+									{values.categories[1].videos.map((video, i) => {
+										let src: string;
+
+										if (typeof video === "string") {
+											src = video;
+										} else if (isFile(video) || isBlob(video)) {
+											src = URL.createObjectURL(video);
+										} else {
+											return null;
+										}
 
 										return (
 											<li key={i} className={s.videoItem}>
@@ -208,7 +292,7 @@ const AddMedia = ({ type }: AddMediaProps) => {
 													type="button"
 													className={s.deleteBtn}
 													onClick={() =>
-														handleVideoDelete(i, setFieldValue, values)
+														handleVideoDelete(setFieldValue, i, values)
 													}
 												>
 													<svg className={s.deleteIcon}>
@@ -220,7 +304,11 @@ const AddMedia = ({ type }: AddMediaProps) => {
 									})}
 								</ul>
 
-								<ErrorMessage name="videos" component="p" className={s.error} />
+								<ErrorMessage
+									name="categories[1].videos"
+									component="p"
+									className={s.error}
+								/>
 							</>
 						)}
 

@@ -6,13 +6,15 @@ import Container from "./Container/Container";
 import ServicesSection from "@/components/Sections/Services/ServicesCategory/ServicesSection/ServicesSection";
 import AddServices from "./AddServices/AddServices";
 import ServicesVariant from "@/components/Sections/Services/ServicesVariant/ServicesVariant";
-import { ArticlesPayload, ServicesPayload } from "@/lib/types/types";
+import {
+	ArticlesPayload,
+	ReviewsPayload,
+	ServicesPayload,
+} from "@/lib/types/types";
 import ArticleList from "@/components/Sections/ArticlesPage/ArticleList/ArticleList";
 import ArticlesItem from "@/components/Sections/ArticlesItem/ArticlesItem";
 import AddArticles from "./AddArticles/AddArticles";
-import SliderReviews, {
-	ReviewsItemProps,
-} from "@/components/Sections/Reviews/SliderReviews/SliderReviews";
+import SliderReviews from "@/components/Sections/Reviews/SliderReviews/SliderReviews";
 import AddReviews from "./AddReviews/AddReviews";
 import AddMedia from "./AddMedia/AddMedia";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +22,7 @@ import { AppDispatch } from "@/redux/store";
 import { getAllServices } from "@/redux/services/operations";
 import { getAllArticles } from "@/redux/articles/operations";
 import { selectArticles } from "@/redux/articles/selectors";
+import { getAllReviews } from "@/redux/reviews/operations";
 
 export type ContentComponentProps = {
 	type: string;
@@ -29,7 +32,7 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const [openSCInfo, setOpenSCInfo] = useState<null | ServicesPayload>(null);
 	const [openSAInfo, setOpenSAInfo] = useState<null | ArticlesPayload>(null);
-	const [openRSInfo, setOpenRSInfo] = useState<null | ReviewsItemProps>(null);
+	const [openRSInfo, setOpenRSInfo] = useState<null | ReviewsPayload>(null);
 	const [option, setOption] = useState(0);
 	const [category, setCategory] = useState(0); // вибрана категорія (0..n)
 	const [language, setLanguage] = useState("pl");
@@ -37,6 +40,7 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 	useEffect(() => {
 		dispatch(getAllServices());
 		dispatch(getAllArticles());
+		dispatch(getAllReviews());
 	}, [dispatch]);
 
 	const isServices = option === 0;
@@ -68,6 +72,7 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 				setLanguage={setLanguage}
 				setOpenSCInfo={setOpenSCInfo}
 				setOpenSAInfo={setOpenSAInfo}
+				setOpenRSInfo={setOpenRSInfo}
 			/>
 
 			{type === "services" &&
@@ -134,7 +139,11 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 						/>
 					</Container>
 				) : (
-					<AddReviews language={language} reviews={openRSInfo} />
+					<AddReviews
+						isEdit={!isServices}
+						language={language}
+						reviews={openRSInfo}
+					/>
 				))}
 		</div>
 	);

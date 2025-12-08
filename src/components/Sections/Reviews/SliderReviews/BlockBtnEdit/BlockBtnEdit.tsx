@@ -3,12 +3,13 @@ import s from "./BlockBtnEdit.module.css";
 
 export type BlockBtnProps = {
 	hundlerEdit: () => void;
+	hundlerDelete: () => void;
 };
 
-const BlockBtnEdit = ({ hundlerEdit }: BlockBtnProps) => {
+const BlockBtnEdit = ({ hundlerEdit, hundlerDelete }: BlockBtnProps) => {
 	return (
 		<div className={s.wrapperBlockBtn}>
-			<button className={s.btn}>
+			<button className={s.btn} onClick={hundlerDelete}>
 				<svg className={s.deleteBtn}>
 					<use href="/sprite.svg#icon-delete"></use>
 				</svg>

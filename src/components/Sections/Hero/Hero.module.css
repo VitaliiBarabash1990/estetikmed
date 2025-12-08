@@ -1,26 +1,30 @@
 .heroWrapper {
 	width: 100%;
-	aspect-ratio: 330 / 715;
+	height: 100dvh;
 	padding: 40px 0;
 	display: flex;
 	flex-direction: column;
+	position: relative;
+	overflow: hidden;
+}
+.heroImageBlock {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	width: 100%;
+	height: 100%;
+
+	overflow: hidden;
+	z-index: -1;
 }
 
-.heroWrapper.lazyLoaded {
-	background-image: url("/img/Hero/hero_mob_x1.webp");
-	background-size: 100% 100%;
-	background-position: center;
-	background-repeat: no-repeat;
-}
-@media screen and (min-resolution: 2dppx),
-	(min-resolution: 192dpi),
-	(-webkit-min-device-pixel-ratio: 2) {
-	.heroWrapper.lazyLoaded {
-		background-image: url("/img/Hero/hero_mob_x2.webp");
-		background-size: 100% 100%;
-		background-position: center;
-		background-repeat: no-repeat;
-	}
+.heroImageBlock img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover; /* зберігає пропорції */
+	object-position: center;
 }
 
 .heroBlockTitle {
@@ -100,25 +104,6 @@
 	background: var(--pink);
 }
 @media screen and (min-width: 768px) {
-	.heroWrapper {
-		aspect-ratio: 768 / 1170;
-	}
-	.heroWrapper.lazyLoaded {
-		background-image: url("/img/Hero/hero_tab_x1.webp");
-		background-size: 100% 100%;
-		background-position: center;
-		background-repeat: no-repeat;
-	}
-	@media screen and (min-resolution: 2dppx),
-		(min-resolution: 192dpi),
-		(-webkit-min-device-pixel-ratio: 2) {
-		.heroWrapper.lazyLoaded {
-			background-image: url("/img/Hero/hero_tab_x2.webp");
-			background-size: 100% 100%;
-			background-position: center;
-			background-repeat: no-repeat;
-		}
-	}
 	.heroBlockTitle {
 		width: 88%;
 		gap: calc((64 / 768) * 100vw);
@@ -152,26 +137,6 @@
 	}
 }
 @media screen and (min-width: 1280px) {
-	.heroWrapper {
-		width: 100%;
-		height: 100dvh;
-	}
-	.heroWrapper.lazyLoaded {
-		background-image: url("/img/Hero/Hero_laptop_x1.webp");
-		background-size: 100% 100%;
-		background-position: center;
-		background-repeat: no-repeat;
-	}
-	@media screen and (min-resolution: 2dppx),
-		(min-resolution: 192dpi),
-		(-webkit-min-device-pixel-ratio: 2) {
-		.heroWrapper.lazyLoaded {
-			background-image: url("/img/Hero/Hero_laptop_x2.webp");
-			background-size: 100% 100%;
-			background-position: center;
-			background-repeat: no-repeat;
-		}
-	}
 	.heroBlockTitle {
 		width: 77%;
 		gap: calc((55 / 1280) * 100vw);

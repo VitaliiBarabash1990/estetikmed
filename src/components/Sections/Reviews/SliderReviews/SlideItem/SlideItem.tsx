@@ -2,13 +2,16 @@
 import React from "react";
 import s from "./SlideItem.module.css";
 import Image from "next/image";
-import { ReviewsItemProps } from "../SliderReviews";
+import { ReviewsPayload } from "@/lib/types/types";
+import { useLocale } from "next-intl";
+import { Locale } from "@/i18n/routing";
 
 type SlideItemProps = {
-	item: ReviewsItemProps;
+	item: ReviewsPayload;
 };
 
 const SlideItem: React.FC<SlideItemProps> = ({ item }) => {
+	const local = useLocale() as Locale;
 	return (
 		<div className={s.slideWrapper}>
 			<div className={s.sliderContent}>
@@ -18,19 +21,25 @@ const SlideItem: React.FC<SlideItemProps> = ({ item }) => {
 						width={372}
 						height={300}
 						sizes="100vw"
-						alt={`article_` + `${item.id}`}
+						alt={`article_` + `${item._id}`}
 						className={s.image}
 					/>
 				</div>
 
 				<div className={s.sliderRewiews}>
 					<ul className={s.rewiewsList}>
-						<li className={`${s.rewiewsItem} ${s.rewiews}`}>{item.reviews}</li>
-						<li className={`${s.rewiewsItem} ${s.answers}`}>{item.answers}</li>
+						<li className={`${s.rewiewsItem} ${s.rewiews}`}>
+							{item[local].reviews}
+						</li>
+						<li className={`${s.rewiewsItem} ${s.answers}`}>
+							{item[local].answers}
+						</li>
 					</ul>
 					<ul className={s.nameServiceList}>
-						<li className={`${s.serviceItem} ${s.name}`}>{item.name}</li>
-						<li className={`${s.serviceItem} ${s.service}`}>{item.services}</li>
+						<li className={`${s.serviceItem} ${s.name}`}>{item[local].name}</li>
+						<li className={`${s.serviceItem} ${s.service}`}>
+							{item[local].services}
+						</li>
 					</ul>
 				</div>
 			</div>

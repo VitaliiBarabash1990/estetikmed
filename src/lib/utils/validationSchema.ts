@@ -97,27 +97,21 @@ export const ValidationSchemaReviews = Yup.object().shape({
 	servicesDe: Yup.string().required(
 		"Введите услугу на Немецком. Это обязательно!"
 	),
-	imgs: Yup.array()
-		.of(
-			Yup.mixed()
-				.test(
-					"is-file",
-					"Файл должен быть изображением",
-					(value) => value instanceof File
-				)
-				.test(
-					"file-type-check",
-					"Файл должен быть изображением (jpg, png, jpeg, webp)",
-					(value) => {
-						if (!(value instanceof File)) return true;
-						return ["image/jpeg", "image/png", "image/webp"].includes(
-							value.type
-						);
-					}
-				)
+	img: Yup.mixed()
+		.required("Добавьте фото")
+		.test(
+			"is-file",
+			"Файл должен быть изображением",
+			(value) => value instanceof File
 		)
-		.min(1, "Добавьте 1 фото")
-		.max(1, "Можно добавить только 1 фото"),
+		.test(
+			"file-type-check",
+			"Файл должен быть изображением (jpg, png, jpeg, webp)",
+			(value) => {
+				if (!(value instanceof File)) return false;
+				return ["image/jpeg", "image/png", "image/webp"].includes(value.type);
+			}
+		),
 });
 
 export const ValidationSchemaMedia = (type: number) =>
@@ -174,3 +168,43 @@ export const ValidationSchemaMedia = (type: number) =>
 			otherwise: (schema) => schema.optional(),
 		}),
 	});
+
+export const ValidationSchemaCallback = Yup.object().shape({
+	name: Yup.string()
+		.required("Введите имя. Это обязательно!")
+		.min(2, "Минимум 2 символа"),
+
+	phone: Yup.string()
+		.required("Введите номер телефона. Это обязательно!")
+		.min(5, "Минимум 5 символов"),
+
+	email: Yup.string()
+		.required("Введите коректный email!")
+		.email("Не коректный Email!"),
+
+	message: Yup.string()
+		.required("Введите сообщение. Это обязательно!")
+		.min(10, "Минимум 10 символов"),
+
+	file: Yup.mixed()
+		.nullable()
+		.test("file-type-check", "Недопустимый формат файла", (value) => {
+			if (!value) return true; // файл НЕ обязателен
+			if (!(value instanceof File)) return false;
+
+			const allowed = [
+				"image/jpeg",
+				"image/png",
+				"image/webp",
+				"application/pdf",
+				"application/msword",
+				"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+			];
+
+			return allowed.includes(value.type);
+		})
+		.test("file-size", "Файл должен быть меньше 10MB", (value) => {
+			if (!value || !(value instanceof File)) return true;
+			return value.size <= 10 * 1024 * 1024; // 10MB
+		}),
+});

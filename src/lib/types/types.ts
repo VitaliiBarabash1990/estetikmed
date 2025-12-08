@@ -54,6 +54,30 @@ export interface ArticlesPayload {
 	_id?: string | undefined;
 }
 
+//state Reviews
+export interface ReviewsState {
+	reviewsList: ReviewsPayload[];
+	isLoading: boolean;
+	isError: boolean;
+}
+
+export interface ReviewsPayload {
+	pl: {
+		name: string;
+		services: string;
+		reviews: string;
+		answers: string;
+	};
+	de: {
+		name: string;
+		services: string;
+		reviews: string;
+		answers: string;
+	};
+	img: string;
+	_id?: string | undefined;
+}
+
 //forServices
 export interface ServicesFormProps {
 	namePl: string;
@@ -99,11 +123,16 @@ export interface ArticlesFormProps {
 
 //forMedia
 export interface MediaFormProps {
-	type?: string;
-	imgs: (File | null)[];
-	videos: (File | null)[];
-	existingImg?: string[];
-	existingVideos?: string[];
+	categories: [
+		{
+			type?: string;
+			imgs: (File | null)[];
+		},
+		{
+			type?: string;
+			videos: (File | null)[];
+		}
+	];
 }
 
 //forReviews
@@ -116,6 +145,18 @@ export interface ReviewsFormProps {
 	nameDe: string;
 	servicesPl: string;
 	servicesDe: string;
-	img: File | null;
-	existingImg?: string;
+	img: File | string | null;
+}
+
+// 🔹 Тип для стану
+export interface GalleryState {
+	media: GalleryCategory[];
+	isLoading: boolean;
+	isError: boolean;
+}
+export interface GalleryCategory {
+	_id?: string;
+	type: "images" | "video";
+	imgs: string[]; // URL[]
+	videos: string[]; // URL[]
 }

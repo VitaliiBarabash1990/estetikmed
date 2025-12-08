@@ -51,7 +51,7 @@ const SlideItem: React.FC<SlideItemProps> = ({ item, setOpenSAInfo }) => {
 
 				<div className={s.sliderContentDescr}>
 					<h3 className={s.title}>{item[local].title}</h3>
-					<p className={s.description}>{item[local].article.slice(0, 50)}</p>
+					{/* <p className={s.description}>{item[local].article.slice(0, 50)}</p> */}
 				</div>
 			</div>
 		</div>

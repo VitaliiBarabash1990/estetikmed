@@ -68,15 +68,16 @@ const ServicesSection = ({ id, setOpenSCInfo }: CategoryProps) => {
 
 			<ul className={s.servicesList}>
 				{paginatedList.map((item) => (
-					<li key={item._id} className={s.servicesItem}>
+					<li
+						key={item._id}
+						className={s.servicesItem}
+						onClick={() => hundlerClickInfo(item)}
+					>
 						{item[locale].name}
 
 						<div className={s.infoBlock}>
 							{item.price} PLN
-							<svg
-								className={s.iconInfo}
-								onClick={() => hundlerClickInfo(item)}
-							>
+							<svg className={s.iconInfo}>
 								<use href="/sprite.svg#icon-solar-info"></use>
 							</svg>
 						</div>

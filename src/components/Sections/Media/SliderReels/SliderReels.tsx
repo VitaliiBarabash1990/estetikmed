@@ -14,30 +14,33 @@ import { useTranslations } from "next-intl";
 import PoppupVideo from "@/lib/utils/PoppupVideo/PoppupVideo";
 import VideoPlayer from "@/lib/utils/VideoPlayer/VideoPlayer";
 
-const SliderReels = () => {
+type ReelsProps = {
+	media: string[];
+};
+
+const SliderReels = ({ media }: ReelsProps) => {
 	const [modalVideo, setModalVideo] = useState<null | string>(null);
-	console.log("ModalVideo", modalVideo);
 	const t = useTranslations("Media");
 
-	const GalerryList = [
-		// "/img/Media/video_reels.png",
-		"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
-		"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
-		"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
-		"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
-		"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
-		"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
-		"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
-		"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
-		"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
-		"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
-		"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
-		"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
-		"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
-		"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
-		"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
-		"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
-	];
+	// const GalerryList = [
+	// 	// "/img/Media/video_reels.png",
+	// 	"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
+	// 	"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
+	// 	"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
+	// 	"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
+	// 	"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
+	// 	"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
+	// 	"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
+	// 	"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
+	// 	"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
+	// 	"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
+	// 	"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
+	// 	"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
+	// 	"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
+	// 	"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
+	// 	"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
+	// 	"/img/Media/reels/kak_yznat_horoshego_cheloveka.mp4",
+	// ];
 
 	return (
 		<>
@@ -61,7 +64,7 @@ const SliderReels = () => {
 						// slidesPerGroup={1} // гортати по одній
 						// spaceBetween={16} // відступи між слайдами
 					>
-						{GalerryList.map((item, index) => (
+						{media.map((item, index) => (
 							<SwiperSlide key={index} className={s.slide}>
 								<SlideItem item={item} setModalVideo={setModalVideo} />
 							</SwiperSlide>

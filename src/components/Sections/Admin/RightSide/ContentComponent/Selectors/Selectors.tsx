@@ -1,7 +1,11 @@
 import React, { SetStateAction, useState } from "react";
 import s from "./Selectors.module.css";
 import useIsMobile from "@/lib/isMobile/isMobile";
-import { ArticlesPayload, ServicesPayload } from "@/lib/types/types";
+import {
+	ArticlesPayload,
+	ReviewsPayload,
+	ServicesPayload,
+} from "@/lib/types/types";
 
 type SelectorsProps = {
 	type: string;
@@ -13,6 +17,7 @@ type SelectorsProps = {
 	setLanguage: React.Dispatch<SetStateAction<string>>;
 	setOpenSCInfo: React.Dispatch<SetStateAction<ServicesPayload | null>>;
 	setOpenSAInfo: React.Dispatch<SetStateAction<ArticlesPayload | null>>;
+	setOpenRSInfo: React.Dispatch<SetStateAction<ReviewsPayload | null>>;
 };
 
 const Selectors: React.FC<SelectorsProps> = ({
@@ -25,6 +30,7 @@ const Selectors: React.FC<SelectorsProps> = ({
 	setLanguage,
 	setOpenSCInfo,
 	setOpenSAInfo,
+	setOpenRSInfo,
 }) => {
 	const [subHidden, setSubHidden] = useState(true);
 	const [mainCategory, setMainCategory] = useState<number | null>(null);
@@ -70,6 +76,7 @@ const Selectors: React.FC<SelectorsProps> = ({
 							if (idx === 1) {
 								setOpenSCInfo(null);
 								setOpenSAInfo(null);
+								setOpenRSInfo(null);
 							}
 						}}
 					>

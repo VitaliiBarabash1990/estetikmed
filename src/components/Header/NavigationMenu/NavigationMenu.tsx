@@ -6,11 +6,13 @@ import { SetStateAction } from "react";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 import BurgerButton from "../BurgerButton/BurgerButton";
 import { useTranslations } from "next-intl";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectIsEnterAuth, selectIsToken } from "@/redux/auth/selectors";
 import RegisterForm from "./RegisterForm/RegisterForm";
 import Logo from "./Logo/Logo";
 import { Link, Pathnames } from "@/i18n/routing";
+import { AppDispatch } from "@/redux/store";
+import { authExit } from "@/redux/auth/authSlice";
 
 type MyComponentProps = {
 	setOpenMenu: React.Dispatch<SetStateAction<boolean>>;
@@ -22,6 +24,7 @@ type LinkData =
 	| { id: number; type: "scroll"; link: string; text: string };
 
 export const NavigationMenu = ({ setOpenMenu, openMenu }: MyComponentProps) => {
+	const dispatch = useDispatch<AppDispatch>();
 	const t = useTranslations("Hero");
 	const isEnterAuth = useSelector(selectIsEnterAuth);
 	const isToken = useSelector(selectIsToken);
@@ -38,43 +41,48 @@ export const NavigationMenu = ({ setOpenMenu, openMenu }: MyComponentProps) => {
 		? linkDatas.filter((item) => item.id !== 0)
 		: linkDatas;
 
-	const handlerSubmit = () => setOpenMenu(false);
+	const handlerSubmit = () => {
+		setOpenMenu(false);
+		dispatch(authExit());
+	};
 
 	return (
 		<div className={s.navMenuWrapper}>
-			<div className={s.menu}>
-				<LanguageSwitcher />
-				<Logo />
-				<BurgerButton setOpenMenu={handlerSubmit} openMenu={openMenu} />
-			</div>
+			<div className={s.blokTopMenu}>
+				<div className={s.menu}>
+					<LanguageSwitcher />
+					<Logo />
+					<BurgerButton setOpenMenu={handlerSubmit} openMenu={openMenu} />
+				</div>
 
-			{!isEnterAuth && (
-				<ul className={s.navMenuList}>
-					{linksDatasCurrent.map((item) => (
-						<li key={item.id} className={s.navMenuItem}>
-							{item.type === "route" ? (
-								<Link
-									href={item.link}
-									className={s.navMenuLink}
-									onClick={handlerSubmit}
-								>
-									{item.text}
-								</Link>
-							) : (
-								<LocalizedScrollLink
-									href="/"
-									scrollId={item.link}
-									className={s.navMenuLink}
-									onClick={handlerSubmit}
-								>
-									{item.text}
-								</LocalizedScrollLink>
-							)}
-							<div className={s.fadingLine}></div>
-						</li>
-					))}
-				</ul>
-			)}
+				{!isEnterAuth && (
+					<ul className={s.navMenuList}>
+						{linksDatasCurrent.map((item) => (
+							<li key={item.id} className={s.navMenuItem}>
+								{item.type === "route" ? (
+									<Link
+										href={item.link}
+										className={s.navMenuLink}
+										onClick={handlerSubmit}
+									>
+										{item.text}
+									</Link>
+								) : (
+									<LocalizedScrollLink
+										href="/"
+										scrollId={item.link}
+										className={s.navMenuLink}
+										onClick={handlerSubmit}
+									>
+										{item.text}
+									</LocalizedScrollLink>
+								)}
+								<div className={s.fadingLine}></div>
+							</li>
+						))}
+					</ul>
+				)}
+			</div>
 
 			{isEnterAuth && <RegisterForm />}
 			<div

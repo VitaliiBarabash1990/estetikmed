@@ -49,3 +49,14 @@ export const reviews: ReviewItemRaw[] = [
 		answersKey: "answers",
 	},
 ];
+
+// const reviewsList: ReviewsItemProps[] = reviews.map(
+// 	(item: ReviewItemRaw) => ({
+// 		id: item.id,
+// 		img: item.img,
+// 		name: t(item.nameKey),
+// 		services: t(item.servicesKey),
+// 		reviews: t(item.reviewsKey),
+// 		answers: t(item.answersKey),
+// 	})
+// );

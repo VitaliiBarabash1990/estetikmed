@@ -1,21 +1,46 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import s from "./Hero.module.css";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 const Hero = () => {
-	const [isLoaded, setIsLoaded] = useState(false);
 	const t = useTranslations("Hero");
 
-	useEffect(() => {
-		setTimeout(() => {
-			setIsLoaded(true);
-		}, 10);
-	}, []);
-
 	return (
-		<div className={`${s.heroWrapper} ${isLoaded ? s.lazyLoaded : ""}`}>
+		<div className={s.heroWrapper}>
+			<div className={s.heroImageBlock}>
+				<picture>
+					{/* Desktop */}
+					<source
+						srcSet="/img/Hero/Hero_laptop_x2.webp"
+						media="(min-width: 1280px)"
+					/>
+
+					{/* Tablet */}
+					<source
+						srcSet="/img/Hero/hero_tab_x2.webp"
+						media="(min-width: 768px)"
+					/>
+
+					{/* Mobile */}
+					<source
+						srcSet="/img/Hero/hero_mob_x2.webp"
+						media="(max-width: 767px)"
+					/>
+
+					<Image
+						src="/img/Hero/hero_mob_x2.webp" // fallback
+						alt="hero"
+						fill
+						style={{
+							objectFit: "cover",
+							objectPosition: "center",
+						}}
+						priority
+					/>
+				</picture>
+			</div>
 			<div className={s.heroBlockTitle}>
 				<div className={s.heroTitleBlock}>
 					<div className={s.heroName}>

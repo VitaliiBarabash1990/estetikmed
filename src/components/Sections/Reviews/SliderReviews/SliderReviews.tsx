@@ -11,38 +11,27 @@ import "swiper/css/pagination";
 import s from "./SliderReviews.module.css";
 import SlideItem from "./SlideItem/SlideItem";
 import { useTranslations } from "next-intl";
-import { ReviewItemRaw, reviews } from "@/lib/data/reviews";
+// import { ReviewItemRaw, reviews } from "@/lib/data/reviews";
 import BlockBtnEdit from "./BlockBtnEdit/BlockBtnEdit";
+import { useDispatch, useSelector } from "react-redux";
+import { selectReviews } from "@/redux/reviews/selectors";
+import { ReviewsPayload } from "@/lib/types/types";
+import { AppDispatch } from "@/redux/store";
+import { deleteReviews } from "@/redux/reviews/operations";
 
-export type ReviewsItemProps = {
-	id: number;
-	img: string;
-	name: string;
-	services: string;
-	reviews: string;
-	answers: string;
-};
 export type ReviewsProps = {
 	page: string;
 	hundlerEdit?: () => void;
-	setOpenRSInfo?: React.Dispatch<SetStateAction<ReviewsItemProps | null>>;
+	setOpenRSInfo?: React.Dispatch<SetStateAction<ReviewsPayload | null>>;
 };
 
 const SliderReviews = ({ page, hundlerEdit, setOpenRSInfo }: ReviewsProps) => {
+	const dispatch = useDispatch<AppDispatch>();
 	const t = useTranslations("Reviews");
 
-	const [activeSlide, setActiveSlide] = useState<ReviewsItemProps | null>(null);
+	const [activeSlide, setActiveSlide] = useState<ReviewsPayload | null>(null);
 
-	const reviewsList: ReviewsItemProps[] = reviews.map(
-		(item: ReviewItemRaw) => ({
-			id: item.id,
-			img: item.img,
-			name: t(item.nameKey),
-			services: t(item.servicesKey),
-			reviews: t(item.reviewsKey),
-			answers: t(item.answersKey),
-		})
-	);
+	const reviewsList = useSelector(selectReviews);
 
 	return (
 		<div id="SliderReviews" className={s.articlesSwiper}>
@@ -55,6 +44,7 @@ const SliderReviews = ({ page, hundlerEdit, setOpenRSInfo }: ReviewsProps) => {
 					}}
 					modules={[Pagination, Navigation]}
 					loop={true}
+					autoHeight={true}
 					breakpoints={{
 						320: { slidesPerView: 1, spaceBetween: 4 },
 					}}
@@ -67,7 +57,7 @@ const SliderReviews = ({ page, hundlerEdit, setOpenRSInfo }: ReviewsProps) => {
 					// }}
 				>
 					{reviewsList.map((item) => (
-						<SwiperSlide key={item.id} className={s.slide}>
+						<SwiperSlide key={item._id} className={s.slide}>
 							<SlideItem item={item} />
 						</SwiperSlide>
 					))}
@@ -80,6 +70,12 @@ const SliderReviews = ({ page, hundlerEdit, setOpenRSInfo }: ReviewsProps) => {
 				>
 					{page === "admin" ? (
 						<BlockBtnEdit
+							hundlerDelete={() => {
+								if (activeSlide?._id !== null) {
+									dispatch(deleteReviews(String(activeSlide?._id)));
+								}
+								setOpenRSInfo?.(null);
+							}}
 							hundlerEdit={() => {
 								if (activeSlide && setOpenRSInfo) {
 									setOpenRSInfo(activeSlide);

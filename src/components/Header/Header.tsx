@@ -42,7 +42,7 @@ const Header = () => {
 		<>
 			<div
 				className={`${s.headerWrapper} ${
-					path === "admin" || path === "blog" ? s.relative : s.fixed
+					path === "admin" || path === "blog" ? s.relative : s.absolute
 				}`}
 			>
 				<LanguageSwitcher />

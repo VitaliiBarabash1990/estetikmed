@@ -2,39 +2,37 @@
 import React from "react";
 import s from "./AddReviews.module.css";
 import { Form, Formik, ErrorMessage, FormikHelpers } from "formik";
-import { ReviewsFormProps } from "@/lib/types/types";
-import {
-	ValidationSchemaArticles,
-	ValidationSchemaReviews,
-} from "@/lib/utils/validationSchema";
+import { ReviewsFormProps, ReviewsPayload } from "@/lib/types/types";
+import { ValidationSchemaReviews } from "@/lib/utils/validationSchema";
 import Image from "next/image";
-import { ReviewsItemProps } from "@/components/Sections/Reviews/SliderReviews/SliderReviews";
 import ReviewsField from "./ReviewsField/ReviewsField";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { createReviews, updateReviews } from "@/redux/reviews/operations";
 
 type AddReviewsProps = {
 	language: string;
 	id?: number;
-	reviews?: ReviewsItemProps | null;
+	reviews?: ReviewsPayload | null;
+	isEdit: boolean;
 };
 
-const AddReviews = ({ language, id, reviews }: AddReviewsProps) => {
+const AddReviews = ({ language, id, reviews, isEdit }: AddReviewsProps) => {
+	const dispatch = useDispatch<AppDispatch>();
 	const isLanguagePl = language === "pl";
 	console.log("IDTYPE", id);
 
 	const initialValues: ReviewsFormProps = {
-		reviewsPl: reviews?.reviews ?? "",
-		reviewsDe: reviews?.reviews ?? "",
-		answersPl: reviews?.answers ?? "",
-		answersDe: reviews?.answers ?? "",
-		namePl: reviews?.name ?? "",
-		nameDe: reviews?.name ?? "",
-		servicesPl: reviews?.services ?? "",
-		servicesDe: reviews?.services ?? "",
-		img: null,
-		existingImg: reviews?.img ?? "",
+		reviewsPl: reviews?.pl.reviews ?? "",
+		reviewsDe: reviews?.de.reviews ?? "",
+		answersPl: reviews?.pl.answers ?? "",
+		answersDe: reviews?.de.answers ?? "",
+		namePl: reviews?.pl.name ?? "",
+		nameDe: reviews?.de.name ?? "",
+		servicesPl: reviews?.pl.services ?? "",
+		servicesDe: reviews?.de.services ?? "",
+		img: reviews?.img ?? "", // або string, або File
 	};
-
-	// medycyna", "depolacja_man", "depolacja_woman
 
 	// 📌 Додавання зображень
 	const handleImageChange = (
@@ -51,7 +49,7 @@ const AddReviews = ({ language, id, reviews }: AddReviewsProps) => {
 	const handleImageDelete = (
 		setFieldValue: FormikHelpers<ReviewsFormProps>["setFieldValue"]
 	) => {
-		setFieldValue("img", null);
+		setFieldValue("img", ""); // видалено → бекенд запише null
 	};
 
 	// 📤 submit
@@ -67,16 +65,21 @@ const AddReviews = ({ language, id, reviews }: AddReviewsProps) => {
 		formData.append("servicesPl", values.servicesPl);
 		formData.append("servicesDe", values.servicesDe);
 
+		// Якщо новий файл
 		if (values.img instanceof File) {
 			formData.append("img", values.img);
+		} else {
+			// Якщо старе фото (рядок)
+			formData.append("img", values.img as string);
 		}
 
-		// Якщо старе фото не видалене — передаємо його імʼя/URL
-		if (!values.img && values.existingImg) {
-			formData.append("existingImg", values.existingImg);
+		if (isEdit && reviews?._id) {
+			console.log("FOrmDataUpdate", formData);
+			dispatch(updateReviews({ id: reviews._id, formData }));
+		} else if (isEdit) {
+			console.log("FOrmData", formData);
+			dispatch(createReviews(formData));
 		}
-
-		console.log("SEND FormData:", values);
 	};
 
 	return (
@@ -129,13 +132,13 @@ const AddReviews = ({ language, id, reviews }: AddReviewsProps) => {
 								</label>
 							</li>
 							{/* 📌 Прев’ю нового або існуючого зображення */}
-							{(values.img || values.existingImg) && (
+							{values.img && (
 								<li className={`${s.imgItem} ${s.imgItemImage}`}>
 									<Image
 										src={
-											values.img
+											values.img instanceof File
 												? URL.createObjectURL(values.img)
-												: (values.existingImg as string)
+												: (values.img as string)
 										}
 										alt="article-img-preview"
 										width={150}
@@ -146,12 +149,7 @@ const AddReviews = ({ language, id, reviews }: AddReviewsProps) => {
 									<button
 										type="button"
 										className={s.deleteBtn}
-										onClick={() => {
-											// Видаляємо нове фото
-											setFieldValue("img", null);
-											// Видаляємо існуюче фото
-											setFieldValue("existingImg", "");
-										}}
+										onClick={() => handleImageDelete(setFieldValue)}
 									>
 										<svg className={s.deleteIcon}>
 											<use href="/sprite.svg#icon-delete"></use>

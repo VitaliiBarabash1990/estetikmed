@@ -13,6 +13,8 @@ import {
 import storage from "redux-persist/lib/storage";
 import { ServicesReducer } from "./services/servicesSlice";
 import { ArticlesReducer } from "./articles/articlesSlice";
+import { ReviewsReducer } from "./reviews/reviewsSlice";
+import { MediaReducer } from "./media/mediaSlice";
 
 const authPersistConfig = {
 	key: "auth",
@@ -27,6 +29,8 @@ const store = configureStore({
 		auth: persistedAuthReducer,
 		services: ServicesReducer,
 		articles: ArticlesReducer,
+		reviews: ReviewsReducer,
+		media: MediaReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

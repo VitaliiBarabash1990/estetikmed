@@ -12,17 +12,21 @@ import s from "./SliderGallery.module.css";
 import SlideItem from "./SlideItem/SlideItem";
 import { useTranslations } from "next-intl";
 
-const SliderGallery = () => {
+type ImageGaleryProps = {
+	media: string[];
+};
+
+const SliderGallery = ({ media }: ImageGaleryProps) => {
 	const t = useTranslations("Media");
 
-	const GalerryList = [
-		"/img/Media/photo_1.webp",
-		"/img/Media/photo_2.webp",
-		"/img/Media/photo_1.webp",
-		"/img/Media/photo_2.webp",
-		"/img/Media/photo_1.webp",
-		"/img/Media/photo_2.webp",
-	];
+	// const GalerryList = [
+	// 	"/img/Media/photo_1.webp",
+	// 	"/img/Media/photo_2.webp",
+	// 	"/img/Media/photo_1.webp",
+	// 	"/img/Media/photo_2.webp",
+	// 	"/img/Media/photo_1.webp",
+	// 	"/img/Media/photo_2.webp",
+	// ];
 
 	return (
 		<div id="SliderGallery" className={s.gallerySwiper}>
@@ -41,7 +45,7 @@ const SliderGallery = () => {
 						1280: { slidesPerView: 2, spaceBetween: 24 },
 					}}
 				>
-					{GalerryList.map((item, index) => (
+					{media.map((item, index) => (
 						<SwiperSlide key={index} className={s.slide}>
 							<SlideItem item={item} />
 						</SwiperSlide>

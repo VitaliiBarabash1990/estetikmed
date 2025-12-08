@@ -3,8 +3,11 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
 import s from "./FormCallback.module.css";
 import { useTranslations } from "next-intl";
-import { File } from "buffer";
 import AutoResizeTextarea from "./AutoResizeTextarea/AutoResizeTextarea";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { sendOrderEmail } from "@/redux/auth/operations";
+import { ValidationSchemaCallback } from "@/lib/utils/validationSchema";
 
 type FormCallBackProps = {
 	name: string;
@@ -15,6 +18,7 @@ type FormCallBackProps = {
 };
 
 const FormCallback = () => {
+	const dispatch = useDispatch<AppDispatch>();
 	const t = useTranslations("Callback");
 	const initialValues: FormCallBackProps = {
 		name: "",
@@ -24,11 +28,19 @@ const FormCallback = () => {
 		file: null,
 	};
 
-	const hundlerSubmit = (value: FormCallBackProps) => {
-		const formData = {
-			name: value.name,
-		};
-		console.log("Data", formData);
+	const handlerSubmit = (values: FormCallBackProps) => {
+		const formData = new FormData();
+
+		formData.append("name", values.name);
+		formData.append("phone", values.phone);
+		formData.append("email", values.email);
+		formData.append("message", values.message);
+
+		if (values.file) {
+			formData.append("file", values.file);
+		}
+
+		dispatch(sendOrderEmail(formData));
 	};
 
 	return (
@@ -55,7 +67,11 @@ const FormCallback = () => {
 					/>
 				</div>
 			</div>
-			<Formik initialValues={initialValues} onSubmit={hundlerSubmit}>
+			<Formik
+				initialValues={initialValues}
+				validationSchema={ValidationSchemaCallback}
+				onSubmit={handlerSubmit}
+			>
 				{({ setFieldValue }) => (
 					<Form className={s.form}>
 						<div className={s.componentField}>

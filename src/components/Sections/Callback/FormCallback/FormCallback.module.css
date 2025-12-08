@@ -45,7 +45,11 @@
 }
 .componentField {
 	display: flex;
+	flex-direction: column;
 	width: 100%;
+}
+.error {
+	color: red;
 }
 .label {
 	width: 100%;
@@ -174,6 +178,7 @@
 @media screen and (min-width: 1280px) {
 	.callbackFormWrapper {
 		gap: 0;
+		height: auto;
 	}
 	.titleBlock {
 		padding-left: 40px;
