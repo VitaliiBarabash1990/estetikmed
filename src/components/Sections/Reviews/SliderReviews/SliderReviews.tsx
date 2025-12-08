@@ -84,7 +84,25 @@ const SliderReviews = ({ page, hundlerEdit, setOpenRSInfo }: ReviewsProps) => {
 							}}
 						/>
 					) : (
-						<h3 className={s.title}>{t("title")}</h3>
+						// <h3 className={s.title}>{t("title")}</h3>
+						// <h3
+						// 	className={s.title}
+						// 	dangerouslySetInnerHTML={{
+						// 		__html: t("title").replace(
+						// 			/(\S+)$/,
+						// 			`<span class="${s.lastWord}">$1</span>`
+						// 		),
+						// 	}}
+						// />
+						<h3
+							className={s.title}
+							dangerouslySetInnerHTML={{
+								__html: t("title").replace(
+									/(.*?)([-–—]\s*.*)/,
+									`$1<span class="${s.afterDash}">$2</span>`
+								),
+							}}
+						/>
 					)}
 
 					<div className={s.paginationBlock}>

@@ -47,7 +47,7 @@
 	}
 }
 .title {
-	color: rgba(51, 55, 53, 1);
+	color: #a3a3a3;
 
 	font-family: var(--font-family);
 	font-size: clamp(20px, calc((24 / 768) * 100vw), 32px);
@@ -56,6 +56,10 @@
 	letter-spacing: 0%;
 	text-align: left;
 	text-transform: uppercase;
+}
+
+.title .afterDash {
+	color: #333735;
 }
 
 .paginationBlock {
