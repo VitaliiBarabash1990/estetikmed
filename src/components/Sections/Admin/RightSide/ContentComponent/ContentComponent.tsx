@@ -84,6 +84,7 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 								hundlerCloseServices={hundlerCloseServices}
 								hundlerEdit={hundlerEdit}
 								page="admin"
+								type={type}
 							/>
 						) : (
 							<ServicesSection

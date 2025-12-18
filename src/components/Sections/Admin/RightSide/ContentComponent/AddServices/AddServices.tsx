@@ -18,7 +18,6 @@ type AddServicesProps = {
 };
 
 const AddServices = ({ language, id, category, isEdit }: AddServicesProps) => {
-	console.log("Category", category);
 	const dispatch = useDispatch<AppDispatch>();
 	const isLanguagePl = language === "pl";
 
@@ -97,10 +96,8 @@ const AddServices = ({ language, id, category, isEdit }: AddServicesProps) => {
 		});
 
 		if (isEdit) {
-			console.log("FOrmData", formData);
 			dispatch(createServices(formData));
 		} else if (!isEdit && category?._id) {
-			console.log("FOrmDataUpdate", formData);
 			dispatch(updateServices({ id: category._id, formData }));
 		}
 	};

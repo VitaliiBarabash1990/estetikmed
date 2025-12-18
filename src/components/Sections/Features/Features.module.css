@@ -118,7 +118,8 @@
 	}
 	.imageBlock,
 	.procedureList {
-		width: calc((100% - 12px) / 2);
+		/* width: calc((100% - 12px) / 2); */
+		width: calc(50% - 12px);
 		aspect-ratio: 604 / 632;
 	}
 	.procedureList {

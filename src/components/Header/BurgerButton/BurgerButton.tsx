@@ -10,7 +10,6 @@ type BurgerProps = {
 
 const BurgerButton = ({ setOpenMenu, openMenu }: BurgerProps) => {
 	const path = usePathname().split("/")[1];
-	// console.log("OpenMenu", openMenu);
 	const hundlerBurgerMenu = () => {
 		setOpenMenu((prev) => !prev);
 	};

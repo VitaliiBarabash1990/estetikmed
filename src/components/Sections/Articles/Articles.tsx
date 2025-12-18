@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
 import s from "./Articles.module.css";
-import { articles } from "@/lib/data/articles";
 import { useTranslations } from "next-intl";
 import ArticlesSwiper from "./ArticlesSwiper/ArticlesSwiper";
 import AllArticles from "./AllArticles/AllArticles";
@@ -17,7 +16,7 @@ const Articles = () => {
 	}, [dispatch]);
 
 	return (
-		<div className={s.sectionWrapper}>
+		<div id="Articles" className={s.sectionWrapper}>
 			<ArticlesSwiper />
 			<AllArticles text={t("btn")} />
 		</div>

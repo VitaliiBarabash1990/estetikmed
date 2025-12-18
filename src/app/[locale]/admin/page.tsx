@@ -7,14 +7,14 @@ import RightSide from "@/components/Sections/Admin/RightSide/RightSide";
 import s from "./admin.module.css";
 import { selectIsToken, selectUserRole } from "@/redux/auth/selectors";
 import { useSelector } from "react-redux";
-import NotFoundPage from "../not-found";
+import { useRouter } from "@/i18n/routing";
 
 const Page = () => {
 	const [activeItem, setActiveItem] = useState<number | 0>(0);
-	console.log("ActiveItem", activeItem);
 	const isMobile = useIsMobile();
 	const isToken = useSelector(selectIsToken);
 	const isRole = useSelector(selectUserRole);
+	const route = useRouter();
 	return (
 		<>
 			{isToken && isRole === "admin" ? (
@@ -32,7 +32,7 @@ const Page = () => {
 					</WrapperForComponentsAllSides>
 				</>
 			) : (
-				<NotFoundPage />
+				route.push("/")
 			)}
 		</>
 	);

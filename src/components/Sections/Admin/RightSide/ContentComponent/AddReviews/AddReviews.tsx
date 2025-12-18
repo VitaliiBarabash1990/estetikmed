@@ -20,7 +20,6 @@ type AddReviewsProps = {
 const AddReviews = ({ language, id, reviews, isEdit }: AddReviewsProps) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const isLanguagePl = language === "pl";
-	console.log("IDTYPE", id);
 
 	const initialValues: ReviewsFormProps = {
 		reviewsPl: reviews?.pl.reviews ?? "",
@@ -74,10 +73,8 @@ const AddReviews = ({ language, id, reviews, isEdit }: AddReviewsProps) => {
 		}
 
 		if (isEdit && reviews?._id) {
-			console.log("FOrmDataUpdate", formData);
 			dispatch(updateReviews({ id: reviews._id, formData }));
 		} else if (isEdit) {
-			console.log("FOrmData", formData);
 			dispatch(createReviews(formData));
 		}
 	};

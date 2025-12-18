@@ -1,12 +1,10 @@
 "use client";
-import React, { SetStateAction } from "react";
+import React, { SetStateAction, useState } from "react";
 import s from "./TitleGroup.module.css";
 import { redirect, usePathname } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import { ArticlesPayload } from "@/lib/types/types";
-import { deleteArticles } from "@/redux/articles/operations";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
+import ModalConfirmation from "@/lib/utils/ModalConfirmation/ModalConfirmation";
 
 type TitleGroupProps = {
 	title: string;
@@ -23,7 +21,7 @@ const TitleGroup: React.FC<TitleGroupProps> = ({
 	hundlerEdit,
 	id,
 }) => {
-	const dispatch = useDispatch<AppDispatch>();
+	const [confirmation, setConfirmation] = useState(false);
 	const path = usePathname().split("/")[1];
 	const segments = usePathname().split("/").filter(Boolean);
 	const locale = useLocale();
@@ -43,64 +41,68 @@ const TitleGroup: React.FC<TitleGroupProps> = ({
 			return;
 		}
 	};
-	console.log("TYPE", type);
 	return (
-		<div className={s.titleGroup}>
-			<h3
-				className={`${s.titleArticle} ${
-					type !== "blog" ? "" : s.titleArticleBlog
-				}`}
-			>
-				{title}
-			</h3>
-			<div className={s.btnTitleGroup}>
-				{type === "admin" && (
-					<>
-						<button
-							type="button"
-							className={`${s.btnArticle} ${
-								type === "admin" ? s.btnArticleDark : ""
-							}`}
-							onClick={() => {
-								if (id !== null) {
-									dispatch(deleteArticles(String(id)));
-								}
-								setOpenSAInfo?.(null);
-							}}
-						>
-							<svg className={s.iconClose}>
-								<use href="/sprite.svg#icon-delete"></use>
-							</svg>
-						</button>
-						<button
-							type="button"
-							className={`${s.btnArticle} ${
-								type === "admin" ? s.btnArticleDark : ""
-							}`}
-							onClick={() => {
-								if (hundlerEdit) hundlerEdit();
-							}}
-						>
-							<svg className={`${s.iconClose} ${s.edit}`}>
-								<use href="/sprite.svg#icon-edit"></use>
-							</svg>
-						</button>
-					</>
-				)}
-
-				<button
-					type="button"
-					className={`${s.btnArticle} ${
-						type !== "blog" ? s.btnArticleDark : ""
+		<>
+			{" "}
+			<div className={s.titleGroup}>
+				<h3
+					className={`${s.titleArticle} ${
+						type !== "blog" ? "" : s.titleArticleBlog
 					}`}
-					onClick={redirectLink}
 				>
-					<svg className={s.iconClose}>
-						<use href="/sprite.svg#icon-material-close-rounded"></use>
-					</svg>
-				</button>
+					{title}
+				</h3>
+				<div className={s.btnTitleGroup}>
+					{type === "admin" && (
+						<>
+							<button
+								type="button"
+								className={`${s.btnArticle} ${
+									type === "admin" ? s.btnArticleDark : ""
+								}`}
+								onClick={() => setConfirmation(true)}
+							>
+								<svg className={s.iconClose}>
+									<use href="/sprite.svg#icon-delete"></use>
+								</svg>
+							</button>
+							<button
+								type="button"
+								className={`${s.btnArticle} ${
+									type === "admin" ? s.btnArticleDark : ""
+								}`}
+								onClick={() => {
+									if (hundlerEdit) hundlerEdit();
+								}}
+							>
+								<svg className={`${s.iconClose} ${s.edit}`}>
+									<use href="/sprite.svg#icon-edit"></use>
+								</svg>
+							</button>
+						</>
+					)}
+
+					<button
+						type="button"
+						className={`${s.btnArticle} ${
+							type !== "blog" ? s.btnArticleDark : ""
+						}`}
+						onClick={redirectLink}
+					>
+						<svg className={s.iconClose}>
+							<use href="/sprite.svg#icon-material-close-rounded"></use>
+						</svg>
+					</button>
+				</div>
 			</div>
-		</div>
+			{confirmation && (
+				<ModalConfirmation
+					type="articles"
+					id={id}
+					setOpenSAInfo={setOpenSAInfo}
+				/>
+			)}
+		</>
 	);
 };
 

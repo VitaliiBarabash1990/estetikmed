@@ -48,7 +48,7 @@ const Features = () => {
 			paddingLeft={isMobile ? 8 : 24}
 			paddingRight={isMobile ? 8 : 24}
 		>
-			<div className={s.featuresWrapper}>
+			<div id="Features" className={s.featuresWrapper}>
 				<div className={s.imageBlock}>
 					<Image
 						src="/img/Features/bg_blur.webp"

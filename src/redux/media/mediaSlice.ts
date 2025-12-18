@@ -18,7 +18,7 @@ export const mediaSlice = createSlice({
 			.addCase(
 				getAllMedia.fulfilled,
 				(state, { payload }: PayloadAction<GalleryCategory[]>) => {
-					console.log("PAYLOAD", payload);
+					// console.log("PAYLOAD", payload);
 					state.media = payload;
 					state.isLoading = false;
 				}

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import s from "./Footer.module.css";
 import { useTranslations } from "next-intl";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,17 +8,22 @@ import { AppDispatch } from "@/redux/store";
 import { authEnter } from "@/redux/auth/authSlice";
 import WrapperForComponents from "@/lib/utils/WrapperForComponents/WrapperForComponents";
 import { logOut } from "@/redux/auth/operations";
+import { useRouter } from "@/i18n/routing";
 
 const Footer = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const t = useTranslations("Footer");
 	const isToken = useSelector(selectIsToken);
+	const router = useRouter();
 
 	const hundlerSwitchEnterAuth = () => {
 		dispatch(authEnter());
 	};
 	const hundlerSwitchExitAuth = () => {
 		dispatch(logOut());
+		setTimeout(() => {
+			router.push("/");
+		}, 500);
 	};
 
 	return (

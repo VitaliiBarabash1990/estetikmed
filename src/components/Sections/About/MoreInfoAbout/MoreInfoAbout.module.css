@@ -12,6 +12,7 @@
 }
 @media screen and (min-width: 768px) {
 	.aboutInfoWrapper {
+		width: calc(100% + 32px);
 		padding: 40px;
 	}
 }

@@ -31,7 +31,7 @@ export const adminLogIn = createAsyncThunk<
 >("auth/adminlogin", async (credentials, thunkAPI) => {
 	try {
 		const res = await esteticMedAPI.post("/auth/adminlogin", credentials);
-		console.log("Data", res.data.data.data);
+		// console.log("Data", res.data.data.data);
 		const token = res.data?.data?.data?.token;
 		if (token) setAuthHeader(token);
 		toast.success(`Welcome Admin ${res.data?.data?.data?.email ?? ""}`);

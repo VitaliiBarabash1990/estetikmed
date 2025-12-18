@@ -10,7 +10,7 @@ export const getAllServices = createAsyncThunk(
 	async (_, thunkAPI) => {
 		try {
 			const res = await esteticMedAPI.get("/services");
-			console.log("MainData", res.data.data);
+			// console.log("MainData", res.data.data);
 			return res.data.data;
 		} catch (err) {
 			// @ts-expect-error TS is not sure about error structure

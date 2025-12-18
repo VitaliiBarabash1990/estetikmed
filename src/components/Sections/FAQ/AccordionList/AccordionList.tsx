@@ -12,7 +12,6 @@ const AccordionList = () => {
 		title: t(item.titleKey),
 		description: t(item.descriptionKey),
 	}));
-	console.log("activeItem", activeItem);
 
 	const hundlerOpenItem = (id: number) => {
 		setActiveItem((prev) => (prev === id ? null : id));
@@ -27,7 +26,11 @@ const AccordionList = () => {
 						className={s.accordionItem}
 						onClick={() => hundlerOpenItem(item.id)}
 					>
-						<div className={s.accordionBtn}>
+						<div
+							className={`${s.accordionBtn} ${
+								activeItem === item.id ? s.accordioBtnPurpure : ""
+							}`}
+						>
 							{item.title}
 							<div className={s.iconWrapper}>
 								<svg
@@ -56,7 +59,11 @@ const AccordionList = () => {
 						className={s.accordionItem}
 						onClick={() => hundlerOpenItem(item.id)}
 					>
-						<div className={s.accordionBtn}>
+						<div
+							className={`${s.accordionBtn} ${
+								activeItem === item.id ? s.accordioBtnPurpure : ""
+							}`}
+						>
 							{item.title}
 							<div className={s.iconWrapper}>
 								<svg

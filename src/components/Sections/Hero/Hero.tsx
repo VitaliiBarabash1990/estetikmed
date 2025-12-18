@@ -7,8 +7,16 @@ import { useTranslations } from "next-intl";
 const Hero = () => {
 	const t = useTranslations("Hero");
 
+	// const linkReservation = () => {
+	// 	window.open(
+	// 		"https://booksy.com/pl-pl/202886_medycyna-estetyczna-laser-diodowy_medycyna-estetyczna_19380_swinoujscie?do=invite&_branch_match_id=1529221794714245955&utm_medium=profile_share_from_profile&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXT07J0UvKz88urtRLzs%2FVDymIKAjLtTTxjkiyrytKTUstKsrMS49PKsovL04tsnXLBIrlVwAAnvjsTz0AAAA%3D",
+	// 		"_blank",
+	// 		"noopener,noreferrer"
+	// 	);
+	// };
+
 	return (
-		<div className={s.heroWrapper}>
+		<div id="Hero" className={s.heroWrapper}>
 			<div className={s.heroImageBlock}>
 				<picture>
 					{/* Desktop */}
@@ -60,12 +68,27 @@ const Hero = () => {
 					<h2 className={s.heroSubTitle}>{t("sub_title")}</h2>
 				</div>
 				<div className={s.heroBtnBlock}>
-					<button type="button" className={`${s.btn} ${s.reservationBtn}`}>
+					{/* <button
+						type="button"
+						className={`${s.btn} ${s.reservationBtn}`}
+						onClick={() => linkReservation()}
+					>
 						{t("button_1")}
-					</button>
-					<button type="button" className={`${s.btn} ${s.consultationBtn}`}>
+					</button> */}
+					<a
+						href="https://booksy.com/pl-pl/202886_medycyna-estetyczna-laser-diodowy_medycyna-estetyczna_19380_swinoujscie?do=invite&_branch_match_id=1529221794714245955&utm_medium=profile_share_from_profile&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXT07J0UvKz88urtRLzs%2FVDymIKAjLtTTxjkiyrytKTUstKsrMS49PKsovL04tsnXLBIrlVwAAnvjsTz0AAAA%3D"
+						target="_blank"
+						rel="noopener noreferrer"
+						className={`${s.btn} ${s.reservationBtn}`}
+					>
+						{t("button_1")}
+					</a>
+					<a href="#CallbackForm" className={`${s.btn} ${s.consultationBtn}`}>
 						{t("button_2")}
-					</button>
+					</a>
+					{/* <button type="button" className={`${s.btn} ${s.consultationBtn}`}>
+						{t("button_2")}
+					</button> */}
 				</div>
 			</div>
 		</div>

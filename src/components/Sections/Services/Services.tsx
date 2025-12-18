@@ -35,11 +35,19 @@ const Services = () => {
 				paddingTop={isMobile ? 20 : 40}
 				paddingBottom={isMobile ? 20 : 40}
 			>
-				<div className={s.titleBlock}>
+				<div id="Services" className={s.titleBlock}>
 					<h3 className={s.title}>{t("title")}</h3>
-					<button type="button" className={`${s.btn} ${s.btn_mob}`}>
+					<a
+						href="https://booksy.com/pl-pl/202886_medycyna-estetyczna-laser-diodowy_medycyna-estetyczna_19380_swinoujscie?do=invite&_branch_match_id=1529221794714245955&utm_medium=profile_share_from_profile&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXT07J0UvKz88urtRLzs%2FVDymIKAjLtTTxjkiyrytKTUstKsrMS49PKsovL04tsnXLBIrlVwAAnvjsTz0AAAA%3D"
+						target="_blank"
+						rel="noopener noreferrer"
+						className={`${s.btn} ${s.btn_mob}`}
+					>
 						{t("btn_reservation")}
-					</button>
+					</a>
+					{/* <button type="button" className={`${s.btn} ${s.btn_mob}`}>
+						{t("btn_reservation")}
+					</button> */}
 				</div>
 			</WrapperForComponentsAllSides>
 			{openSCInfo ? (

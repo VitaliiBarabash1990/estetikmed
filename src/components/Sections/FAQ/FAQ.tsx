@@ -11,12 +11,12 @@ function FAQ() {
 	const t = useTranslations("Faq");
 	return (
 		<WrapperForComponentsAllSides
-			paddingTop={isMobile ? 12 : 20}
+			paddingTop={isMobile ? 0 : 20}
 			paddingBottom={isMobile ? 12 : 20}
 			paddingLeft={isMobile ? 12 : 24}
 			paddingRight={isMobile ? 12 : 24}
 		>
-			<div className={s.faqWrapper}>
+			<div id="Faq" className={s.faqWrapper}>
 				<div className={s.titleGroup}>
 					<h3 className={s.title}>{t("title")}</h3>
 				</div>

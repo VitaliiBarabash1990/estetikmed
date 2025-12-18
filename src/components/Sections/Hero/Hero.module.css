@@ -9,7 +9,7 @@
 }
 .heroImageBlock {
 	position: absolute;
-	top: 50%;
+	top: calc(50% - 1px);
 	left: 50%;
 	transform: translate(-50%, -50%);
 
@@ -84,11 +84,15 @@
 	gap: 12px;
 }
 .btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	border: 1px solid rgba(234, 234, 234, 0.4);
 	border-radius: 40px;
 	width: 100%;
 	max-width: calc((280 / 330) * 100vw);
 	height: calc((40 / 330) * 100vw);
+	max-height: 48px;
 	background: rgba(16, 16, 16, 0.1);
 
 	font-family: var(--second-family);
@@ -131,8 +135,9 @@
 		flex-direction: row;
 	}
 	.btn {
-		max-width: calc((280 / 768) * 100vw);
+		max-width: 280px;
 		height: calc((48 / 768) * 100vw);
+		max-height: 56px;
 		font-size: clamp(12px, calc((16 / 768) * 100vw), 16px);
 	}
 }

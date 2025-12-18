@@ -45,3 +45,12 @@
 		display: none;
 	}
 }
+@media screen and (min-width: 1280px) {
+	.btn:hover {
+		box-sizing: border-box;
+		/* border: 1px solid rgba(234, 234, 234, 0.4); */
+		border-radius: 40px;
+		box-shadow: inset 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+		background: rgba(16, 16, 16, 0.1);
+	}
+}

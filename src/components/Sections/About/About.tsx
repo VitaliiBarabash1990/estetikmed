@@ -8,7 +8,6 @@ import MoreInfoAbout from "./MoreInfoAbout/MoreInfoAbout";
 
 const About = () => {
 	const [isMore, setIsMore] = useState(false);
-	console.log("IsMore", isMore);
 	const { left, right } = useSizeWindows();
 	const t = useTranslations("About");
 
@@ -30,7 +29,7 @@ const About = () => {
 			paddingTop={40}
 			paddingBottom={40}
 		>
-			<div className={s.aboutWrapper}>
+			<div id="About" className={s.aboutWrapper}>
 				<h3 className={s.titleAbout}>{t("title")}</h3>
 				{isMore ? (
 					<>

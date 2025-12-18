@@ -11,6 +11,7 @@ import Reviews from "@/components/Sections/Reviews/Reviews";
 import Media from "@/components/Sections/Media/Media";
 import Callback from "@/components/Sections/Callback/Callback";
 import Contacts from "@/components/Sections/Contacts/Contacts";
+import ScrollHandler from "@/lib/utils/ScrollHandler/ScrollHandler";
 
 type Props = {
 	params: Promise<{ locale: Locale }>;
@@ -20,10 +21,11 @@ export default async function IndexPage({ params }: Props) {
 	const { locale } = await params;
 	// Enable static rendering
 	setRequestLocale(locale);
-	// console.log("LOCKALE", locale);
 
 	return (
 		<>
+			<ScrollHandler />
+
 			<Hero />
 			<About />
 			<Services />

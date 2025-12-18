@@ -25,7 +25,7 @@ function Media() {
 
 	return (
 		<PaddingMedia>
-			<div className={s.mediaWrapper}>
+			<div id="Media" className={s.mediaWrapper}>
 				{video?.length ? <SliderReels media={video || []} /> : null}
 
 				{images?.length ? <SliderGallery media={images || []} /> : null}

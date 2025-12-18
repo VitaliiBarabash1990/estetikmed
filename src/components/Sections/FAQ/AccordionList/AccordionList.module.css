@@ -25,6 +25,13 @@
 
 	border-radius: 15px;
 	background: rgba(244, 244, 247, 1);
+
+	transform: scale(1);
+	transition: transform 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.accordionItem:hover {
+	transform: scale(1.01);
+	transition: transform 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .accordionBtn {
 	display: flex;
@@ -42,6 +49,15 @@
 	line-height: clamp(24px, calc((32 / 768) * 100vw), 40px);
 	letter-spacing: 0%;
 	text-align: left;
+}
+.accordioBtnPurpure {
+	color: var(--pink);
+}
+.accordionBtn:hover {
+	color: var(--pink);
+}
+.accordionBtn:hover .iconAccordion {
+	stroke: var(--pink);
 }
 
 .iconWrapper {

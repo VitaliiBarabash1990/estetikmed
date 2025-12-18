@@ -40,7 +40,7 @@ export const authSlice = createSlice({
 				state.isError = false;
 			})
 			.addCase(adminLogIn.fulfilled, (state, { payload }) => {
-				console.log("Payload", payload);
+				// console.log("Payload", payload);
 				state.user.user = payload.user ?? null;
 				state.user.email = payload.email;
 				state.token = payload.accessToken;

@@ -28,7 +28,6 @@ const AddArticles = ({ language, article, isEdit }: AddServicesProps) => {
 		img: isEdit ? article?.img ?? "" : "", // або string, або File
 	};
 
-	console.log("IsEdit", isEdit);
 	// 📌 Додавання зображень
 	const handleImageChange = (
 		e: React.ChangeEvent<HTMLInputElement>,
@@ -64,10 +63,8 @@ const AddArticles = ({ language, article, isEdit }: AddServicesProps) => {
 		}
 
 		if (isEdit && article?._id) {
-			console.log("FOrmDataUpdate", formData);
 			dispatch(updateArticles({ id: article._id, formData }));
 		} else if (isEdit) {
-			console.log("FOrmData", formData);
 			dispatch(createArticles(formData));
 		}
 	};

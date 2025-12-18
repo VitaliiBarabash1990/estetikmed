@@ -30,7 +30,6 @@ const Header = () => {
 
 	const isEnterAuth = useSelector(selectIsEnterAuth);
 	const isToken = useSelector(selectIsToken);
-	console.log("isEnterAuth", isEnterAuth);
 
 	useEffect(() => {
 		if (isEnterAuth) {

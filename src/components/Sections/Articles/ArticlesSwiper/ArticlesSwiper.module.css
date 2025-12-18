@@ -9,7 +9,17 @@
 	display: flex;
 	flex-direction: column-reverse;
 	align-items: center;
-	gap: 40px;
+	gap: 16px;
+}
+@media screen and (min-width: 768px) {
+	.sliderContainer {
+		gap: 24px;
+	}
+}
+@media screen and (min-width: 1280px) {
+	.sliderContainer {
+		gap: 40px;
+	}
 }
 
 .swiper {

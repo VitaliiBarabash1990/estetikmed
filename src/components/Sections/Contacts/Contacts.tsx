@@ -5,18 +5,48 @@ import s from "./Contacts.module.css";
 import Image from "next/image";
 import LanguageSwitcher from "@/components/Header/LanguageSwitcher/LanguageSwitcher";
 
+const isEmail = (value: string) => value.includes("@");
+const isPhone = (value: string) => /^\d+$/.test(value);
+
+const getContactHref = (link: string) => {
+	if (isEmail(link)) return `mailto:${link}`;
+	if (isPhone(link)) return `tel:${link}`;
+	return null;
+};
+
 const Contacts = () => {
 	const contactsList = [
-		{ id: 0, icon: "/sprite.svg#icon-phone", text: "730294631" },
-		{ id: 1, icon: "/img/Contacts/booksy.png", text: "booksy" },
-		{ id: 2, icon: "/sprite.svg#icon-email", text: "janinah130@gmail.com" },
-		{ id: 3, icon: "", text: "" },
+		{
+			id: 0,
+			icon: "/sprite.svg#icon-phone",
+			text: "730294641",
+			link: "730294641",
+		},
+		{
+			id: 1,
+			icon: "/img/Contacts/booksy.png",
+			text: "booksy",
+			link: "https://booksy.com/pl-pl/202886_medycyna-estetyczna-laser-diodowy_medycyna-estetyczna_19380_swinoujscie?do=invite&_branch_match_id=1529221794714245955&utm_medium=profile_share_from_profile&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXT07J0UvKz88urtRLzs%2FVDymIKAjLtTTxjkiyrytKTUstKsrMS49PKsovL04tsnXLBIrlVwAAnvjsTz0AAAA%3D",
+		},
+		{
+			id: 2,
+			icon: "/sprite.svg#icon-email",
+			text: "janinah130@gmail.com",
+			link: "janinah130@gmail.com",
+		},
+		{ id: 3, icon: "", text: "", link: "" },
 		{
 			id: 4,
 			icon: "/sprite.svg#icon-location",
 			text: "Świnoujście ul Armii Krajowej 12/1b",
+			link: "",
 		},
-		{ id: 5, icon: "/sprite.svg#icon-facebook", text: "" },
+		{
+			id: 5,
+			icon: "/sprite.svg#icon-facebook",
+			text: "",
+			link: "https://www.facebook.com/profile.php?id=100032952622081&mibextid=wwXIfr&rdid=ExHeChsTlYOXq3Ha&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F18fHTMDJTW%2F%3Fmibextid%3DwwXIfr",
+		},
 	];
 	const scheduleList = [
 		{ id: 0, day: "PN–CZ", time: "8:00–20:00" },
@@ -26,13 +56,14 @@ const Contacts = () => {
 	const menuList = [
 		{ id: 0, link: "#About", name: "O studiu" },
 		{ id: 1, link: "#Services", name: "usługi" },
-		{ id: 2, link: "#Blogu", name: "blogu" },
-		{ id: 3, link: "#FAQ", name: "FAQ" },
-		{ id: 4, link: "#Comunication", name: "ŁĄCZNOŚĆ" },
+		{ id: 2, link: "#Articles", name: "blogu" },
+		{ id: 3, link: "#Faq", name: "FAQ" },
+		{ id: 4, link: "#CallbackForm", name: "ŁĄCZNOŚĆ" },
 	];
+
 	return (
 		<PaddingContacts>
-			<div className={s.contactWrapper}>
+			<div id="Contacts" className={s.contactWrapper}>
 				<div className={s.contactListWrapper}>
 					<ul className={s.contactsList}>
 						{contactsList.map((item) => (
@@ -41,25 +72,43 @@ const Contacts = () => {
 								className={`${s.contactsItem} ${s[`contactItem_${item.id}`]}`}
 							>
 								{item.text === "booksy" ? (
-									<Image src={item.icon} width={123} height={28} alt="booksy" />
+									<a
+										href={item.link}
+										target="_blank"
+										rel="noopener noreferrer"
+										className={s.booksyLink}
+									>
+										<Image
+											src={item.icon}
+											width={123}
+											height={28}
+											alt="booksy"
+										/>
+									</a>
 								) : item.icon === "" && item.text === "" ? (
 									<LanguageSwitcher section="contacts" />
 								) : item.id === 5 ? (
 									<div className={s.facebookWrapper}>
-										<div className={s.facebookBlock}>
+										<a
+											href={item.link}
+											target="_blank"
+											rel="noopener noreferrer"
+											className={s.facebookBlock}
+										>
 											<div className={s.iconBlockFacebook}>
 												<svg className={s.iconItemFacebook}>
 													<use href={item.icon}></use>
 												</svg>
 											</div>
-										</div>
-										<div className={s.arrowBlock}>
+										</a>
+
+										<a href="#Hero" className={s.arrowBlock}>
 											<div className={s.arrowBlockTop}>
 												<svg className={s.arrowIcon}>
 													<use href="/sprite.svg#icon-arrow-in-top"></use>
 												</svg>
 											</div>
-										</div>
+										</a>
 									</div>
 								) : (
 									<>
@@ -68,7 +117,16 @@ const Contacts = () => {
 												<use href={item.icon}></use>
 											</svg>
 										</div>
-										<p className={s.textItem}>{item.text}</p>
+										{getContactHref(item.link) ? (
+											<a
+												href={getContactHref(item.link)!}
+												className={s.textItem}
+											>
+												{item.text}
+											</a>
+										) : (
+											<span className={s.textItem}>{item.text}</span>
+										)}
 									</>
 								)}
 							</li>
@@ -93,7 +151,7 @@ const Contacts = () => {
 
 				<div className={s.contactMap}>
 					<iframe
-						src="https://www.google.com/maps/embed?pb=!1m21!1m12!1m3!1d146.89495175327048!2d14.251207152262818!3d53.9083030333265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m6!3e2!4m3!3m2!1d53.9083368!2d14.2512581!4m0!5e0!3m2!1sru!2spl!4v1764535308737!5m2!1sru!2spl"
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d207.7404502335692!2d14.251173297698177!3d53.90838085733247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47aa5f3390e52611%3A0x3314a55feea52fc7!2sArmii%20Krajowej%2012%2F1B%2C%2072-600%20%C5%9Awinouj%C5%9Bcie!5e0!3m2!1sru!2spl!4v1766010325270!5m2!1sru!2spl"
 						width="600"
 						height="450"
 						style={{ border: "0" }}

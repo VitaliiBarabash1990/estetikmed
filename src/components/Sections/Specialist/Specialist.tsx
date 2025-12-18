@@ -6,7 +6,7 @@ import Image from "next/image";
 const Specialist = () => {
 	const t = useTranslations("Specialist");
 	return (
-		<div className={s.sectionSpecialist}>
+		<div id="Specialist" className={s.sectionSpecialist}>
 			<div className={s.containerSpecialist}>
 				<ul className={s.specialistWrapper}>
 					<li className={s.specialistDescription}>
