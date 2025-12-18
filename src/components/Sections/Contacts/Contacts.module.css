@@ -66,7 +66,7 @@
 	text-align: left;
 }
 .iconItem {
-	width: auto;
+	width: 24px;
 	height: 24px;
 	stroke: var(--color-icon);
 	fill: none;
@@ -241,7 +241,7 @@
 		height: 40px;
 	}
 	.iconItem {
-		width: auto;
+		width: 40px;
 		height: 40px;
 	}
 	.contactItem_0 {
