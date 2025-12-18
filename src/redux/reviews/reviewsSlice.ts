@@ -12,6 +12,7 @@ const initialState: ReviewsState = {
 	reviewsList: [],
 	isLoading: false,
 	isError: false,
+	isSuccess: false,
 };
 
 export const reviewsSlice = createSlice({
@@ -20,6 +21,9 @@ export const reviewsSlice = createSlice({
 	reducers: {
 		resetServicesError(state) {
 			state.isError = false;
+		},
+		resetSuccessReviews(state) {
+			state.isSuccess = false;
 		},
 	},
 	extraReducers: (builder) => {
@@ -32,6 +36,7 @@ export const reviewsSlice = createSlice({
 			.addCase(createReviews.fulfilled, (state, { payload }) => {
 				state.reviewsList.push(payload);
 				state.isLoading = false;
+				state.isSuccess = true;
 			})
 			.addCase(createReviews.rejected, (state) => {
 				state.isLoading = false;
@@ -49,6 +54,7 @@ export const reviewsSlice = createSlice({
 					item._id === payload._id ? payload : item
 				);
 				state.isLoading = false;
+				state.isSuccess = true;
 			})
 			.addCase(updateReviews.rejected, (state) => {
 				state.isLoading = false;
@@ -70,5 +76,5 @@ export const reviewsSlice = createSlice({
 	},
 });
 
-export const { resetServicesError } = reviewsSlice.actions;
+export const { resetServicesError, resetSuccessReviews } = reviewsSlice.actions;
 export const ReviewsReducer = reviewsSlice.reducer;

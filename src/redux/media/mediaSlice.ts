@@ -6,12 +6,17 @@ const initialState: GalleryState = {
 	media: [],
 	isLoading: false,
 	isError: false,
+	isSuccess: false,
 };
 
 export const mediaSlice = createSlice({
 	name: "media",
 	initialState,
-	reducers: {},
+	reducers: {
+		resetSuccessMedia(state) {
+			state.isSuccess = false;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			// 🟢 GET
@@ -36,6 +41,7 @@ export const mediaSlice = createSlice({
 						state.media.push(payload);
 					}
 					state.isLoading = false;
+					state.isSuccess = true;
 				}
 			)
 
@@ -59,4 +65,5 @@ export const mediaSlice = createSlice({
 	},
 });
 
+export const { resetSuccessMedia } = mediaSlice.actions;
 export const MediaReducer = mediaSlice.reducer;

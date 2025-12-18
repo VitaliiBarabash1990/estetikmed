@@ -6,20 +6,22 @@ import { ReviewsFormProps, ReviewsPayload } from "@/lib/types/types";
 import { ValidationSchemaReviews } from "@/lib/utils/validationSchema";
 import Image from "next/image";
 import ReviewsField from "./ReviewsField/ReviewsField";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { createReviews, updateReviews } from "@/redux/reviews/operations";
+import { selectIsSuccess } from "@/redux/reviews/selectors";
+import ModalSuccessfull from "@/lib/utils/ModalSuccessfull/ModalSuccessfull";
 
 type AddReviewsProps = {
 	language: string;
-	id?: number;
 	reviews?: ReviewsPayload | null;
 	isEdit: boolean;
 };
 
-const AddReviews = ({ language, id, reviews, isEdit }: AddReviewsProps) => {
+const AddReviews = ({ language, reviews, isEdit }: AddReviewsProps) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const isLanguagePl = language === "pl";
+	const isSuccess = useSelector(selectIsSuccess);
 
 	const initialValues: ReviewsFormProps = {
 		reviewsPl: reviews?.pl.reviews ?? "",
@@ -52,7 +54,10 @@ const AddReviews = ({ language, id, reviews, isEdit }: AddReviewsProps) => {
 	};
 
 	// 📤 submit
-	const hundlerSubmit = (values: ReviewsFormProps) => {
+	const hundlerSubmit = (
+		values: ReviewsFormProps,
+		{ resetForm }: FormikHelpers<ReviewsFormProps>
+	) => {
 		const formData = new FormData();
 
 		formData.append("reviewsPl", values.reviewsPl);
@@ -73,108 +78,120 @@ const AddReviews = ({ language, id, reviews, isEdit }: AddReviewsProps) => {
 		}
 
 		if (isEdit && reviews?._id) {
-			dispatch(updateReviews({ id: reviews._id, formData }));
+			dispatch(updateReviews({ id: reviews._id, formData }))
+				.unwrap()
+				.then(() => {
+					resetForm();
+				});
 		} else if (isEdit) {
-			dispatch(createReviews(formData));
+			dispatch(createReviews(formData))
+				.unwrap()
+				.then(() => {
+					resetForm();
+				});
 		}
 	};
 
 	return (
-		<div className={s.addServicesWrapper}>
-			<Formik
-				initialValues={initialValues}
-				validationSchema={ValidationSchemaReviews}
-				onSubmit={hundlerSubmit}
-				enableReinitialize
-			>
-				{({ values, setFieldValue, resetForm }) => (
-					<Form className={s.form}>
-						{isLanguagePl ? (
-							<>
-								<ReviewsField
-									title="Отзыв клиента *"
-									text="reviews"
-									lang="Pl"
-								/>
-								<ReviewsField title="Ответ" text="answers" lang="Pl" />
-								<ReviewsField title="Имя Клиента" text="name" lang="Pl" />
-								<ReviewsField title="Услуга" text="services" lang="Pl" />
-							</>
-						) : (
-							<>
-								<ReviewsField
-									title="Отзыв клиента *"
-									text="reviews"
-									lang="De"
-								/>
-								<ReviewsField title="Ответ" text="answers" lang="De" />
-								<ReviewsField title="Имя Клиента" text="name" lang="De" />
-								<ReviewsField title="Услуга" text="services" lang="De" />
-							</>
-						)}
-
-						{/* 📌 Блок завантаження зображень */}
-						<ul className={s.imageList}>
-							<li className={`${s.imgItem} ${s.imgItemUpload}`}>
-								<label className={s.uploadBox}>
-									<input
-										type="file"
-										accept="image/*"
-										onChange={(e) => handleImageChange(e, setFieldValue)}
-										style={{ display: "none" }}
+		<>
+			{" "}
+			<div className={s.addServicesWrapper}>
+				<Formik
+					initialValues={initialValues}
+					validationSchema={ValidationSchemaReviews}
+					onSubmit={hundlerSubmit}
+					enableReinitialize
+				>
+					{({ values, setFieldValue, resetForm }) => (
+						<Form className={s.form}>
+							{isLanguagePl ? (
+								<>
+									<ReviewsField
+										title="Отзыв клиента *"
+										text="reviews"
+										lang="Pl"
 									/>
-									<svg className={s.uploadIcon}>
-										<use href="/sprite.svg#icon-upload"></use>
-									</svg>
-								</label>
-							</li>
-							{/* 📌 Прев’ю нового або існуючого зображення */}
-							{values.img && (
-								<li className={`${s.imgItem} ${s.imgItemImage}`}>
-									<Image
-										src={
-											values.img instanceof File
-												? URL.createObjectURL(values.img)
-												: (values.img as string)
-										}
-										alt="article-img-preview"
-										width={150}
-										height={100}
-										className={s.imgPreview}
+									<ReviewsField title="Ответ" text="answers" lang="Pl" />
+									<ReviewsField title="Имя Клиента" text="name" lang="Pl" />
+									<ReviewsField title="Услуга" text="services" lang="Pl" />
+								</>
+							) : (
+								<>
+									<ReviewsField
+										title="Отзыв клиента *"
+										text="reviews"
+										lang="De"
 									/>
-
-									<button
-										type="button"
-										className={s.deleteBtn}
-										onClick={() => handleImageDelete(setFieldValue)}
-									>
-										<svg className={s.deleteIcon}>
-											<use href="/sprite.svg#icon-delete"></use>
-										</svg>
-									</button>
-								</li>
+									<ReviewsField title="Ответ" text="answers" lang="De" />
+									<ReviewsField title="Имя Клиента" text="name" lang="De" />
+									<ReviewsField title="Услуга" text="services" lang="De" />
+								</>
 							)}
-						</ul>
 
-						<ErrorMessage name="img" component="p" className={s.error} />
+							{/* 📌 Блок завантаження зображень */}
+							<ul className={s.imageList}>
+								<li className={`${s.imgItem} ${s.imgItemUpload}`}>
+									<label className={s.uploadBox}>
+										<input
+											type="file"
+											accept="image/*"
+											onChange={(e) => handleImageChange(e, setFieldValue)}
+											style={{ display: "none" }}
+										/>
+										<svg className={s.uploadIcon}>
+											<use href="/sprite.svg#icon-upload"></use>
+										</svg>
+									</label>
+								</li>
+								{/* 📌 Прев’ю нового або існуючого зображення */}
+								{values.img && (
+									<li className={`${s.imgItem} ${s.imgItemImage}`}>
+										<Image
+											src={
+												values.img instanceof File
+													? URL.createObjectURL(values.img)
+													: (values.img as string)
+											}
+											alt="article-img-preview"
+											width={150}
+											height={100}
+											className={s.imgPreview}
+										/>
 
-						<div className={s.btnGroup}>
-							<button type="submit" className={s.saveBtn}>
-								Сохранить
-							</button>
+										<button
+											type="button"
+											className={s.deleteBtn}
+											onClick={() => handleImageDelete(setFieldValue)}
+										>
+											<svg className={s.deleteIcon}>
+												<use href="/sprite.svg#icon-delete"></use>
+											</svg>
+										</button>
+									</li>
+								)}
+							</ul>
 
-							<button
-								type="button"
-								className={s.cancelBtn}
-								onClick={() => resetForm()}
-							>
-								Отменить
-							</button>
-						</div>
-					</Form>
-				)}
-			</Formik>
-		</div>
+							<ErrorMessage name="img" component="p" className={s.error} />
+
+							<div className={s.btnGroup}>
+								<button type="submit" className={s.saveBtn}>
+									Сохранить
+								</button>
+
+								<button
+									type="button"
+									className={s.cancelBtn}
+									onClick={() => resetForm()}
+								>
+									Отменить
+								</button>
+							</div>
+						</Form>
+					)}
+				</Formik>
+			</div>
+			{isSuccess && <ModalSuccessfull />}
+		</>
 	);
 };
 

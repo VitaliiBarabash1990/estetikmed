@@ -6,9 +6,11 @@ import { ServicesFormProps, ServicesPayload } from "@/lib/types/types";
 import { ValidationSchemaServices } from "@/lib/utils/validationSchema";
 import ServicesField from "./ServicesField/ServicesField";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { createServices, updateServices } from "@/redux/services/operations";
+import { selectSuccess } from "@/redux/services/selectors";
+import ModalSuccessfull from "@/lib/utils/ModalSuccessfull/ModalSuccessfull";
 
 type AddServicesProps = {
 	language: string;
@@ -20,6 +22,8 @@ type AddServicesProps = {
 const AddServices = ({ language, id, category, isEdit }: AddServicesProps) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const isLanguagePl = language === "pl";
+	const isSuccess = useSelector(selectSuccess);
+	console.log("IsSuccess", isSuccess);
 
 	const categoryToId: Record<number, string> = {
 		0: "medycyna",
@@ -75,7 +79,10 @@ const AddServices = ({ language, id, category, isEdit }: AddServicesProps) => {
 
 	// 📤 submit
 
-	const hundlerSubmit = (values: ServicesFormProps) => {
+	const hundlerSubmit = (
+		values: ServicesFormProps,
+		{ resetForm }: FormikHelpers<ServicesFormProps>
+	) => {
 		const formData = new FormData();
 
 		formData.append("namePl", values.namePl);
@@ -96,96 +103,80 @@ const AddServices = ({ language, id, category, isEdit }: AddServicesProps) => {
 		});
 
 		if (isEdit) {
-			dispatch(createServices(formData));
+			dispatch(createServices(formData))
+				.unwrap()
+				.then(() => {
+					resetForm();
+				});
 		} else if (!isEdit && category?._id) {
-			dispatch(updateServices({ id: category._id, formData }));
+			dispatch(updateServices({ id: category._id, formData }))
+				.unwrap()
+				.then(() => {
+					resetForm();
+				});
 		}
 	};
 
 	return (
-		<div className={s.addServicesWrapper}>
-			<Formik
-				initialValues={initialValues}
-				validationSchema={ValidationSchemaServices}
-				onSubmit={hundlerSubmit}
-				enableReinitialize
-			>
-				{({ values, setFieldValue, resetForm }) => (
-					<Form className={s.form}>
-						{isLanguagePl ? (
-							<>
-								<ServicesField title="Название услуги" lang="Pl" />
-								<ServicesField
-									title="Описание"
-									description="description"
-									lang="Pl"
-								/>
-							</>
-						) : (
-							<>
-								<ServicesField title="Название услуги" lang="De" />
-								<ServicesField
-									title="Описание"
-									description="description"
-									lang="De"
-								/>
-							</>
-						)}
-
-						<ServicesField title="Цена, PLN" description="price" />
-
-						{/* 📌 Блок завантаження зображень */}
-						{/* СТАРІ ФОТО */}
-						<ul className={s.imageList}>
-							{/* КНОПКА ДОДАВАННЯ */}
-							<li className={`${s.imgItem} ${s.imgItemUpload}`}>
-								<label className={s.uploadBox}>
-									<input
-										type="file"
-										accept="image/*"
-										multiple
-										onChange={(e) =>
-											handleImageChange(e, setFieldValue, values)
-										}
-										style={{ display: "none" }}
+		<>
+			{" "}
+			<div className={s.addServicesWrapper}>
+				<Formik
+					initialValues={initialValues}
+					validationSchema={ValidationSchemaServices}
+					onSubmit={hundlerSubmit}
+					enableReinitialize
+				>
+					{({ values, setFieldValue, resetForm }) => (
+						<Form className={s.form}>
+							{isLanguagePl ? (
+								<>
+									<ServicesField title="Название услуги" lang="Pl" />
+									<ServicesField
+										title="Описание"
+										description="description"
+										lang="Pl"
 									/>
-									<svg className={s.uploadIcon}>
-										<use href="/sprite.svg#icon-upload"></use>
-									</svg>
-								</label>
-							</li>
-
-							{values.existingImg?.map((img, i) => (
-								<li key={i} className={s.imgItem}>
-									<Image
-										src={img}
-										alt={`existing-${i}`}
-										width={150}
-										height={100}
-										className={s.imgPreview}
+								</>
+							) : (
+								<>
+									<ServicesField title="Название услуги" lang="De" />
+									<ServicesField
+										title="Описание"
+										description="description"
+										lang="De"
 									/>
-									<button
-										type="button"
-										className={s.deleteBtn}
-										onClick={() =>
-											handleExistingDelete(i, setFieldValue, values)
-										}
-									>
-										<svg className={s.deleteIcon}>
-											<use href="/sprite.svg#icon-delete"></use>
+								</>
+							)}
+
+							<ServicesField title="Цена, PLN" description="price" />
+
+							{/* 📌 Блок завантаження зображень */}
+							{/* СТАРІ ФОТО */}
+							<ul className={s.imageList}>
+								{/* КНОПКА ДОДАВАННЯ */}
+								<li className={`${s.imgItem} ${s.imgItemUpload}`}>
+									<label className={s.uploadBox}>
+										<input
+											type="file"
+											accept="image/*"
+											multiple
+											onChange={(e) =>
+												handleImageChange(e, setFieldValue, values)
+											}
+											style={{ display: "none" }}
+										/>
+										<svg className={s.uploadIcon}>
+											<use href="/sprite.svg#icon-upload"></use>
 										</svg>
-									</button>
+									</label>
 								</li>
-							))}
 
-							{/* НОВІ ФОТО */}
-							{values.imgs.map((img, i) => {
-								const src = img instanceof File ? URL.createObjectURL(img) : "";
-								return (
+								{values.existingImg?.map((img, i) => (
 									<li key={i} className={s.imgItem}>
 										<Image
-											src={src}
-											alt={`new-${i}`}
+											src={img}
+											alt={`existing-${i}`}
 											width={150}
 											height={100}
 											className={s.imgPreview}
@@ -194,7 +185,7 @@ const AddServices = ({ language, id, category, isEdit }: AddServicesProps) => {
 											type="button"
 											className={s.deleteBtn}
 											onClick={() =>
-												handleNewImageDelete(i, setFieldValue, values)
+												handleExistingDelete(i, setFieldValue, values)
 											}
 										>
 											<svg className={s.deleteIcon}>
@@ -202,29 +193,58 @@ const AddServices = ({ language, id, category, isEdit }: AddServicesProps) => {
 											</svg>
 										</button>
 									</li>
-								);
-							})}
-						</ul>
+								))}
 
-						<ErrorMessage name="imgs" component="p" className={s.error} />
+								{/* НОВІ ФОТО */}
+								{values.imgs.map((img, i) => {
+									const src =
+										img instanceof File ? URL.createObjectURL(img) : "";
+									return (
+										<li key={i} className={s.imgItem}>
+											<Image
+												src={src}
+												alt={`new-${i}`}
+												width={150}
+												height={100}
+												className={s.imgPreview}
+											/>
+											<button
+												type="button"
+												className={s.deleteBtn}
+												onClick={() =>
+													handleNewImageDelete(i, setFieldValue, values)
+												}
+											>
+												<svg className={s.deleteIcon}>
+													<use href="/sprite.svg#icon-delete"></use>
+												</svg>
+											</button>
+										</li>
+									);
+								})}
+							</ul>
 
-						<div className={s.btnGroup}>
-							<button type="submit" className={s.saveBtn}>
-								Сохранить
-							</button>
+							<ErrorMessage name="imgs" component="p" className={s.error} />
 
-							<button
-								type="button"
-								className={s.cancelBtn}
-								onClick={() => resetForm()}
-							>
-								Отменить
-							</button>
-						</div>
-					</Form>
-				)}
-			</Formik>
-		</div>
+							<div className={s.btnGroup}>
+								<button type="submit" className={s.saveBtn}>
+									Сохранить
+								</button>
+
+								<button
+									type="button"
+									className={s.cancelBtn}
+									onClick={() => resetForm()}
+								>
+									Отменить
+								</button>
+							</div>
+						</Form>
+					)}
+				</Formik>
+			</div>
+			{isSuccess && <ModalSuccessfull />}
+		</>
 	);
 };
 

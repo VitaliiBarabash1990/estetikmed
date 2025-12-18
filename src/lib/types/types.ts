@@ -17,6 +17,7 @@ export interface ServicesState {
 	servicesList: ServicesPayload[];
 	isLoading: boolean;
 	isError: boolean;
+	isSuccess: boolean;
 }
 
 export interface ServicesPayload {
@@ -39,6 +40,7 @@ export interface ArticlesState {
 	articlesList: ArticlesPayload[];
 	isLoading: boolean;
 	isError: boolean;
+	isSuccess: boolean;
 }
 
 export interface ArticlesPayload {
@@ -59,6 +61,7 @@ export interface ReviewsState {
 	reviewsList: ReviewsPayload[];
 	isLoading: boolean;
 	isError: boolean;
+	isSuccess: boolean;
 }
 
 export interface ReviewsPayload {
@@ -153,6 +156,7 @@ export interface GalleryState {
 	media: GalleryCategory[];
 	isLoading: boolean;
 	isError: boolean;
+	isSuccess: boolean;
 }
 export interface GalleryCategory {
 	_id?: string;

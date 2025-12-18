@@ -12,6 +12,7 @@ const initialState: ArticlesState = {
 	articlesList: [],
 	isLoading: false,
 	isError: false,
+	isSuccess: false,
 };
 
 export const articlesSlice = createSlice({
@@ -20,6 +21,9 @@ export const articlesSlice = createSlice({
 	reducers: {
 		resetServicesError(state) {
 			state.isError = false;
+		},
+		resetSuccessArticles(state) {
+			state.isSuccess = false;
 		},
 	},
 	extraReducers: (builder) => {
@@ -32,6 +36,7 @@ export const articlesSlice = createSlice({
 			.addCase(createArticles.fulfilled, (state, { payload }) => {
 				state.articlesList.push(payload);
 				state.isLoading = false;
+				state.isSuccess = true;
 			})
 			.addCase(createArticles.rejected, (state) => {
 				state.isLoading = false;
@@ -49,6 +54,7 @@ export const articlesSlice = createSlice({
 					item._id === payload._id ? payload : item
 				);
 				state.isLoading = false;
+				state.isSuccess = true;
 			})
 			.addCase(updateArticles.rejected, (state) => {
 				state.isLoading = false;
@@ -70,5 +76,6 @@ export const articlesSlice = createSlice({
 	},
 });
 
-export const { resetServicesError } = articlesSlice.actions;
+export const { resetServicesError, resetSuccessArticles } =
+	articlesSlice.actions;
 export const ArticlesReducer = articlesSlice.reducer;

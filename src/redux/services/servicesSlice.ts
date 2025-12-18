@@ -13,6 +13,7 @@ const initialState: ServicesState = {
 	servicesList: [],
 	isLoading: false,
 	isError: false,
+	isSuccess: false,
 };
 
 export const servicesSlice = createSlice({
@@ -21,6 +22,9 @@ export const servicesSlice = createSlice({
 	reducers: {
 		resetServicesError(state) {
 			state.isError = false;
+		},
+		resetSuccessServices(state) {
+			state.isSuccess = false;
 		},
 	},
 	extraReducers: (builder) => {
@@ -33,6 +37,7 @@ export const servicesSlice = createSlice({
 			.addCase(createServices.fulfilled, (state, { payload }) => {
 				state.servicesList.push(payload);
 				state.isLoading = false;
+				state.isSuccess = true;
 			})
 			.addCase(createServices.rejected, (state) => {
 				state.isLoading = false;
@@ -50,6 +55,7 @@ export const servicesSlice = createSlice({
 					item._id === payload._id ? payload : item
 				);
 				state.isLoading = false;
+				state.isSuccess = true;
 			})
 			.addCase(updateServices.rejected, (state) => {
 				state.isLoading = false;
@@ -87,5 +93,6 @@ export const servicesSlice = createSlice({
 	},
 });
 
-export const { resetServicesError } = servicesSlice.actions;
+export const { resetServicesError, resetSuccessServices } =
+	servicesSlice.actions;
 export const ServicesReducer = servicesSlice.reducer;

@@ -5,13 +5,14 @@ import Image from "next/image";
 import s from "./AddMedia.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { selectMedia } from "@/redux/media/selectors";
+import { selectIsSuccess, selectMedia } from "@/redux/media/selectors";
 import {
 	getAllMedia,
 	uploadMedia,
 	deleteMedia,
 } from "@/redux/media/operations";
 import ModalConfirmationMedia from "@/lib/utils/ModalConfirmationMedia/ModalConfirmationMedia";
+import ModalSuccessfull from "@/lib/utils/ModalSuccessfull/ModalSuccessfull";
 
 // ------------ TYPE GUARDS ------------
 const isFile = (item: unknown): item is File => item instanceof File;
@@ -36,6 +37,7 @@ type AddMediaProps = {
 const AddMedia = ({ type }: AddMediaProps) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const [confirmation, setConfirmation] = useState(false);
+	const isSuccess = useSelector(selectIsSuccess);
 
 	const [deleteTarget, setDeleteTarget] = useState<{
 		type: "images" | "video";
@@ -226,181 +228,185 @@ const AddMedia = ({ type }: AddMediaProps) => {
 	};
 
 	return (
-		<div className={s.addServicesWrapper}>
-			<Formik
-				initialValues={initialValues}
-				onSubmit={handleSubmit}
-				enableReinitialize
-			>
-				{({ values, setFieldValue, resetForm }) => (
-					<>
-						<Form className={s.form}>
-							{/* ====================== IMAGES ====================== */}
-							{type === 0 && (
-								<>
-									<ul className={s.imageList}>
-										<li className={`${s.imgItem} ${s.imgItemUpload}`}>
-											<label className={s.uploadBox}>
-												<input
-													type="file"
-													accept="image/*"
-													multiple
-													style={{ display: "none" }}
-													onChange={(e) =>
-														handleImageChange(e, setFieldValue, values)
-													}
-												/>
-												<svg className={s.uploadIcon}>
-													<use href="/sprite.svg#icon-upload"></use>
-												</svg>
-											</label>
-										</li>
-
-										{values.categories[0].imgs.map((img, i) => {
-											let src: string;
-
-											if (typeof img === "string") {
-												src = img;
-											} else if (isFile(img) || isBlob(img)) {
-												src = URL.createObjectURL(img);
-											} else {
-												return null;
-											}
-
-											return (
-												<li key={i} className={s.imgItem}>
-													<Image
-														src={src}
-														alt={`img-${i}`}
-														width={150}
-														height={100}
-														className={s.imgPreview}
+		<>
+			{" "}
+			<div className={s.addServicesWrapper}>
+				<Formik
+					initialValues={initialValues}
+					onSubmit={handleSubmit}
+					enableReinitialize
+				>
+					{({ values, setFieldValue, resetForm }) => (
+						<>
+							<Form className={s.form}>
+								{/* ====================== IMAGES ====================== */}
+								{type === 0 && (
+									<>
+										<ul className={s.imageList}>
+											<li className={`${s.imgItem} ${s.imgItemUpload}`}>
+												<label className={s.uploadBox}>
+													<input
+														type="file"
+														accept="image/*"
+														multiple
+														style={{ display: "none" }}
+														onChange={(e) =>
+															handleImageChange(e, setFieldValue, values)
+														}
 													/>
+													<svg className={s.uploadIcon}>
+														<use href="/sprite.svg#icon-upload"></use>
+													</svg>
+												</label>
+											</li>
 
-													<button
-														type="button"
-														className={s.deleteBtn}
-														onClick={() => {
-															setDeleteTarget({ type: "images", index: i });
-															setConfirmation(true);
-														}}
-														// onClick={() =>
-														// 	handleImageDelete(setFieldValue, i, values)
-														// }
-													>
-														<svg className={s.deleteIcon}>
-															<use href="/sprite.svg#icon-delete"></use>
-														</svg>
-													</button>
-												</li>
-											);
-										})}
-									</ul>
+											{values.categories[0].imgs.map((img, i) => {
+												let src: string;
 
-									<ErrorMessage
-										name="categories[0].imgs"
-										component="p"
-										className={s.error}
-									/>
-								</>
-							)}
+												if (typeof img === "string") {
+													src = img;
+												} else if (isFile(img) || isBlob(img)) {
+													src = URL.createObjectURL(img);
+												} else {
+													return null;
+												}
 
-							{/* ====================== VIDEOS ====================== */}
-							{type === 1 && (
-								<>
-									<ul className={s.videoList}>
-										<li className={`${s.videoItem} ${s.videoItemUpload}`}>
-											<label className={s.uploadBox}>
-												<input
-													type="file"
-													accept="video/*"
-													multiple
-													style={{ display: "none" }}
-													onChange={(e) =>
-														handleVideoChange(e, setFieldValue, values)
-													}
-												/>
-												<svg className={s.uploadIcon}>
-													<use href="/sprite.svg#icon-upload"></use>
-												</svg>
-											</label>
-										</li>
+												return (
+													<li key={i} className={s.imgItem}>
+														<Image
+															src={src}
+															alt={`img-${i}`}
+															width={150}
+															height={100}
+															className={s.imgPreview}
+														/>
 
-										{values.categories[1].videos.map((video, i) => {
-											let src: string;
+														<button
+															type="button"
+															className={s.deleteBtn}
+															onClick={() => {
+																setDeleteTarget({ type: "images", index: i });
+																setConfirmation(true);
+															}}
+															// onClick={() =>
+															// 	handleImageDelete(setFieldValue, i, values)
+															// }
+														>
+															<svg className={s.deleteIcon}>
+																<use href="/sprite.svg#icon-delete"></use>
+															</svg>
+														</button>
+													</li>
+												);
+											})}
+										</ul>
 
-											if (typeof video === "string") {
-												src = video;
-											} else if (isFile(video) || isBlob(video)) {
-												src = URL.createObjectURL(video);
-											} else {
-												return null;
-											}
+										<ErrorMessage
+											name="categories[0].imgs"
+											component="p"
+											className={s.error}
+										/>
+									</>
+								)}
 
-											return (
-												<li key={i} className={s.videoItem}>
-													<video
-														src={src}
-														controls
-														className={s.videoPreview}
+								{/* ====================== VIDEOS ====================== */}
+								{type === 1 && (
+									<>
+										<ul className={s.videoList}>
+											<li className={`${s.videoItem} ${s.videoItemUpload}`}>
+												<label className={s.uploadBox}>
+													<input
+														type="file"
+														accept="video/*"
+														multiple
+														style={{ display: "none" }}
+														onChange={(e) =>
+															handleVideoChange(e, setFieldValue, values)
+														}
 													/>
+													<svg className={s.uploadIcon}>
+														<use href="/sprite.svg#icon-upload"></use>
+													</svg>
+												</label>
+											</li>
 
-													<button
-														type="button"
-														className={s.deleteBtn}
-														onClick={() => {
-															setDeleteTarget({ type: "video", index: i });
-															setConfirmation(true);
-														}}
+											{values.categories[1].videos.map((video, i) => {
+												let src: string;
 
-														// onClick={() =>
-														// 	handleVideoDelete(setFieldValue, i, values)
-														// }
-													>
-														<svg className={s.deleteIcon}>
-															<use href="/sprite.svg#icon-delete"></use>
-														</svg>
-													</button>
-												</li>
-											);
-										})}
-									</ul>
+												if (typeof video === "string") {
+													src = video;
+												} else if (isFile(video) || isBlob(video)) {
+													src = URL.createObjectURL(video);
+												} else {
+													return null;
+												}
 
-									<ErrorMessage
-										name="categories[1].videos"
-										component="p"
-										className={s.error}
-									/>
-								</>
+												return (
+													<li key={i} className={s.videoItem}>
+														<video
+															src={src}
+															controls
+															className={s.videoPreview}
+														/>
+
+														<button
+															type="button"
+															className={s.deleteBtn}
+															onClick={() => {
+																setDeleteTarget({ type: "video", index: i });
+																setConfirmation(true);
+															}}
+
+															// onClick={() =>
+															// 	handleVideoDelete(setFieldValue, i, values)
+															// }
+														>
+															<svg className={s.deleteIcon}>
+																<use href="/sprite.svg#icon-delete"></use>
+															</svg>
+														</button>
+													</li>
+												);
+											})}
+										</ul>
+
+										<ErrorMessage
+											name="categories[1].videos"
+											component="p"
+											className={s.error}
+										/>
+									</>
+								)}
+
+								<div className={s.btnGroup}>
+									<button type="submit" className={s.saveBtn}>
+										Сохранить
+									</button>
+
+									<button
+										type="button"
+										className={s.cancelBtn}
+										onClick={() => resetForm()}
+									>
+										Отменить
+									</button>
+								</div>
+							</Form>
+							{confirmation && (
+								<ModalConfirmationMedia
+									onConfirm={() => handleConfirmDelete(setFieldValue, values)}
+									onCancel={() => {
+										setConfirmation(false);
+										setDeleteTarget(null);
+									}}
+								/>
 							)}
-
-							<div className={s.btnGroup}>
-								<button type="submit" className={s.saveBtn}>
-									Сохранить
-								</button>
-
-								<button
-									type="button"
-									className={s.cancelBtn}
-									onClick={() => resetForm()}
-								>
-									Отменить
-								</button>
-							</div>
-						</Form>
-						{confirmation && (
-							<ModalConfirmationMedia
-								onConfirm={() => handleConfirmDelete(setFieldValue, values)}
-								onCancel={() => {
-									setConfirmation(false);
-									setDeleteTarget(null);
-								}}
-							/>
-						)}
-					</>
-				)}
-			</Formik>
-		</div>
+						</>
+					)}
+				</Formik>
+			</div>
+			{isSuccess && <ModalSuccessfull />}
+		</>
 	);
 };
 
