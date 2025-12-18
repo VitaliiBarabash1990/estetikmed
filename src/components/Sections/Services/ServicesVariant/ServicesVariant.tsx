@@ -13,7 +13,7 @@ type ServicesVariantProps = {
 	page?: string;
 	hundlerCloseServices: () => void;
 	hundlerEdit?: () => void;
-	type: string;
+	type?: string;
 };
 
 const ServicesVariant: React.FC<ServicesVariantProps> = ({
