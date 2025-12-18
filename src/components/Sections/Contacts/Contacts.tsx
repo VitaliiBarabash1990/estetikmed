@@ -114,7 +114,8 @@ const Contacts = () => {
 									<>
 										<div className={s.iconBlock}>
 											<svg className={s.iconItem}>
-												<use href={item.icon}></use>
+												{/* <use href={item.icon}></use> */}
+												<use href={item.icon} xlinkHref={item.icon} />
 											</svg>
 										</div>
 										{getContactHref(item.link) ? (

@@ -90,7 +90,7 @@
 	border: 1px solid rgba(234, 234, 234, 0.4);
 	border-radius: 40px;
 	width: 100%;
-	max-width: calc((280 / 330) * 100vw);
+	max-width: 280px;
 	height: calc((40 / 330) * 100vw);
 	max-height: 48px;
 	background: rgba(16, 16, 16, 0.1);

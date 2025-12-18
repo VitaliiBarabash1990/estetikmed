@@ -8,7 +8,7 @@
 	margin: 0 auto;
 	height: 100dvh;
 	gap: 40px;
-	padding: 0px 12px 24px 12px;
+	padding: 0px 12px 40px;
 }
 .blokTopMenu {
 	display: flex;
@@ -29,9 +29,10 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	justify-content: center;
+	justify-content: space-between;
 	width: 100%;
-	gap: calc((16 / 330) * 100vw);
+	height: 45dvh;
+	gap: 16px;
 	margin: 0 auto;
 }
 .navMenuItem {
@@ -39,14 +40,14 @@
 	align-items: center;
 	gap: calc((64 / 330) * 100vw);
 	width: 100%;
-	height: calc((40 / 330) * 100vw);
+	height: 40px;
 }
 .navMenuLink {
 	display: flex;
 	align-items: center;
 	font-family: var(--font-family);
 	font-weight: 400;
-	font-size: clamp(15px, calc((15 / 330) * 100vw), 40px);
+	font-size: clamp(15px, calc((15 / 330) * 100vw), 20px);
 	line-height: 18px;
 	text-transform: uppercase;
 	color: rgba(234, 234, 234, 1);
@@ -66,7 +67,7 @@
 	align-items: center;
 	/* gap: calc((64 / 330) * 100vw); */
 	gap: 64px;
-	padding-bottom: 20px;
+	/* padding-bottom: 20px; */
 }
 .menuBlockCtaAuthEnter {
 	aspect-ratio: 330 / 76;
@@ -100,6 +101,7 @@
 	width: 100%;
 	max-width: 280px;
 	height: calc((40 / 330) * 100vw);
+	max-height: 48px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -139,21 +141,21 @@
 		padding: 40px 0;
 	}
 	.navMenuList {
-		gap: calc((24 / 768) * 100vw);
+		height: 40dvh;
+		gap: 24px;
 	}
 	.navMenuItem {
 		gap: calc((64 / 768) * 100vw);
-		height: calc((40 / 768) * 100vw);
 	}
 	.navMenuLink {
-		font-size: clamp(15px, calc((20 / 768) * 100vw), 40px);
+		font-size: clamp(20px, calc((20 / 768) * 100vw), 40px);
 		line-height: 24px;
 	}
 	.menuBlockCta {
 		/* aspect-ratio: 768 / 272; */
 		/* gap: calc((64 / 768) * 100vw); */
 		gap: 64px;
-		padding-bottom: 40px;
+		/* padding-bottom: 40px; */
 	}
 	.menuBlockCtaAuthEnter {
 		aspect-ratio: 768 / 180;
@@ -171,17 +173,24 @@
 	}
 	.menuBtn {
 		height: calc((48 / 768) * 100vw);
+		max-height: 56px;
 		font-size: clamp(16px, calc((16 / 768) * 100vw), 40px);
 	}
 }
 
 @media screen and (min-width: 1280px) {
 	.navMenuList {
-		gap: calc((18 / 1280) * 100vw);
+		height: 35dvh;
+		gap: 18px;
 	}
 	.navMenuItem {
 		gap: calc((64 / 1280) * 100vw);
-		height: calc((40 / 1280) * 100vw);
+		transform: scale(1);
+		transition: transform 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	}
+	.navMenuItem:hover {
+		transform: scale(1.01);
+		transition: transform 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 	}
 	.navMenuLink {
 		font-size: clamp(15px, calc((20 / 1280) * 100vw), 20px);
@@ -201,7 +210,7 @@
 		line-height: 180%;
 	}
 	.menuBtn {
-		height: calc((56 / 1280) * 100vw);
+		height: 56px;
 		font-size: clamp(16px, calc((18 / 1280) * 100vw), 18px);
 	}
 }
