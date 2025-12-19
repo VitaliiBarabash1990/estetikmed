@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { AuthResponse, SendOrderPayload } from "@/lib/types/types";
+import { AuthResponse } from "@/lib/types/types";
 
 export const esteticMedAPI = axios.create({
 	baseURL: "https://estetikmed-back-1tim.onrender.com",
@@ -82,11 +82,11 @@ export const sendOrderEmail = createAsyncThunk<
 
 export const sendOrderTelegram = createAsyncThunk<
 	void,
-	SendOrderPayload,
+	FormData,
 	{ rejectValue: string }
->("order/sendTelegram", async (orderData, thunkAPI) => {
+>("order/sendTelegram", async (formData, thunkAPI) => {
 	try {
-		await esteticMedAPI.post("/auth/send-order-telegram", orderData);
+		await esteticMedAPI.post("/auth/send-telegram", formData);
 		toast.success("Замовлення успішно відправлено на Telegram!");
 	} catch (error) {
 		// @ts-expect-error TS is not sure about error structure

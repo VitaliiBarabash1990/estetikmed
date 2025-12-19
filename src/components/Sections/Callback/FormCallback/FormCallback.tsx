@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import AutoResizeTextarea from "./AutoResizeTextarea/AutoResizeTextarea";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { sendOrderEmail } from "@/redux/auth/operations";
+import { sendOrderEmail, sendOrderTelegram } from "@/redux/auth/operations";
 import { ValidationSchemaCallback } from "@/lib/utils/validationSchema";
 
 type FormCallBackProps = {
@@ -41,6 +41,7 @@ const FormCallback = () => {
 		}
 
 		dispatch(sendOrderEmail(formData));
+		dispatch(sendOrderTelegram(formData));
 	};
 
 	return (
