@@ -41,15 +41,17 @@ const ArticlesItem: React.FC<ArticlesItemType> = ({
 				id={id}
 			/>
 			<p className={s.text}>{article[local].article}</p>
-			<div className={s.imageWrapper}>
-				<Image
-					src={article.img}
-					width={1152}
-					height={600}
-					alt={`image` + `${article._id}`}
-					className={s.image}
-				/>
-			</div>
+			{article.img && (
+				<div className={s.imageWrapper}>
+					<Image
+						src={article.img}
+						width={1152}
+						height={600}
+						alt={`image` + `${article._id}`}
+						className={s.image}
+					/>
+				</div>
+			)}
 		</div>
 	);
 };

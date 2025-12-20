@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 import { AuthResponse } from "@/lib/types/types";
 
 export const esteticMedAPI = axios.create({
-	baseURL: "https://estetikmed-back-1tim.onrender.com",
-	// baseURL: "http://localhost:4000",
+	// baseURL: "https://estetikmed-back-1tim.onrender.com",
+	baseURL: "http://localhost:4000",
 	// baseURL: "https://cosmetolog-backend.onrender.com",
 
 	withCredentials: true,
@@ -95,3 +95,24 @@ export const sendOrderTelegram = createAsyncThunk<
 		return thunkAPI.rejectWithValue(message);
 	}
 });
+
+export const refreshSession = createAsyncThunk(
+	"auth/refreshSession",
+	async (_, thunkAPI) => {
+		try {
+			// НЕ передаємо токен в headers — cookie піде автоматично завдяки withCredentials
+			const response = await esteticMedAPI.post("/auth/refresh");
+
+			const token = response.data?.data?.accessToken;
+			if (token) {
+				setAuthHeader(token); // оновлюємо accessToken
+			}
+
+			return response.data.data;
+		} catch (error) {
+			// @ts-expect-error TS is not sure about error structure
+			const message = error?.message || "Failed to refresh session";
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);

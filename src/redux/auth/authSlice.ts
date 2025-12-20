@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { logOut, adminLogIn } from "./operations";
+import { logOut, adminLogIn, refreshSession } from "./operations";
 import { AuthState } from "@/lib/types/types";
 
 const initialState: AuthState = {
@@ -72,7 +72,26 @@ export const authSlice = createSlice({
 			})
 			.addCase(logOut.rejected, (state) => {
 				state.isLoading = false;
-				state.isError = true;
+			})
+			.addCase(refreshSession.pending, (state) => {
+				state.isLoading = true;
+				state.isError = false;
+			})
+			.addCase(refreshSession.fulfilled, (state, { payload }) => {
+				state.user.user = payload.user ?? null;
+				state.user.email = payload.email;
+				state.token = payload.accessToken;
+				state.role = payload.role;
+				state.isEnterAuth = false;
+				state.isLoggedIn = true;
+				state.isLoading = false;
+				state.isError = false;
+				state.isSuccess = true;
+			})
+			.addCase(refreshSession.rejected, (state) => {
+				state.token = null;
+				state.isLoggedIn = false;
+				state.isLoading = false;
 			});
 	},
 });

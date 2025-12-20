@@ -23,7 +23,6 @@ const AddServices = ({ language, id, category, isEdit }: AddServicesProps) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const isLanguagePl = language === "pl";
 	const isSuccess = useSelector(selectSuccess);
-	console.log("IsSuccess", isSuccess);
 
 	const categoryToId: Record<number, string> = {
 		0: "medycyna",
@@ -102,13 +101,13 @@ const AddServices = ({ language, id, category, isEdit }: AddServicesProps) => {
 			}
 		});
 
-		if (isEdit) {
+		if (isEdit && !category?._id) {
 			dispatch(createServices(formData))
 				.unwrap()
 				.then(() => {
 					resetForm();
 				});
-		} else if (!isEdit && category?._id) {
+		} else if (isEdit && category?._id) {
 			dispatch(updateServices({ id: category._id, formData }))
 				.unwrap()
 				.then(() => {

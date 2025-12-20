@@ -15,16 +15,18 @@ const SlideItem: React.FC<SlideItemProps> = ({ item }) => {
 	return (
 		<div className={s.slideWrapper}>
 			<div className={s.sliderContent}>
-				<div className={s.imageWrapper}>
-					<Image
-						src={item.img}
-						width={372}
-						height={300}
-						sizes="100vw"
-						alt={`article_` + `${item._id}`}
-						className={s.image}
-					/>
-				</div>
+				{item.img && (
+					<div className={s.imageWrapper}>
+						<Image
+							src={item.img}
+							width={372}
+							height={300}
+							sizes="100vw"
+							alt={`article_` + `${item._id}`}
+							className={s.image}
+						/>
+					</div>
+				)}
 
 				<div className={s.sliderRewiews}>
 					<ul className={s.rewiewsList}>

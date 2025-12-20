@@ -12,6 +12,7 @@ import Media from "@/components/Sections/Media/Media";
 import Callback from "@/components/Sections/Callback/Callback";
 import Contacts from "@/components/Sections/Contacts/Contacts";
 import ScrollHandler from "@/lib/utils/ScrollHandler/ScrollHandler";
+import IndexClient from "@/lib/utils/IndexClient/IndexClient";
 
 type Props = {
 	params: Promise<{ locale: Locale }>;
@@ -25,6 +26,8 @@ export default async function IndexPage({ params }: Props) {
 	return (
 		<>
 			<ScrollHandler />
+
+			<IndexClient />
 
 			<Hero />
 			<About />

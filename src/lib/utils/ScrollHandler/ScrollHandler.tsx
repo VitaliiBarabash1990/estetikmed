@@ -17,7 +17,7 @@ export default function ScrollHandler() {
 		// ❗️даємо сторінці стабілізуватись
 		setTimeout(() => {
 			el.scrollIntoView({ behavior: "smooth", block: "start" });
-		}, 300);
+		}, 600);
 	}, [searchParams]);
 
 	return null;

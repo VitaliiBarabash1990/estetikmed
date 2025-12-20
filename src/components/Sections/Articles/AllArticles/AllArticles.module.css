@@ -1,12 +1,14 @@
 .btnAllArticles {
-	width: 280px;
-	height: 56px;
+	width: 100%;
+	max-width: 280px;
+	height: calc((40 / 330) * 100vw);
+	max-height: 48px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 	gap: 16px;
-	padding: 12px 48px;
+	padding: 12px;
 
 	box-sizing: border-box;
 	border: 2px solid rgba(242, 94, 218, 1);
@@ -21,4 +23,21 @@
 	letter-spacing: 0%;
 	text-align: left;
 	text-transform: capitalize;
+}
+
+@media screen and (min-width: 768px) {
+	.btnAllArticles {
+		height: calc((48 / 768) * 100vw);
+		max-height: 56px;
+	}
+}
+@media screen and (min-width: 1280px) {
+	.btnAllArticles {
+		height: 56px;
+		font-size: clamp(12px, calc((18 / 1280) * 100vw), 18px);
+	}
+	.btnAllArticles:hover {
+		color: var(--white);
+		background: rgba(242, 94, 218, 1);
+	}
 }

@@ -25,7 +25,7 @@ const ServicesVariant: React.FC<ServicesVariantProps> = ({
 }) => {
 	const [confirmation, setConfirmation] = useState(false);
 	const local = useLocale() as Locale;
-	const countImages = openSCInfo?.imgs.length;
+	const countImages = openSCInfo?.imgs.length as number;
 
 	return (
 		<>
@@ -79,7 +79,7 @@ const ServicesVariant: React.FC<ServicesVariantProps> = ({
 				<div className={s.price}>{openSCInfo?.price} PLN</div>
 				<div className={s.description}>{openSCInfo?.[local].description}</div>
 
-				{countImages === 1 && openSCInfo?.imgs[0] ? (
+				{countImages === 1 && openSCInfo?.imgs?.[0] ? (
 					<div className={s.imageWrapper}>
 						<Image
 							src={openSCInfo.imgs[0]}
@@ -90,9 +90,9 @@ const ServicesVariant: React.FC<ServicesVariantProps> = ({
 							alt="image"
 						/>
 					</div>
-				) : (
+				) : countImages > 1 ? (
 					<SwiperPhoto cardLists={openSCInfo?.imgs ?? []} />
-				)}
+				) : null}
 			</div>
 			{confirmation && (
 				<ModalConfirmation
