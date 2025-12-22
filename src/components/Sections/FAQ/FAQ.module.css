@@ -16,7 +16,7 @@
 	justify-content: flex-start;
 	align-items: center;
 	gap: 10;
-	padding: 0px clamp(8px, calc((8 / 768) * 100vw), 40px);
+	padding: 0px 8px;
 }
 .title {
 	color: rgba(51, 55, 53, 1);
@@ -28,4 +28,9 @@
 	letter-spacing: 0%;
 	text-transform: uppercase;
 	text-align: left;
+}
+@media screen and (min-width: 1280px) {
+	.titleGroup {
+		padding: 0px 40px;
+	}
 }

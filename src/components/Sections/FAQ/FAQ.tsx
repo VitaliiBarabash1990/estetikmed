@@ -11,7 +11,7 @@ function FAQ() {
 	const t = useTranslations("Faq");
 	return (
 		<WrapperForComponentsAllSides
-			paddingTop={isMobile ? 0 : 20}
+			paddingTop={isMobile ? 0 : 0}
 			paddingBottom={isMobile ? 12 : 20}
 			paddingLeft={isMobile ? 12 : 24}
 			paddingRight={isMobile ? 12 : 24}
