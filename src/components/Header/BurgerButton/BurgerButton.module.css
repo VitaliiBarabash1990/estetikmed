@@ -6,28 +6,46 @@
 	justify-content: flex-end;
 	cursor: pointer;
 }
+
 .burgerIcon {
 	width: 100%;
 	height: 100%;
 }
+
+/* стандарт */
 .iconOpen {
 	stroke: var(--background);
 }
+
 .iconClose {
 	fill: var(--background);
 }
+
+/* темна тема */
 .iconClose.darkColor {
 	fill: var(--color-icon);
 }
+
 .iconOpen.darkColor {
 	stroke: var(--color-icon);
 }
+
+/* ❗ БІЛИЙ КОЛІР ДЛЯ CONTACTS */
+.whiteText.iconOpen {
+	stroke: var(--white);
+}
+
+.whiteText.iconClose {
+	fill: var(--white);
+}
+
 @media screen and (min-width: 768px) {
 	.burgerMenu {
 		width: calc((40 / 768) * 100vw);
 		height: calc((40 / 768) * 100vw);
 	}
 }
+
 @media screen and (min-width: 1280px) {
 	.burgerMenu {
 		width: calc((40 / 1280) * 100vw);

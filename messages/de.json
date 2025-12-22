@@ -29,9 +29,9 @@
 		"btn": "Beratung"
 	},
 	"Services": {
-		"title": "Usługi",
-		"btn_reservation": "Zapisać się",
-		"btn_consultation": "Konsultacja",
+		"title": "Leistungen",
+		"btn_reservation": "Melden Sie sich an",
+		"btn_consultation": "Beratung",
 		"services": [
 			"Ästhetische und regenerative Medizin",
 			"Laser-Haarentfernung für Frauen",

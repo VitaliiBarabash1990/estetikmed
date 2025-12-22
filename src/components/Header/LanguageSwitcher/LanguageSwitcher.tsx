@@ -9,19 +9,22 @@ type Props = {
 
 const LanguageSwitcher = ({ section }: Props) => {
 	const router = useRouter();
-	// const path = usePathname().split("/")[1];
 	const pathname = usePathname();
 	const path = pathname.split("/")[1];
 	const [isPending, startTransition] = useTransition();
 
 	const locale = useLocale();
 
+	// 👉 винесена логіка
+	const isContacts = section === "contacts";
+	const isDarkSection = path === "admin" || path === "blog" || isContacts;
+
 	// 🔥 Перемикач локалі
 	const handleLocaleChange = (nextLocale: string) => {
 		if (nextLocale === locale) return;
 
 		startTransition(() => {
-			router.replace(pathname, { locale: nextLocale }); // 🔹 без params
+			router.replace(pathname, { locale: nextLocale });
 		});
 	};
 
@@ -30,21 +33,21 @@ const LanguageSwitcher = ({ section }: Props) => {
 			{routing.locales.map((item) => (
 				<React.Fragment key={item}>
 					<li
-						className={`${s.menuLanguageItem} ${
-							path === "admin" || path === "blog" || section === "contacts"
-								? s.darkColor
-								: ""
-						} ${item === locale ? s.activeLang : ""}`}
+						className={`${s.menuLanguageItem}
+							${isDarkSection ? s.darkColor : ""}
+							${isContacts ? s.whiteText : ""}
+							${item === locale ? s.activeLang : ""}
+						`}
 						onClick={() => handleLocaleChange(item)}
 					>
-						{item === "pl" ? "PLK" : "DEU".toUpperCase()}
+						{item === "pl" ? "PLK" : "DEU"}
 					</li>
+
 					<div
-						className={`${s.separator} ${
-							path === "admin" || path === "blog" || section === "contacts"
-								? s.darkColor
-								: ""
-						}`}
+						className={`${s.separator}
+							${isDarkSection ? s.darkColor : ""}
+							${isContacts ? s.whiteText : ""}
+						`}
 					>
 						|
 					</div>

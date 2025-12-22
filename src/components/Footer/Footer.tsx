@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import s from "./Footer.module.css";
 import { useTranslations } from "next-intl";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import { authEnter } from "@/redux/auth/authSlice";
 import WrapperForComponents from "@/lib/utils/WrapperForComponents/WrapperForComponents";
 import { logOut } from "@/redux/auth/operations";
 import { useRouter } from "@/i18n/routing";
+import Image from "next/image";
 
 const Footer = () => {
 	const dispatch = useDispatch<AppDispatch>();
@@ -34,6 +35,19 @@ const Footer = () => {
 					<h5 className={s.text}> All rights reserved</h5>
 				</div>
 				<div className={s.footerBtn}>
+					<a
+						href="https://www.7flows.studio"
+						className={s.studioLink}
+						target="_blank"
+					>
+						<Image
+							src="/img/Footer/Logo.svg"
+							alt="logo web studio"
+							width={39}
+							height={36}
+						/>
+						<p className={s.studioLinkText}>7flows.studio created</p>
+					</a>
 					<button
 						type="button"
 						className={s.enterBtn}

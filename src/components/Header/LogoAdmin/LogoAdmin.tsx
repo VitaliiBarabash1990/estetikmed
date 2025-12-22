@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./LogoAdmin.module.css";
-import { usePathname } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/routing";
 import useIsMobile from "@/lib/isMobile/isMobile";
 import Logo from "../NavigationMenu/Logo/Logo";
 
@@ -12,7 +12,8 @@ const LogoAdmin = () => {
 			{isMobile ? (
 				<Logo />
 			) : (
-				<div
+				<Link
+					href="/"
 					className={
 						path === "admin" || path === "blog"
 							? s.logoAdminWrapper
@@ -20,7 +21,7 @@ const LogoAdmin = () => {
 					}
 				>
 					<h4 className={s.logoTitle}>EstetikMed</h4>
-				</div>
+				</Link>
 			)}
 		</>
 	);
