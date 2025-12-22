@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { logOut, adminLogIn, refreshSession } from "./operations";
+import {
+	logOut,
+	adminLogIn,
+	refreshSession,
+	sendOrderEmail,
+} from "./operations";
 import { AuthState } from "@/lib/types/types";
 
 const initialState: AuthState = {
@@ -14,6 +19,7 @@ const initialState: AuthState = {
 	isError: false,
 	isSuccess: false,
 	isEnterAuth: false,
+	isSendOrder: false,
 };
 
 export const authSlice = createSlice({
@@ -25,6 +31,7 @@ export const authSlice = createSlice({
 		},
 		resetSuccess(state) {
 			state.isSuccess = false;
+			state.isSendOrder = false;
 		},
 		authEnter(state) {
 			state.isEnterAuth = true;
@@ -92,6 +99,9 @@ export const authSlice = createSlice({
 				state.token = null;
 				state.isLoggedIn = false;
 				state.isLoading = false;
+			})
+			.addCase(sendOrderEmail.fulfilled, (state) => {
+				state.isSendOrder = true;
 			});
 	},
 });

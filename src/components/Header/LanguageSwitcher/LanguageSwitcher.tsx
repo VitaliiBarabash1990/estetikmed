@@ -1,3 +1,4 @@
+"use client";
 import { routing, usePathname, useRouter } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import React, { useTransition } from "react";
@@ -16,6 +17,7 @@ const LanguageSwitcher = ({ section }: Props) => {
 	const locale = useLocale();
 
 	// 👉 винесена логіка
+	const isNavMenu = section === "navmenu";
 	const isContacts = section === "contacts";
 	const isDarkSection = path === "admin" || path === "blog" || isContacts;
 
@@ -35,7 +37,7 @@ const LanguageSwitcher = ({ section }: Props) => {
 					<li
 						className={`${s.menuLanguageItem}
 							${isDarkSection ? s.darkColor : ""}
-							${isContacts ? s.whiteText : ""}
+							${isNavMenu ? s.whiteText : ""}
 							${item === locale ? s.activeLang : ""}
 						`}
 						onClick={() => handleLocaleChange(item)}
@@ -46,7 +48,7 @@ const LanguageSwitcher = ({ section }: Props) => {
 					<div
 						className={`${s.separator}
 							${isDarkSection ? s.darkColor : ""}
-							${isContacts ? s.whiteText : ""}
+							${isNavMenu ? s.whiteText : ""}
 						`}
 					>
 						|

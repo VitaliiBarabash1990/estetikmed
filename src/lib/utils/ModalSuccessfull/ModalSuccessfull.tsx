@@ -6,10 +6,18 @@ import { resetSuccessServices } from "@/redux/services/servicesSlice";
 import { resetSuccessArticles } from "@/redux/articles/articlesSlice";
 import { resetSuccessReviews } from "@/redux/reviews/reviewsSlice";
 import { resetSuccessMedia } from "@/redux/media/mediaSlice";
+import { resetSuccess } from "@/redux/auth/authSlice";
 
-const ModalSuccessfull = () => {
+type CallBackProps = {
+	message?: string;
+};
+
+const ModalSuccessfull = ({
+	message = "Категория успешно внесенна в базу!",
+}: CallBackProps) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const hundlerOnClick = () => {
+		dispatch(resetSuccess());
 		dispatch(resetSuccessServices());
 		dispatch(resetSuccessArticles());
 		dispatch(resetSuccessReviews());
@@ -20,7 +28,7 @@ const ModalSuccessfull = () => {
 		<div className={s.modal} onClick={hundlerOnClick}>
 			<div className={s.modalContent} onClick={(e) => e.stopPropagation()}>
 				<div className={s.content}>
-					<h3 className={s.title}>Категория успешно внесенна в базу!</h3>
+					<h3 className={s.title}>{message}</h3>
 
 					<button
 						className={s.modalCloseBtn}

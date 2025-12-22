@@ -168,22 +168,3 @@ const Contacts = () => {
 };
 
 export default Contacts;
-
-{
-	/* <div>
-	<div>
-		<div className={s.iconBlock}>
-			<svg className={s.iconItem}>
-				<use href={item.icon}></use>
-			</svg>
-		</div>
-	</div>
-	<div>
-		<div>
-			<svg>
-				<use href="sprite.svg#icon-arrow-in-top"></use>
-			</svg>
-		</div>
-	</div>
-</div>; */
-}

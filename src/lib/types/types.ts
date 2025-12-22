@@ -10,6 +10,7 @@ export interface AuthState {
 	isError: boolean;
 	isSuccess: boolean;
 	isEnterAuth: boolean;
+	isSendOrder: boolean;
 }
 
 //state Services

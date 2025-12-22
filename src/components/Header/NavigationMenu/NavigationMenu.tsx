@@ -67,7 +67,7 @@ export const NavigationMenu = ({ setOpenMenu, openMenu }: MyComponentProps) => {
 		<div className={s.navMenuWrapper}>
 			<div className={s.blokTopMenu}>
 				<div className={s.menu}>
-					<LanguageSwitcher section="contacts" />
+					<LanguageSwitcher section="navmenu" />
 					<Logo />
 					<BurgerButton
 						setOpenMenu={handlerSubmit}
