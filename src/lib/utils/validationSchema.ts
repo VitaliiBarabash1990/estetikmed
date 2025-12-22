@@ -171,20 +171,20 @@ export const ValidationSchemaMedia = (type: number) =>
 
 export const ValidationSchemaCallback = Yup.object().shape({
 	name: Yup.string()
-		.required("Введите имя. Это обязательно!")
-		.min(2, "Минимум 2 символа"),
+		.required("Wpisz nazwę. To konieczność!")
+		.min(2, "Minimum 2 znaki"),
 
 	phone: Yup.string()
-		.required("Введите номер телефона. Это обязательно!")
-		.min(5, "Минимум 5 символов"),
+		.required("Wpisz swój numer telefonu. To konieczność!")
+		.min(5, "Minimum 5 znaków"),
 
 	email: Yup.string()
-		.required("Введите коректный email!")
-		.email("Не коректный Email!"),
+		.required("Proszę podać poprawny adres Email!")
+		.email("Nieprawidłowy Email!"),
 
 	message: Yup.string()
-		.required("Введите сообщение. Это обязательно!")
-		.min(10, "Минимум 10 символов"),
+		.required("Wpisz swoją wiadomość. To konieczność!")
+		.min(10, "Minimum 10 znaków"),
 
 	file: Yup.mixed()
 		.nullable()
@@ -203,7 +203,7 @@ export const ValidationSchemaCallback = Yup.object().shape({
 
 			return allowed.includes(value.type);
 		})
-		.test("file-size", "Файл должен быть меньше 10MB", (value) => {
+		.test("file-size", "Plik musi mieć mniej niż 10 MB", (value) => {
 			if (!value || !(value instanceof File)) return true;
 			return value.size <= 10 * 1024 * 1024; // 10MB
 		}),
