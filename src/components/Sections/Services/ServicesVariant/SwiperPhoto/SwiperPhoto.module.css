@@ -1,58 +1,48 @@
+/* --- ТВОЇ СТИЛІ --- */
 .worksSwiper {
-	flex: 1; /* Займає всю ширину що залишилась */
+	flex: 1;
 	max-width: 100%;
 }
+
 .sliderContainer {
 	width: 100%;
-	/* max-width: 888px; */
-	/* max-width: clamp(375px, calc((888 / 1280) * 100vw), 888px); */
 	display: flex;
 	flex-direction: column-reverse;
 	align-items: flex-end;
 	gap: 40px;
 	flex-shrink: 1;
-	/* padding: 3px; */
-	/* border: 1px solid blue; */
 }
 
 .swiper {
 	width: 100%;
-	/* height: 448px; */
 	aspect-ratio: 266 / 266;
-	/* height: auto; */
-	/* padding: 3px; */
-	/* border: 1px solid yellow; */
 }
 
 .slide {
 	height: 100%;
-	/* display: flex;
-	justify-content: center; */
-	/* padding: 3px; */
-	/* border: 1px solid green; */
 }
 
 .paginationBlock {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: calc(8px, calc((16 / 768) * 100vw), 16px);
-	width: clamp(72px, calc((96 / 768) * 100vw), 96px);
-	height: clamp(44px, calc((56 / 768) * 100vw), 56px);
-	/* border: 1px solid goldenrod; */
+	gap: 16px;
+	width: 100%;
+}
+
+.navWrapper {
+	display: flex;
+	gap: 8px;
 }
 
 .navButton {
 	width: clamp(32px, calc((40 / 768) * 100vw), 40px);
 	height: clamp(44px, calc((56 / 768) * 100vw), 56px);
 	display: flex;
-	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	gap: clamp(8px, calc((16 / 768) * 100vw), 16px);
 	padding: 4px;
 	cursor: pointer;
-	z-index: 9;
 	border-radius: 20px;
 	background: rgba(234, 234, 234, 1);
 }
@@ -62,6 +52,34 @@
 	min-width: 12px;
 	height: 24px;
 }
+
 .right {
 	transform: rotate(180deg);
+}
+
+/* --- БУЛІТИ (НОВЕ) --- */
+
+.pagination {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.bullet {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background-color: #d9d9d9;
+	cursor: pointer;
+	transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.bulletActive {
+	background-color: var(--pink);
+	transform: scale(1.25);
+}
+@media screen and (min-width: 768px) {
+	.swiper {
+		aspect-ratio: 266 / 133;
+	}
 }
