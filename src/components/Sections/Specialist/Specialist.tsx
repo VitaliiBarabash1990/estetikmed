@@ -17,7 +17,7 @@ const Specialist = () => {
 					</li>
 					<li className={s.specialistImageBlock}>
 						<Image
-							src="/img/Specialist/bg_specialist.webp"
+							src="/img/specialist/bg_specialist.webp"
 							width={604}
 							height={632}
 							alt="img_specialist"
