@@ -1,5 +1,5 @@
 "use client";
-import React, { SetStateAction } from "react";
+import React from "react";
 import s from "./AddServices.module.css";
 import { Form, Formik, ErrorMessage, FormikHelpers } from "formik";
 import { ServicesFormProps, ServicesPayload } from "@/lib/types/types";
@@ -17,18 +17,9 @@ type AddServicesProps = {
 	id: number;
 	category?: ServicesPayload | null;
 	isEdit: boolean;
-	setOption: React.Dispatch<SetStateAction<number>>;
-	setBack?: React.Dispatch<SetStateAction<ServicesPayload | null>>;
 };
 
-const AddServices = ({
-	language,
-	id,
-	category,
-	isEdit,
-	setOption,
-	setBack,
-}: AddServicesProps) => {
+const AddServices = ({ language, id, category, isEdit }: AddServicesProps) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const isLanguagePl = language === "pl";
 	const isSuccess = useSelector(selectSuccess);
@@ -251,14 +242,7 @@ const AddServices = ({
 					)}
 				</Formik>
 			</div>
-			{isSuccess && (
-				<ModalSuccessfull
-					onClose={() => {
-						setOption(0);
-						setBack?.(null);
-					}}
-				/>
-			)}
+			{isSuccess && <ModalSuccessfull />}
 		</>
 	);
 };

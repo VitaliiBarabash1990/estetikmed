@@ -99,8 +99,6 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 						language={language}
 						id={categoryToId[category]}
 						category={openSCInfo}
-						setOption={setOption}
-						setBack={setOpenSCInfo}
 					/>
 				))}
 
@@ -126,8 +124,6 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 						isEdit={!isServices}
 						language={language}
 						article={openSAInfo}
-						setOption={setOption}
-						setBack={setOpenSAInfo}
 					/>
 				))}
 
@@ -148,7 +144,6 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 						isEdit={!isServices}
 						language={language}
 						reviews={openRSInfo}
-						setOption={setOption}
 					/>
 				))}
 		</div>

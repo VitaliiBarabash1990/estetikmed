@@ -48,35 +48,30 @@ export const ValidationSchemaServices = Yup.object().shape({
 
 export const ValidationSchemaArticles = Yup.object().shape({
 	titlePl: Yup.string().required(
-		"Введите название на Польском. Это обязательно!"
+		"Введите название на Польськом. Это обязательно!"
 	),
 	titleDe: Yup.string().required(
 		"Введите название на Немецком. Это обязательно!"
 	),
 	articlePl: Yup.string().required(
-		"Введите описание на Польском. Это обязательно!"
+		"Введите описание на Польськом. Это обязательно!"
 	),
 	articleDe: Yup.string().required(
 		"Введите описание на Немецком. Это обязательно!"
 	),
-
 	img: Yup.mixed()
 		.required("Добавьте фото")
 		.test(
-			"img-type",
+			"is-file",
+			"Файл должен быть изображением",
+			(value) => value instanceof File
+		)
+		.test(
+			"file-type-check",
 			"Файл должен быть изображением (jpg, png, jpeg, webp)",
 			(value) => {
-				// ✅ старе фото (edit mode)
-				if (typeof value === "string" && value.length > 0) {
-					return true;
-				}
-
-				// ✅ новий файл
-				if (value instanceof File) {
-					return ["image/jpeg", "image/png", "image/webp"].includes(value.type);
-				}
-
-				return false;
+				if (!(value instanceof File)) return false;
+				return ["image/jpeg", "image/png", "image/webp"].includes(value.type);
 			}
 		),
 });
@@ -105,20 +100,16 @@ export const ValidationSchemaReviews = Yup.object().shape({
 	img: Yup.mixed()
 		.required("Добавьте фото")
 		.test(
-			"img-type",
+			"is-file",
+			"Файл должен быть изображением",
+			(value) => value instanceof File
+		)
+		.test(
+			"file-type-check",
 			"Файл должен быть изображением (jpg, png, jpeg, webp)",
 			(value) => {
-				// ✅ старе фото (edit mode)
-				if (typeof value === "string" && value.length > 0) {
-					return true;
-				}
-
-				// ✅ новий файл
-				if (value instanceof File) {
-					return ["image/jpeg", "image/png", "image/webp"].includes(value.type);
-				}
-
-				return false;
+				if (!(value instanceof File)) return false;
+				return ["image/jpeg", "image/png", "image/webp"].includes(value.type);
 			}
 		),
 });

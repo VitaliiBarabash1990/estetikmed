@@ -122,22 +122,14 @@ export const NavigationMenu = ({ setOpenMenu, openMenu }: MyComponentProps) => {
 						{/* <button type="button" className={s.menuBtn}>
 							{t("button_1")}
 						</button> */}
-						{/* <a
+						<a
 							href="https://booksy.com/pl-pl/202886_medycyna-estetyczna-laser-diodowy_medycyna-estetyczna_19380_swinoujscie?do=invite&_branch_match_id=1529221794714245955&utm_medium=profile_share_from_profile&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXT07J0UvKz88urtRLzs%2FVDymIKAjLtTTxjkiyrytKTUstKsrMS49PKsovL04tsnXLBIrlVwAAnvjsTz0AAAA%3D"
 							target="_blank"
 							rel="noopener noreferrer"
 							className={s.menuBtn}
 						>
 							{t("button_1")}
-						</a> */}
-						<LocalizedScrollLink
-							href="/"
-							scrollId="Contacts"
-							className={s.menuBtn}
-							onClick={handleScrollLinkClick("Contacts")}
-						>
-							{t("button_1")}
-						</LocalizedScrollLink>
+						</a>
 						<LocalizedScrollLink
 							href="/"
 							scrollId="CallbackForm"
