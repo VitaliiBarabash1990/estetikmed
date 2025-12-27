@@ -80,11 +80,20 @@ const ServicesVariant: React.FC<ServicesVariantProps> = ({
 				<div className={s.description}>{openSCInfo?.[local].description}</div>
 
 				{countImages === 1 && openSCInfo?.imgs?.[0] ? (
+					// <div className={s.imageWrapper}>
+					// 	<Image
+					// 		src={openSCInfo.imgs[0]}
+					// 		width={100}
+					// 		height={100}
+					// 		sizes="100vw"
+					// 		className={s.image}
+					// 		alt="image"
+					// 	/>
+					// </div>
 					<div className={s.imageWrapper}>
 						<Image
 							src={openSCInfo.imgs[0]}
-							width={100}
-							height={100}
+							fill
 							sizes="100vw"
 							className={s.image}
 							alt="image"

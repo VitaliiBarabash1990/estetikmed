@@ -1,6 +1,7 @@
 .slideWrapper {
 	width: 100%;
-	aspect-ratio: 266 / 266;
+	height: 100%;
+	/* aspect-ratio: 266 / 266; */
 	border-radius: 15px;
 	overflow: hidden;
 	position: relative; /* важливо */
@@ -16,4 +17,9 @@
 	object-fit: contain;
 	height: 100%;
 	width: auto; */
+}
+@media screen and (min-width: 768px) {
+	.slideWrapper {
+		height: 50%;
+	}
 }
