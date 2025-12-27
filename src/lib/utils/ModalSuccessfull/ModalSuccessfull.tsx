@@ -10,9 +10,11 @@ import { resetSuccess } from "@/redux/auth/authSlice";
 
 type CallBackProps = {
 	message?: string;
+	onClose?: () => void;
 };
 
 const ModalSuccessfull = ({
+	onClose,
 	message = "Категория успешно внесенна в базу!",
 }: CallBackProps) => {
 	const dispatch = useDispatch<AppDispatch>();
@@ -22,6 +24,7 @@ const ModalSuccessfull = ({
 		dispatch(resetSuccessArticles());
 		dispatch(resetSuccessReviews());
 		dispatch(resetSuccessMedia());
+		onClose?.();
 	};
 
 	return (

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { SetStateAction } from "react";
 import s from "./AddReviews.module.css";
 import { Form, Formik, ErrorMessage, FormikHelpers } from "formik";
 import { ReviewsFormProps, ReviewsPayload } from "@/lib/types/types";
@@ -16,9 +16,17 @@ type AddReviewsProps = {
 	language: string;
 	reviews?: ReviewsPayload | null;
 	isEdit: boolean;
+	setOption: React.Dispatch<SetStateAction<number>>;
+	setBack?: React.Dispatch<SetStateAction<ReviewsPayload | null>>;
 };
 
-const AddReviews = ({ language, reviews, isEdit }: AddReviewsProps) => {
+const AddReviews = ({
+	language,
+	reviews,
+	isEdit,
+	setOption,
+	setBack,
+}: AddReviewsProps) => {
 	const dispatch = useDispatch<AppDispatch>();
 	const isLanguagePl = language === "pl";
 	const isSuccess = useSelector(selectIsSuccess);
@@ -190,7 +198,14 @@ const AddReviews = ({ language, reviews, isEdit }: AddReviewsProps) => {
 					)}
 				</Formik>
 			</div>
-			{isSuccess && <ModalSuccessfull />}
+			{isSuccess && (
+				<ModalSuccessfull
+					onClose={() => {
+						setOption(0);
+						setBack?.(null);
+					}}
+				/>
+			)}
 		</>
 	);
 };

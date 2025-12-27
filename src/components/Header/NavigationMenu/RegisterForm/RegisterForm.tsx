@@ -64,7 +64,7 @@ const RegisterForm = () => {
 								<Field
 									name="password"
 									type={showPassword ? "text" : "password"}
-									autoComplete="new-password"
+									autoComplete="current-password"
 									className={s.input}
 								/>
 								<div className={s.iconWrap} onClick={() => hundlerVisual()}>
