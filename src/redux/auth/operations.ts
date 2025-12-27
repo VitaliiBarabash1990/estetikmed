@@ -4,20 +4,16 @@ import { toast } from "react-toastify";
 import { AuthResponse } from "@/lib/types/types";
 
 export const esteticMedAPI = axios.create({
-	baseURL: "https://estetikmed-back-1tim.onrender.com",
-	// baseURL: "https://api.estetikmed.pl",
-	// baseURL: "http://localhost:4000",
-	// baseURL: "https://cosmetolog-backend.onrender.com",
-
+	baseURL: "https://api.estetikmed.pl",
 	withCredentials: true,
 });
 
 const setAuthHeader = (token: string) => {
-	axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+	esteticMedAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 const clearAuthHeader = () => {
-	delete axios.defaults.headers.common.Authorization;
+	delete esteticMedAPI.defaults.headers.common.Authorization;
 };
 
 interface LoginCredentials {
