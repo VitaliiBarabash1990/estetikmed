@@ -1,5 +1,5 @@
 "use client";
-import React, { SetStateAction } from "react";
+import React from "react";
 import s from "./ServicesCategory.module.css";
 import Image from "next/image";
 import ServicesSection from "./ServicesSection/ServicesSection";
@@ -7,7 +7,7 @@ import { ServicesPayload } from "@/lib/types/types";
 
 export type CategoryProps = {
 	id: number;
-	setOpenSCInfo: React.Dispatch<SetStateAction<ServicesPayload | null>>;
+	setOpenSCInfo: (payload: ServicesPayload) => void;
 };
 
 const imageList: Record<number, string> = {
@@ -29,10 +29,12 @@ const ServicesCategory: React.FC<CategoryProps> = ({ id, setOpenSCInfo }) => {
 						src={imageList[id]}
 						width={604}
 						height={664}
-						alt={`img_` + id}
+						alt={`img_${id}`}
 						className={s.image}
 					/>
 				</div>
+
+				{/* ServicesSection передає payload */}
 				<ServicesSection id={id} setOpenSCInfo={setOpenSCInfo} />
 			</div>
 		</div>

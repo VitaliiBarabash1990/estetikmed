@@ -13,9 +13,14 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { getAllServices } from "@/redux/services/operations";
 
+type OpenServiceState = {
+	categoryId: number;
+	payload: ServicesPayload;
+} | null;
+
 const Services = () => {
 	const dispatch = useDispatch<AppDispatch>();
-	const [openSCInfo, setOpenSCInfo] = useState<null | ServicesPayload>(null);
+	const [openService, setOpenService] = useState<OpenServiceState>(null);
 
 	useEffect(() => {
 		dispatch(getAllServices());
@@ -24,9 +29,13 @@ const Services = () => {
 	const isMobile = useIsMobile();
 	const { left, right } = useSizeWindows();
 	const t = useTranslations("Services");
-	const hundlerCloseServices = () => {
-		setOpenSCInfo(null);
+
+	const handleCloseServices = () => {
+		setOpenService(null);
 	};
+
+	const categoryIds = [0, 1, 2];
+
 	return (
 		<>
 			<WrapperForComponentsAllSides
@@ -38,30 +47,33 @@ const Services = () => {
 				<div id="Services" className={s.titleBlock}>
 					<h3 className={s.title}>{t("title")}</h3>
 					<a
-						href="https://booksy.com/pl-pl/202886_medycyna-estetyczna-laser-diodowy_medycyna-estetyczna_19380_swinoujscie?do=invite&_branch_match_id=1529221794714245955&utm_medium=profile_share_from_profile&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXT07J0UvKz88urtRLzs%2FVDymIKAjLtTTxjkiyrytKTUstKsrMS49PKsovL04tsnXLBIrlVwAAnvjsTz0AAAA%3D"
+						href="https://booksy.com/pl-pl/202886_medycyna-estetyczna-laser-diodowy_medycyna-estetyczna_19380_swinoujscie"
 						target="_blank"
 						rel="noopener noreferrer"
 						className={`${s.btn} ${s.btn_mob}`}
 					>
 						{t("btn_reservation")}
 					</a>
-					{/* <button type="button" className={`${s.btn} ${s.btn_mob}`}>
-						{t("btn_reservation")}
-					</button> */}
 				</div>
 			</WrapperForComponentsAllSides>
-			{openSCInfo ? (
-				<ServicesVariant
-					openSCInfo={openSCInfo}
-					page="main"
-					hundlerCloseServices={hundlerCloseServices}
-				/>
-			) : (
-				<>
-					<ServicesCategory id={0} setOpenSCInfo={setOpenSCInfo} />
-					<ServicesCategory id={1} setOpenSCInfo={setOpenSCInfo} />
-					<ServicesCategory id={2} setOpenSCInfo={setOpenSCInfo} />
-				</>
+
+			{categoryIds.map((id) =>
+				openService?.categoryId === id ? (
+					<ServicesVariant
+						key={`variant-${id}`}
+						openSCInfo={openService.payload}
+						page="main"
+						hundlerCloseServices={handleCloseServices}
+					/>
+				) : (
+					<ServicesCategory
+						key={`category-${id}`}
+						id={id}
+						setOpenSCInfo={(payload) =>
+							setOpenService({ categoryId: id, payload })
+						}
+					/>
+				)
 			)}
 
 			<BtnBlock />
