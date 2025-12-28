@@ -19,8 +19,8 @@ const Contacts = () => {
 		{
 			id: 0,
 			icon: "/sprite.svg#icon-phone",
-			text: "730294641",
-			link: "730294641",
+			text: "+48730294641",
+			link: "+48730294641",
 		},
 		{
 			id: 1,
