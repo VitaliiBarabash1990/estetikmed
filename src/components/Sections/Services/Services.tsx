@@ -16,11 +16,16 @@ import { getAllServices } from "@/redux/services/operations";
 type OpenServiceState = {
 	categoryId: number;
 	payload: ServicesPayload;
+	page: number;
 } | null;
 
 const Services = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const [openService, setOpenService] = useState<OpenServiceState>(null);
+
+	const [pagesByCategory, setPagesByCategory] = useState<
+		Record<number, number>
+	>({});
 
 	useEffect(() => {
 		dispatch(getAllServices());
@@ -69,8 +74,12 @@ const Services = () => {
 					<ServicesCategory
 						key={`category-${id}`}
 						id={id}
-						setOpenSCInfo={(payload) =>
-							setOpenService({ categoryId: id, payload })
+						currentPage={pagesByCategory[id] ?? 1}
+						onPageChange={(page) =>
+							setPagesByCategory((prev) => ({ ...prev, [id]: page }))
+						}
+						setOpenSCInfo={(payload, page) =>
+							setOpenService({ categoryId: id, payload, page })
 						}
 					/>
 				)

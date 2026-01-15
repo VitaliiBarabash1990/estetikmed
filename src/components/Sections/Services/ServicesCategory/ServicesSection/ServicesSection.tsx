@@ -1,19 +1,32 @@
 "use client";
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import s from "./ServicesSection.module.css";
 import PaginationBlock from "../PaginationBlock/PaginationBlock";
 import PaginationBoolit from "../PaginationBoolit/PaginationBoolit";
 import { useTranslations, useLocale } from "next-intl";
-import { CategoryProps } from "../ServicesCategory";
 import { Locale, usePathname } from "@/i18n/routing";
 import { useSelector } from "react-redux";
 import { selectServices } from "@/redux/services/selectors";
 import { ServicesPayload } from "@/lib/types/types";
 
-const ServicesSection = ({ id, setOpenSCInfo }: CategoryProps) => {
+type Props = {
+	id: number;
+	currentPage: number;
+	onPageChange: (page: number) => void;
+	setOpenSCInfo: (payload: ServicesPayload, page: number) => void;
+};
+
+const ServicesSection = ({
+	id,
+	currentPage,
+	onPageChange,
+	setOpenSCInfo,
+}: Props) => {
+	const page = currentPage;
+	const setPage = onPageChange;
+
 	const isAdmin = usePathname().split("/")[1] === "admin";
 	const locale = useLocale() as Locale;
-
 	const t = useTranslations("Services");
 
 	const servicesTypeToId: Record<number, string> = {
@@ -39,7 +52,6 @@ const ServicesSection = ({ id, setOpenSCInfo }: CategoryProps) => {
 	// PAGINATION
 	// -----------------------------
 	const itemsPerPage = 6;
-	const [page, setPage] = useState(1);
 
 	const totalPages = Math.ceil(filterServicesData.length / itemsPerPage);
 
@@ -47,11 +59,10 @@ const ServicesSection = ({ id, setOpenSCInfo }: CategoryProps) => {
 		const start = (page - 1) * itemsPerPage;
 		return filterServicesData.slice(start, start + itemsPerPage);
 	}, [filterServicesData, page]);
-
 	// -----------------------------
 
 	const hundlerClickInfo = (item: ServicesPayload) => {
-		setOpenSCInfo(item);
+		setOpenSCInfo(item, page);
 	};
 
 	return (

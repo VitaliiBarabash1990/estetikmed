@@ -7,7 +7,9 @@ import { ServicesPayload } from "@/lib/types/types";
 
 export type CategoryProps = {
 	id: number;
-	setOpenSCInfo: (payload: ServicesPayload) => void;
+	currentPage: number;
+	onPageChange: (page: number) => void;
+	setOpenSCInfo: (payload: ServicesPayload, page: number) => void;
 };
 
 const imageList: Record<number, string> = {
@@ -16,7 +18,12 @@ const imageList: Record<number, string> = {
 	2: "/img/Services/service_depilation_laz_dla_man.webp",
 };
 
-const ServicesCategory: React.FC<CategoryProps> = ({ id, setOpenSCInfo }) => {
+const ServicesCategory: React.FC<CategoryProps> = ({
+	id,
+	setOpenSCInfo,
+	currentPage,
+	onPageChange,
+}) => {
 	return (
 		<div className={s.wrapperComponent}>
 			<div
@@ -35,7 +42,12 @@ const ServicesCategory: React.FC<CategoryProps> = ({ id, setOpenSCInfo }) => {
 				</div>
 
 				{/* ServicesSection передає payload */}
-				<ServicesSection id={id} setOpenSCInfo={setOpenSCInfo} />
+				<ServicesSection
+					id={id}
+					currentPage={currentPage}
+					onPageChange={onPageChange}
+					setOpenSCInfo={setOpenSCInfo}
+				/>
 			</div>
 		</div>
 	);

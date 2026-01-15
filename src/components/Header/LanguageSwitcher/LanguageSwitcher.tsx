@@ -42,7 +42,7 @@ const LanguageSwitcher = ({ section }: Props) => {
 						`}
 						onClick={() => handleLocaleChange(item)}
 					>
-						{item === "pl" ? "PLK" : "DEU"}
+						{item === "pl" ? "PL" : "DEU"}
 					</li>
 
 					<div
