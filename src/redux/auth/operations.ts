@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 import { AuthResponse } from "@/lib/types/types";
 
 export const esteticMedAPI = axios.create({
-	baseURL: "https://estetikmed-back-1tim.onrender.com",
-	// baseURL: "https://api.estetikmed.pl",
+	// baseURL: "https://estetikmed-back-1tim.onrender.com",
+	baseURL: "https://api.estetikmed.pl",
 	// baseURL: "http://localhost:4000",
 	// baseURL: "https://cosmetolog-backend.onrender.com",
 
