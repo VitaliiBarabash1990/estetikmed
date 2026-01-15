@@ -40,7 +40,7 @@ const Footer = () => {
 						className={s.studioLink}
 						target="_blank"
 					>
-						<Image
+						<Image //add image
 							src="/img/Footer/Logo.svg"
 							alt="logo web studio"
 							width={39}

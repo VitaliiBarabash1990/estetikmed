@@ -30,19 +30,28 @@ export type ContentComponentProps = {
 
 const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 	const dispatch = useDispatch<AppDispatch>();
-	const [openSCInfo, setOpenSCInfo] = useState<null | ServicesPayload>(null);
-	const [openSAInfo, setOpenSAInfo] = useState<null | ArticlesPayload>(null);
-	const [openRSInfo, setOpenRSInfo] = useState<null | ReviewsPayload>(null);
+
+	// ---------------- States ----------------
+	const [openSCInfo, setOpenSCInfo] = useState<ServicesPayload | null>(null);
+	const [openSAInfo, setOpenSAInfo] = useState<ArticlesPayload | null>(null);
+	const [openRSInfo, setOpenRSInfo] = useState<ReviewsPayload | null>(null);
 	const [option, setOption] = useState(0);
-	const [category, setCategory] = useState(0); // вибрана категорія (0..n)
+	const [category, setCategory] = useState(0); // вибрана категорія
 	const [language, setLanguage] = useState("pl");
 
+	// Зберігаємо номер сторінки для кожної категорії
+	const [pagesByCategory, setPagesByCategory] = useState<
+		Record<number, number>
+	>({});
+
+	// ---------------- Fetch ----------------
 	useEffect(() => {
 		dispatch(getAllServices());
 		dispatch(getAllArticles());
 		dispatch(getAllReviews());
 	}, [dispatch]);
 
+	// ---------------- Helpers ----------------
 	const isServices = option === 0;
 
 	const categoryToId: Record<number, number> = {
@@ -60,6 +69,12 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 	const hundlerCloseServices = () => {
 		setOpenSCInfo(null);
 	};
+
+	const handlePageChange = (catId: number, page: number) => {
+		setPagesByCategory((prev) => ({ ...prev, [catId]: page }));
+	};
+
+	// ---------------- Render ----------------
 	return (
 		<div className={s.content}>
 			<Selectors
@@ -75,6 +90,7 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 				setOpenRSInfo={setOpenRSInfo}
 			/>
 
+			{/* ---------- SERVICES ---------- */}
 			{type === "services" &&
 				(isServices ? (
 					<Container>
@@ -89,7 +105,11 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 						) : (
 							<ServicesSection
 								id={categoryToId[category]}
-								setOpenSCInfo={setOpenSCInfo}
+								currentPage={pagesByCategory[categoryToId[category]] ?? 1}
+								onPageChange={(page) =>
+									handlePageChange(categoryToId[category], page)
+								}
+								setOpenSCInfo={(payload) => setOpenSCInfo(payload)}
 							/>
 						)}
 					</Container>
@@ -104,6 +124,7 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 					/>
 				))}
 
+			{/* ---------- ARTICLES ---------- */}
 			{type === "articles" &&
 				(isServices ? (
 					<Container>
@@ -131,9 +152,11 @@ const ContentComponent: React.FC<ContentComponentProps> = ({ type }) => {
 					/>
 				))}
 
+			{/* ---------- MEDIA ---------- */}
 			{type === "media" &&
 				(isServices ? <AddMedia type={option} /> : <AddMedia type={option} />)}
 
+			{/* ---------- REVIEWS ---------- */}
 			{type === "reviews" &&
 				(isServices ? (
 					<Container>

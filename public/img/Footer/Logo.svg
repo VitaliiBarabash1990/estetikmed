@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="39" height="36" fill="none">
+  <g clip-path="url(#a)">
+    <g filter="url(#b)">
+      <path fill="url(#c)" d="M19.586.001c2.336 0 4.337 2.91 5.167 7.04 3.473-2.28 6.897-2.895 8.533-1.258 1.65 1.65 1.01 5.114-1.313 8.616 4.123.831 7.029 2.83 7.029 5.165 0 2.731-3.978 5.004-9.23 5.484 2.686 3.714 3.514 7.511 1.763 9.263-2.179 2.178-7.522.366-11.935-4.047l-.25-.255c-4.384 4.307-9.633 6.056-11.788 3.902-1.69-1.691-.977-5.29 1.492-8.88C3.89 24.517.002 22.264.002 19.564c0-2.333 2.902-4.331 7.021-5.164-2.325-3.502-2.964-6.967-1.314-8.617 1.66-1.661 5.162-1.002 8.688 1.362C15.215 2.96 17.23 0 19.586 0"/>
+    </g>
+    <path fill="#0a090b" d="m15.979 26.626 3.874-10.963H14.32v-3.874h9.606l.938 1.557-4.573 13.28z"/>
+  </g>
+  <defs>
+    <linearGradient id="c" x1="43.116" x2="-.634" y1="-8.557" y2="30.818" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#bfff00"/>
+      <stop offset="1" stop-color="#fbe95c"/>
+    </linearGradient>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h39v36H0z"/>
+    </clipPath>
+    <filter id="b" width="42.955" height="38.198" x="-1.269" y="-1.2" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+      <feOffset dx="-1.271" dy="1.766"/>
+      <feGaussianBlur stdDeviation="3.531"/>
+      <feComposite in2="hardAlpha" k2="-1" k3="1" operator="arithmetic"/>
+      <feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.25 0"/>
+      <feBlend in2="shape" result="effect1_innerShadow_569_156"/>
+      <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+      <feOffset dx="2.684" dy="-1.201"/>
+      <feGaussianBlur stdDeviation="3.531"/>
+      <feComposite in2="hardAlpha" k2="-1" k3="1" operator="arithmetic"/>
+      <feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.25 0"/>
+      <feBlend in2="effect1_innerShadow_569_156" result="effect2_innerShadow_569_156"/>
+    </filter>
+  </defs>
+</svg>
